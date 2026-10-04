@@ -345,11 +345,12 @@ textarea:focus {
 
 /* Graph */
 .graph-card {
-  background: #0b1120;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 18px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .graph-header {
@@ -362,7 +363,7 @@ textarea:focus {
 .graph-title {
   font-size: 0.88rem;
   font-weight: 700;
-  color: #94a3b8;
+  color: var(--text-main);
 }
 
 .y-intercept-indicator {
@@ -375,9 +376,9 @@ textarea:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #020617;
+  background: var(--bg-input);
   border-radius: 8px;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -388,18 +389,20 @@ textarea:focus {
 }
 
 /* Coordinate Table */
+/* Coordinate Table */
 .table-card {
-  background: #152238;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 16px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .table-title {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #e2e8f0;
+  color: var(--text-main);
   margin-bottom: 10px;
 }
 
@@ -417,18 +420,18 @@ textarea:focus {
 .coord-table th,
 .coord-table td {
   padding: 8px 12px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border-color);
 }
 
 .coord-table th {
-  background: #1e293b;
-  color: #38bdf8;
+  background: var(--bg-input);
+  color: var(--accent);
   font-weight: 700;
 }
 
 .coord-table td {
-  background: #0f172a;
-  color: #f8fafc;
+  background: var(--bg-card);
+  color: var(--text-main);
   font-weight: 600;
 }
 
@@ -440,16 +443,17 @@ textarea:focus {
 }
 
 .concept-item {
-  background: #152238;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   padding: 12px 14px;
   border-radius: 8px;
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .ci-badge {
   display: inline-block;
-  background: rgba(56, 189, 248, 0.2);
-  color: #38bdf8;
+  background: var(--accent-glow);
+  color: var(--accent);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -458,9 +462,10 @@ textarea:focus {
 }
 
 .concept-item p {
-  font-size: 0.82rem;
-  color: #94a3b8;
-  line-height: 1.5;
+  font-size: 0.84rem;
+  color: var(--text-main);
+  line-height: 1.55;
+  font-weight: 500;
 }
 
 /* Toast */

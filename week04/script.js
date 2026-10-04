@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
   <rect width="600" height="640" rx="24" fill="#10172e"/>
   <circle cx="300" cy="285" r="223" fill="none" stroke="#2a3754" stroke-width="1.5"/>
   <circle cx="300" cy="285" r="140" fill="none" stroke="#1d2842" stroke-dasharray="3 3"/>
-${petalsSvg}${axesSvg}  <text x="300" y="556" text-anchor="middle" fill="#ffffff" font-family="'Pretendard', sans-serif" font-size="18" font-weight="600">${safeTitle}</text>
-  <text x="300" y="590" text-anchor="middle" fill="#94a3b8" font-family="'Pretendard', sans-serif" font-size="13" font-weight="500">${safeAuthor} · MATH ART / WEEK 04</text>
+${petalsSvg}${axesSvg}  <text x="300" y="556" text-anchor="middle" fill="#ffffff" font-family="'Pretendard', sans-serif" font-size="19" font-weight="700" letter-spacing="-0.01em">${safeTitle}</text>
+  <text x="300" y="590" text-anchor="middle" fill="#e2e8f0" font-family="'Pretendard', sans-serif" font-size="13" font-weight="600" letter-spacing="0.05em">${safeAuthor} · MATH ART / WEEK 04</text>
 </svg>`;
   }
 

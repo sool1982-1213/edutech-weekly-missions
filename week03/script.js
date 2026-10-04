@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const gridColor = isLightLike ? (theme === 'pastel' ? '#ebded6' : '#e2e8f0') : '#1e293b';
-    const axesColor = isLightLike ? '#64748b' : '#475569';
-    const textColor = isLightLike ? '#64748b' : '#94a3b8';
-    const lineColor = isLightLike ? (theme === 'pastel' ? '#c4666f' : '#2563eb') : '#38bdf8';
+    const axesColor = isLightLike ? (theme === 'pastel' ? '#5d4b48' : (theme === 'sky' ? '#1e3a8a' : '#1e293b')) : '#475569';
+    const textColor = isLightLike ? (theme === 'pastel' ? '#2c1a16' : (theme === 'sky' ? '#0b2545' : '#0f172a')) : '#94a3b8';
+    const lineColor = isLightLike ? (theme === 'pastel' ? '#c44555' : '#1d4ed8') : '#38bdf8';
     const pointColor = lineColor;
 
     // 1. Grid
@@ -163,7 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.stroke();
 
       // Label
-      ctx.fillStyle = '#f8fafc';
+      ctx.fillStyle = isLightLike 
+        ? (theme === 'pastel' ? '#2c1a16' : (theme === 'sky' ? '#0b2545' : '#0f172a')) 
+        : '#f8fafc';
       ctx.font = 'bold 12px sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(`(0, ${b})`, toScreenX(0) + 10, toScreenY(b) - 6);

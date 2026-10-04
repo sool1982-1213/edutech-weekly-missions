@@ -347,11 +347,13 @@ input[type="range"] {
 }
 
 /* Math Explanation Box */
+/* Math Explanation Box */
 .math-explanation-box {
-  background: rgba(30, 41, 75, 0.5);
+  background: var(--bg-hover);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 18px 20px;
+  transition: all 0.25s ease;
 }
 
 .math-header {
@@ -362,38 +364,144 @@ input[type="range"] {
 }
 
 .math-header h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #38bdf8;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--accent);
 }
 
 .math-desc-text {
   font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 12px;
+  color: var(--text-main);
+  line-height: 1.65;
+  margin-bottom: 14px;
 }
 
 .formula-box {
-  background: #0d1527;
+  background: var(--bg-panel);
   padding: 8px 14px;
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
 }
 
 .formula-label {
   font-size: 0.82rem;
-  color: var(--text-dim);
+  color: var(--text-muted);
 }
 
 .formula-box code {
-  color: #fcd34d;
-  font-size: 0.92rem;
-  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.94rem;
+  font-weight: 800;
   font-family: monospace;
+}
+
+/* Theme-specific High Contrast Overrides for Visual Explanations */
+[data-theme="dark"] .math-explanation-box {
+  background: rgba(17, 24, 39, 0.75);
+  border-color: #243256;
+}
+[data-theme="dark"] .math-header h3 {
+  color: #38bdf8;
+}
+[data-theme="dark"] .math-desc-text {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .formula-box {
+  background: #090d16;
+  border-color: #243256;
+}
+[data-theme="dark"] .formula-label {
+  color: #94a3b8;
+}
+[data-theme="dark"] .formula-box code {
+  color: #fcd34d;
+}
+
+/* Light Theme: Crisp, high-contrast slate & cobalt */
+[data-theme="light"] .math-explanation-box {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .math-header h3 {
+  color: #1d4ed8;
+  font-weight: 800;
+}
+[data-theme="light"] .math-desc-text {
+  color: #0f172a;
+  font-weight: 500;
+}
+[data-theme="light"] .formula-box {
+  background: #ffffff;
+  border: 1.5px solid #93c5fd;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
+}
+[data-theme="light"] .formula-label {
+  color: #334155;
+  font-weight: 700;
+}
+[data-theme="light"] .formula-box code {
+  color: #1d4ed8;
+  font-weight: 800;
+}
+
+/* Pastel Theme: Warm, rich contrast espresso & deep coral */
+[data-theme="pastel"] .math-explanation-box {
+  background: #fff6ee;
+  border: 1.5px solid #ebd5cb;
+  box-shadow: 0 2px 10px rgba(93, 75, 72, 0.06);
+}
+[data-theme="pastel"] .math-header h3 {
+  color: #a82e3b;
+  font-weight: 800;
+}
+[data-theme="pastel"] .math-desc-text {
+  color: #2c1a16;
+  font-weight: 500;
+}
+[data-theme="pastel"] .formula-box {
+  background: #ffffff;
+  border: 1.5px solid #f2cdbf;
+  box-shadow: 0 1px 4px rgba(196, 102, 111, 0.08);
+}
+[data-theme="pastel"] .formula-label {
+  color: #5c3b35;
+  font-weight: 700;
+}
+[data-theme="pastel"] .formula-box code {
+  color: #c44555;
+  font-weight: 800;
+}
+
+/* Sky Theme: Deep, crisp marine navy on light sky */
+[data-theme="sky"] .math-explanation-box {
+  background: #f0f7ff;
+  border: 1.5px solid #bfdbfe;
+  box-shadow: 0 2px 10px rgba(30, 58, 138, 0.05);
+}
+[data-theme="sky"] .math-header h3 {
+  color: #1d4ed8;
+  font-weight: 800;
+}
+[data-theme="sky"] .math-desc-text {
+  color: #0b2545;
+  font-weight: 500;
+}
+[data-theme="sky"] .formula-box {
+  background: #ffffff;
+  border: 1.5px solid #93c5fd;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
+}
+[data-theme="sky"] .formula-label {
+  color: #1e3a8a;
+  font-weight: 700;
+}
+[data-theme="sky"] .formula-box code {
+  color: #2563eb;
+  font-weight: 800;
 }
 
 /* Toast */
