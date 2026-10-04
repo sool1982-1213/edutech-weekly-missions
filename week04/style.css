@@ -1,15 +1,17 @@
+@import url('../styles/themes.css');
+
 :root {
-  --bg-primary: #0a0f1d;
-  --bg-secondary: #10172e;
-  --bg-card: #151f38;
-  --bg-input: #1a2544;
-  --text-main: #f0f4fc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-  --accent: #2dd4bf;
-  --accent-glow: rgba(45, 212, 191, 0.25);
-  --border-color: #243256;
-  --border-hover: #3b82f6;
+  --bg-primary: var(--bg-page);
+  --bg-secondary: var(--bg-panel);
+  --bg-card: var(--bg-card);
+  --bg-input: var(--bg-input);
+  --text-main: var(--text-main);
+  --text-muted: var(--text-muted);
+  --text-dim: var(--text-dim);
+  --accent: var(--accent);
+  --accent-glow: var(--accent-glow);
+  --border-color: var(--border-color);
+  --border-hover: var(--accent-blue);
   --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
   --radius-lg: 16px;
   --radius-md: 10px;
@@ -29,17 +31,19 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   padding-bottom: 60px;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Nav */
 .top-nav {
-  background: rgba(16, 23, 46, 0.8);
+  background: var(--header-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   padding: 14px 24px;
   position: sticky;
   top: 0;
   z-index: 50;
+  transition: all 0.25s ease;
 }
 
 .nav-container {
@@ -48,6 +52,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .back-link {

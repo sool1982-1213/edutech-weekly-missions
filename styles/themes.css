@@ -1,0 +1,124 @@
+/* ==========================================================================
+   수현T가 좋아하는 4대 시그니처 테마 시스템
+   1. dark   : 깊은 우주 네이비 (#090D16) & 민트/시안 악센트 (기본)
+   2. light  : 깨끗한 오프화이트 (#F8FAFC) & 코발트 블루 악센트
+   3. pastel : 따뜻한 앤틱 크림 (#FAF6F0) & 로즈코랄/세이지 악센트
+   4. sky    : 청량한 스카이 블루 (#F0F6FF) & 로열 마린블루 악센트
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  --bg-page: #090d16;
+  --bg-panel: #111827;
+  --bg-card: #151f38;
+  --bg-input: #1a2544;
+  --bg-hover: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --border-color: #243256;
+  --accent: #2dd4bf;
+  --accent-glow: rgba(45, 212, 191, 0.25);
+  --accent-blue: #38bdf8;
+  --accent-purple: #c084fc;
+  --accent-yellow: #facc15;
+  --header-bg: rgba(17, 24, 39, 0.85);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] {
+  --bg-page: #f8fafc;
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #f1f5f9;
+  --bg-hover: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #94a3b8;
+  --border-color: #cbd5e1;
+  --accent: #0f766e;
+  --accent-glow: rgba(15, 118, 110, 0.2);
+  --accent-blue: #2563eb;
+  --accent-purple: #9333ea;
+  --accent-yellow: #d97706;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="pastel"] {
+  --bg-page: #faf6f0;
+  --bg-panel: #ffffff;
+  --bg-card: #fffbf7;
+  --bg-input: #f5efeb;
+  --bg-hover: #f0e6de;
+  --text-main: #5d4b48;
+  --text-muted: #8a7572;
+  --text-dim: #a89592;
+  --border-color: #ebded6;
+  --accent: #c4666f;
+  --accent-glow: rgba(196, 102, 111, 0.25);
+  --accent-blue: #7dc9b8;
+  --accent-purple: #b8a8d9;
+  --accent-yellow: #e59866;
+  --header-bg: rgba(255, 251, 247, 0.9);
+  --shadow-color: rgba(93, 75, 72, 0.1);
+}
+
+[data-theme="sky"] {
+  --bg-page: #f0f6ff;
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #e4efff;
+  --bg-hover: #dbeafe;
+  --text-main: #1e3a8a;
+  --text-muted: #45567d;
+  --text-dim: #6b82a6;
+  --border-color: #bfdbfe;
+  --accent: #2563eb;
+  --accent-glow: rgba(37, 99, 235, 0.25);
+  --accent-blue: #38bdf8;
+  --accent-purple: #818cf8;
+  --accent-yellow: #f59e0b;
+  --header-bg: rgba(240, 246, 255, 0.9);
+  --shadow-color: rgba(30, 58, 138, 0.1);
+}
+
+/* ==========================================================================
+   테마 셀렉터 공통 컴포넌트 스타일
+   ========================================================================== */
+.theme-selector-wrapper {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  padding: 3px;
+  border-radius: 24px;
+  gap: 2px;
+}
+
+.theme-pill-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 5px 10px;
+  border-radius: 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.theme-pill-btn:hover {
+  color: var(--text-main);
+}
+
+.theme-pill-btn.active {
+  background: var(--bg-panel);
+  color: var(--text-main);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}

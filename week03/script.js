@@ -47,9 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawGraph() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const isLightLike = theme === 'light' || theme === 'pastel' || theme === 'sky';
+
+    // Canvas Background
+    ctx.fillStyle = isLightLike ? (theme === 'pastel' ? '#fffbf7' : '#ffffff') : '#020617';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const gridColor = isLightLike ? (theme === 'pastel' ? '#ebded6' : '#e2e8f0') : '#1e293b';
+    const axesColor = isLightLike ? '#64748b' : '#475569';
+    const textColor = isLightLike ? '#64748b' : '#94a3b8';
+    const lineColor = isLightLike ? (theme === 'pastel' ? '#c4666f' : '#2563eb') : '#38bdf8';
+    const pointColor = lineColor;
+
     // 1. Grid
     ctx.lineWidth = 1;
-    ctx.strokeStyle = '#1e293b';
+    ctx.strokeStyle = gridColor;
 
     for (let x = xMin; x <= xMax; x++) {
       ctx.beginPath();
@@ -66,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Axes
     ctx.lineWidth = 2;
-    ctx.strokeStyle = '#475569';
+    ctx.strokeStyle = axesColor;
 
     // X Axis
     ctx.beginPath();
@@ -81,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.stroke();
 
     // Axis numbers
-    ctx.fillStyle = '#64748b';
+    ctx.fillStyle = textColor;
     ctx.font = '11px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
@@ -114,9 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.clip();
 
     ctx.lineWidth = 3.5;
-    ctx.strokeStyle = '#38bdf8';
-    ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
-    ctx.shadowBlur = 8;
+    ctx.strokeStyle = lineColor;
+    ctx.shadowColor = isLightLike ? 'transparent' : 'rgba(56, 189, 248, 0.4)';
+    ctx.shadowBlur = isLightLike ? 0 : 8;
 
     ctx.beginPath();
     ctx.moveTo(toScreenX(startX), toScreenY(startY));
@@ -131,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (py >= yMin && py <= yMax) {
         ctx.beginPath();
         ctx.arc(toScreenX(px), toScreenY(py), 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#38bdf8';
+        ctx.fillStyle = pointColor;
         ctx.fill();
-        ctx.strokeStyle = '#0f172a';
+        ctx.strokeStyle = isLightLike ? '#ffffff' : '#0f172a';
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
@@ -219,6 +232,11 @@ document.addEventListener('DOMContentLoaded', () => {
       toast.classList.remove('show');
     }, 2500);
   }
+
+  // Redraw graph on theme change
+  window.addEventListener('edutech:themechange', () => {
+    drawGraph();
+  });
 
   update();
 });
