@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 완성형 학습 리포트 | 1주차 에듀테크 미션</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+</head>
+<body>
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="badge">WEEK 01 · 개초보 미션</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toolbar no-print">
+      <div class="toolbar-info">
+        <h1>📊 수현T의 맞춤형 주간 학습 리포트</h1>
+        <p>선생님 정보와 가상 학생의 피드백 카드를 담은 완성형 학부모 상담 리포트입니다.</p>
+      </div>
+      <div class="toolbar-actions">
+        <button id="toggleEditBtn" class="btn btn-secondary">✏️ 내용 직접 수정</button>
+        <button onclick="window.print()" class="btn btn-primary">🖨️ 인쇄 / PDF 저장</button>
+      </div>
+    </div>
+
+    <!-- Edit Drawer/Modal (Collapsible) -->
+    <section id="editSection" class="edit-panel no-print" style="display: none;">
+      <h2>📝 리포트 내용 편집기</h2>
+      <div class="edit-grid">
+        <div class="form-group">
+          <label>선생님 이름</label>
+          <input type="text" id="editTeacherName" value="수현T">
+        </div>
+        <div class="form-group">
+          <label>학원명</label>
+          <input type="text" id="editAcademy" value="초강스 에듀테크 LAB 수학학원">
+        </div>
+        <div class="form-group">
+          <label>학생 이름</label>
+          <input type="text" id="editStudentName" value="김초강">
+        </div>
+        <div class="form-group">
+          <label>학습 단원</label>
+          <input type="text" id="editUnit" value="일차함수 · 그래프의 변화와 해석">
+        </div>
+        <div class="form-group full-width">
+          <label>강점 (Strengths)</label>
+          <textarea id="editStrength" rows="2">그래프의 기울기 변화를 직관적으로 파악하고, 조건에 맞는 좌표를 신속하게 찾아냅니다.</textarea>
+        </div>
+        <div class="form-group full-width">
+          <label>보완점 (Improvement)</label>
+          <textarea id="editImprovement" rows="2">복합 식의 전개 과정에서 음수 부호 처리를 한 번 더 꼼꼼하게 점검할 필요가 있습니다.</textarea>
+        </div>
+        <div class="form-group full-width">
+          <label>다음 목표 (Next Goal)</label>
+          <textarea id="editGoal" rows="2">문제 풀이 직후 핵심 조건과 계산을 30초간 자가 검산하는 루틴을 체득합니다.</textarea>
+        </div>
+        <div class="form-group">
+          <label>학습 흐름 성취도 (%)</label>
+          <input type="number" id="editProgress" value="85" min="0" max="100">
+        </div>
+      </div>
+    </section>
+
+    <!-- Report Paper View -->
+    <article class="report-paper">
+      <!-- Report Header -->
+      <header class="report-header">
+        <div class="header-left">
+          <span class="report-tag">WEEKLY LEARNING REPORT</span>
+          <h2 id="reportMainTitle">주간 맞춤 학습 피드백 리포트</h2>
+          <p class="academy-name" id="displayAcademy">초강스 에듀테크 LAB 수학학원</p>
+        </div>
+        <div class="header-right">
+          <div class="date-badge">2026년 10월 1주차</div>
+        </div>
+      </header>
+
+      <!-- Teacher Profile Card -->
+      <section class="teacher-profile-card">
+        <div class="teacher-avatar">👨‍🏫</div>
+        <div class="teacher-info">
+          <div class="teacher-badge">담당 교사</div>
+          <h3 id="displayTeacher">수현T 선생님</h3>
+          <p class="teacher-desc">"학생이 스스로 수식 속의 원리를 발견하고, 자신감 있게 논리적인 문제 해결 과정을 설명할 수 있도록 지도합니다."</p>
+        </div>
+        <div class="subject-tag">중·고등 수학 전문</div>
+      </section>
+
+      <!-- Student Overview -->
+      <section class="student-overview">
+        <div class="meta-item">
+          <span class="meta-label">학생 성명</span>
+          <strong class="meta-value" id="displayStudent">김초강 학생</strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">학습 과목</span>
+          <strong class="meta-value">수학 (개념 & 심화)</strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">학습 단원</span>
+          <strong class="meta-value" id="displayUnit">일차함수 · 그래프의 변화와 해석</strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">학습 출석률</span>
+          <strong class="meta-value text-accent">100% (완벽 출석)</strong>
+        </div>
+      </section>
+
+      <!-- Core Feedback 3 Cards -->
+      <section class="feedback-cards-grid">
+        <div class="card card-strength">
+          <div class="card-header">
+            <span class="card-icon">🌟</span>
+            <h4>강점 (Strengths)</h4>
+          </div>
+          <p id="displayStrength">그래프의 기울기 변화를 직관적으로 파악하고, 조건에 맞는 좌표를 신속하게 찾아냅니다.</p>
+        </div>
+
+        <div class="card card-improve">
+          <div class="card-header">
+            <span class="card-icon">🔍</span>
+            <h4>보완점 (Improvement)</h4>
+          </div>
+          <p id="displayImprovement">복합 식의 전개 과정에서 음수 부호 처리를 한 번 더 꼼꼼하게 점검할 필요가 있습니다.</p>
+        </div>
+
+        <div class="card card-goal">
+          <div class="card-header">
+            <span class="card-icon">🎯</span>
+            <h4>다음 목표 (Next Goal)</h4>
+          </div>
+          <p id="displayGoal">문제 풀이 직후 핵심 조건과 계산을 30초간 자가 검산하는 루틴을 체득합니다.</p>
+        </div>
+      </section>
+
+      <!-- Progress Section -->
+      <section class="progress-section">
+        <div class="progress-header">
+          <span class="progress-title">이번 주 종합 학습 흐름 & 집중도</span>
+          <span class="progress-value" id="displayProgressText">매우 우수 · 85%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="displayProgressBar" style="width: 85%;"></div>
+        </div>
+        <p class="progress-comment">개념 이해도가 지난주 대비 크게 상승하였으며, 그래프 해석 과제에서 뛰어난 몰입도를 보여주었습니다.</p>
+      </section>
+
+      <!-- Report Footer -->
+      <footer class="report-footer">
+        <p>※ 본 리포트는 공교육 및 학원 에듀테크 주간 미션의 일환으로 제작된 맞춤형 학습 피드백 양식입니다.</p>
+        <div class="signature">지도교사: <span id="displaySignature">수현T</span> (인)</div>
+      </footer>
+    </article>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

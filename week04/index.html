@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 회전대칭 엽서 | 4주차 AI 수학 아트</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="badge">WEEK 04 · 개초보 미션</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header">
+      <span class="sub-title">초강스 에듀테크 LAB · AI로 만드는 수학 아트</span>
+      <h1>🌸 수현T의 회전대칭 엽서 제작소</h1>
+      <p class="description">꽃잎 수와 이름을 바꾸면 회전대칭의 규칙($360^\circ \div n$)이 시각화되는 인터랙티브 수학 엽서입니다.</p>
+    </header>
+
+    <div class="workspace-grid">
+      <!-- Controls Panel -->
+      <section class="panel control-panel">
+        <h2 class="panel-title">⚙️ 엽서 설정</h2>
+
+        <div class="form-group">
+          <label for="authorInput">선생님 이름 / 별명</label>
+          <input type="text" id="authorInput" value="수현T" placeholder="이름을 입력하세요" maxlength="20">
+        </div>
+
+        <div class="form-group">
+          <label for="titleInput">작품 제목</label>
+          <input type="text" id="titleInput" value="수학 꽃이 피었습니다" placeholder="작품 제목" maxlength="40">
+        </div>
+
+        <div class="form-group">
+          <div class="slider-header">
+            <label for="petalCount">꽃잎 수 ($n$)</label>
+            <span class="slider-badge" id="petalCountDisplay">8개</span>
+          </div>
+          <input type="range" id="petalCount" min="4" max="16" value="8" step="1">
+          <div class="slider-scale">
+            <span>4</span>
+            <span>8</span>
+            <span>12</span>
+            <span>16</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="colorTheme">테마 컬러</label>
+          <div class="color-picker-row">
+            <button type="button" class="color-dot active" data-color="175" style="background: hsl(175, 85%, 68%)" title="민트"></button>
+            <button type="button" class="color-dot" data-color="280" style="background: hsl(280, 85%, 68%)" title="바이올렛"></button>
+            <button type="button" class="color-dot" data-color="340" style="background: hsl(340, 85%, 68%)" title="로즈 핑크"></button>
+            <button type="button" class="color-dot" data-color="45" style="background: hsl(45, 95%, 60%)" title="골든 옐로우"></button>
+            <button type="button" class="color-dot" data-color="210" style="background: hsl(210, 85%, 68%)" title="스카이 블루"></button>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="toggle-label">
+            <input type="checkbox" id="showAxes" checked>
+            <span class="toggle-text">📐 대칭 중심축 표시</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="userMemo">나의 수학 설명 한 문장 (댓글 제출용)</label>
+          <textarea id="userMemo" rows="3" placeholder="만들면서 발견하거나 배운 점을 적어보세요">같은 모양을 8번 회전해 45° 대칭을 이루며, 회전각과 꽃잎 수가 반비례 관계임을 시각적으로 체감했습니다.</textarea>
+        </div>
+
+        <div class="action-buttons">
+          <button id="downloadSvgBtn" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            SVG 엽서 다운로드
+          </button>
+          <button id="copyCommentBtn" class="btn btn-secondary">
+            📋 제출 댓글 양식 복사
+          </button>
+        </div>
+      </section>
+
+      <!-- Preview & Math Explanation -->
+      <section class="panel preview-panel">
+        <div class="panel-header-row">
+          <h2 class="panel-title">🖼️ 실시간 엽서 미리보기</h2>
+          <span class="calc-badge" id="angleBadge">회전각: 45.0°</span>
+        </div>
+
+        <div class="card-wrapper" id="postcardContainer">
+          <!-- Live SVG is rendered here -->
+          <div id="svgContainer"></div>
+        </div>
+
+        <!-- Math explanation box -->
+        <div class="math-explanation-box">
+          <div class="math-header">
+            <span class="math-icon">💡</span>
+            <h3>수학 교사용 개념 가이드</h3>
+          </div>
+          <p id="mathDescText" class="math-desc-text"></p>
+          <div class="formula-box">
+            <span class="formula-label">회전각 계산 공식:</span>
+            <code id="formulaCode">360° ÷ 8 = 45.0°</code>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast" class="toast">댓글 양식이 클립보드에 복사되었습니다!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

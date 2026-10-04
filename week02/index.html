@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 학부모 공지 제작기 | 2주차 에듀테크 미션</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+</head>
+<body>
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="badge">WEEK 02 · 개초보 미션</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header no-print">
+      <span class="sub-title">초강스 에듀테크 LAB · 강사 업무 자동화</span>
+      <h1>📢 수현T의 학부모 공지 제작기</h1>
+      <p class="description">수업 정보를 입력하면 기본형, 카카오톡형, 친근형 3종 공지문과 모바일 카드가 즉시 생성됩니다.</p>
+    </header>
+
+    <div class="workspace-grid">
+      <!-- Input Form -->
+      <section class="panel input-panel no-print">
+        <h2 class="panel-title">✏️ 공지 정보 입력</h2>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="teacherInput">선생님 성함</label>
+            <input type="text" id="teacherInput" value="수현T">
+          </div>
+          <div class="form-group">
+            <label for="academyInput">학원 / 모임명</label>
+            <input type="text" id="academyInput" value="초강스 에듀테크 LAB">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subjectInput">과목</label>
+            <input type="text" id="subjectInput" value="수학">
+          </div>
+          <div class="form-group">
+            <label for="targetClassInput">대상 반</label>
+            <input type="text" id="targetClassInput" value="중등 심화반">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="noticeTitleInput">공지 제목</label>
+          <input type="text" id="noticeTitleInput" value="10월 일차함수 단원평가 및 오답 클리닉 안내">
+        </div>
+
+        <div class="form-group">
+          <label for="dateTimeInput">일시</label>
+          <input type="text" id="dateTimeInput" value="10월 14일(수) 오후 5:00 ~ 7:00">
+        </div>
+
+        <div class="form-group">
+          <label for="contentInput">수업 / 행사 핵심 내용</label>
+          <textarea id="contentInput" rows="2">일차함수 그래프 활용 단원평가 실시 및 학생별 취약 유형 1:1 오답 첨삭 클리닉을 진행합니다.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="materialsInput">준비물</label>
+          <input type="text" id="materialsInput" value="개인 오답노트, 그래프용 자, 필기도구">
+        </div>
+
+        <div class="form-group">
+          <label for="requestInput">학부모님께 요청 사항</label>
+          <input type="text" id="requestInput" value="귀가 후 오답노트 확인 및 따뜻한 격려 부탁드립니다.">
+        </div>
+
+        <p class="security-note">🔒 모든 입력 정보는 브라우저 내부에서만 처리되며 외부 서버로 전송되지 않습니다.</p>
+      </section>
+
+      <!-- Output & Preview -->
+      <section class="panel output-panel">
+        <!-- Tab selector for notice types -->
+        <div class="tabs-header no-print">
+          <button type="button" class="tab-btn active" data-tab="tab-standard">① 기본 공지문</button>
+          <button type="button" class="tab-btn" data-tab="tab-kakao">② 짧은 카톡형</button>
+          <button type="button" class="tab-btn" data-tab="tab-friendly">③ 친근한 말투형</button>
+          <button type="button" class="tab-btn" data-tab="tab-card">📱 모바일 카드</button>
+        </div>
+
+        <!-- Tab 1: Standard Notice -->
+        <div class="tab-content active" id="tab-standard">
+          <div class="notice-box-wrapper">
+            <div class="box-header">
+              <span class="box-title">정중한 기본 공식 공지문</span>
+              <button class="btn-copy" data-target="standardText">📋 복사하기</button>
+            </div>
+            <pre class="notice-text-content" id="standardText"></pre>
+          </div>
+        </div>
+
+        <!-- Tab 2: Kakao Notice -->
+        <div class="tab-content" id="tab-kakao">
+          <div class="notice-box-wrapper">
+            <div class="box-header">
+              <span class="box-title">요약 카카오톡 전달형</span>
+              <button class="btn-copy" data-target="kakaoText">📋 복사하기</button>
+            </div>
+            <pre class="notice-text-content" id="kakaoText"></pre>
+          </div>
+        </div>
+
+        <!-- Tab 3: Friendly Notice -->
+        <div class="tab-content" id="tab-friendly">
+          <div class="notice-box-wrapper">
+            <div class="box-header">
+              <span class="box-title">친근하고 다정한 소통형</span>
+              <button class="btn-copy" data-target="friendlyText">📋 복사하기</button>
+            </div>
+            <pre class="notice-text-content" id="friendlyText"></pre>
+          </div>
+        </div>
+
+        <!-- Tab 4: Mobile Card Preview -->
+        <div class="tab-content" id="tab-card">
+          <div class="mobile-preview-frame">
+            <div class="mobile-card-content">
+              <div class="card-top-bar">
+                <span class="card-inst" id="cardAcademy">초강스 에듀테크 LAB</span>
+                <span class="card-target-badge" id="cardTarget">중등 심화반</span>
+              </div>
+              <h3 class="card-main-title" id="cardTitle">공지 제목</h3>
+              
+              <div class="card-info-list">
+                <div class="card-info-item">
+                  <span class="ci-icon">🗓️</span>
+                  <div>
+                    <span class="ci-label">일시</span>
+                    <strong class="ci-value" id="cardDate">일시 정보</strong>
+                  </div>
+                </div>
+                <div class="card-info-item">
+                  <span class="ci-icon">📖</span>
+                  <div>
+                    <span class="ci-label">내용</span>
+                    <strong class="ci-value" id="cardContent">내용 정보</strong>
+                  </div>
+                </div>
+                <div class="card-info-item">
+                  <span class="ci-icon">✏️</span>
+                  <div>
+                    <span class="ci-label">준비물</span>
+                    <strong class="ci-value" id="cardMaterials">준비물 정보</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-request-box">
+                <span class="cr-badge">학부모 요청사항</span>
+                <p id="cardRequest">요청 사항</p>
+              </div>
+
+              <div class="card-footer-info">
+                <span>담당 교사: <strong id="cardTeacher">수현T</strong></span>
+                <span class="edu-badge">초강스 WEEK 02</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions no-print">
+            <button onclick="window.print()" class="btn btn-primary">🖨️ 카드 인쇄 / PDF 저장</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast" class="toast">공지문이 클립보드에 복사되었습니다!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
