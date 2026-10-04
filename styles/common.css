@@ -402,13 +402,14 @@ body {
 
 @media (max-width: 680px) {
   .portal-header {
-    padding: 12px 0;
+    position: relative; /* 모바일에서 스크롤 시 뷰어 화면을 가리는 현상 방지 */
+    padding: 10px 0;
   }
 
   .header-container {
     padding: 0 16px;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     align-items: stretch;
   }
 
@@ -557,5 +558,9 @@ body {
 @media (max-width: 420px) {
   .browser-dots {
     display: none; /* 초소형 모바일 화면에서 브라우저 점 아이콘 숨김으로 타이틀 영역 확보 */
+  }
+
+  .brand-text p {
+    display: none; /* 초소형 화면에서 부제목 숨김으로 헤더 높이 최소화 */
   }
 }

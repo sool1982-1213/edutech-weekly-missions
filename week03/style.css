@@ -561,4 +561,17 @@ textarea:focus {
     padding: 6px 8px;
     font-size: 0.82rem;
   }
+
+  .graph-header {
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .graph-title,
+  .y-intercept-indicator {
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
 }

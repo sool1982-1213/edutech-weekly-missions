@@ -572,4 +572,28 @@ body {
     align-items: flex-start;
     gap: 10px;
   }
+
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .report-footer {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .report-footer p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    width: 100%;
+  }
+
+  .signature {
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
 }

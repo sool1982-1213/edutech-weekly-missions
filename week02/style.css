@@ -500,14 +500,24 @@ textarea:focus {
     border-radius: var(--radius-md);
   }
 
-  .category-tabs {
-    flex-wrap: wrap;
-    gap: 6px;
+  .tabs-header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 16px;
   }
 
-  .cat-tab {
-    font-size: 0.78rem;
-    padding: 6px 10px;
+  .tab-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px 8px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
 
   .form-row {

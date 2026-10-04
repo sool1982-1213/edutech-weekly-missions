@@ -489,4 +489,23 @@ input[type="range"] {
     flex-wrap: wrap;
     gap: 6px;
   }
+
+  .panel-header-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-header-row h2 {
+    font-size: 1.05rem;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .calc-badge {
+    font-size: 0.78rem;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
 }
