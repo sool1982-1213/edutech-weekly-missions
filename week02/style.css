@@ -195,6 +195,11 @@ textarea:focus {
   color: var(--text-muted);
   cursor: pointer;
   transition: all 0.15s;
+  white-space: nowrap !important;
+  word-break: keep-all;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tab-btn:hover {
@@ -453,6 +458,26 @@ textarea:focus {
 @media (max-width: 860px) {
   .workspace-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tabs-header {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .tab-btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 11px 8px !important;
+    font-size: 0.84rem !important;
+    white-space: nowrap !important;
+    justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
   }
 }
 
