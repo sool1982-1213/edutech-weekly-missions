@@ -122,3 +122,41 @@
   box-shadow: 0 2px 6px var(--shadow-color);
   border: 1px solid var(--border-color);
 }
+
+/* 모바일 화면 테마 스위처 최적화 */
+@media (max-width: 520px) {
+  .theme-selector-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+  }
+
+  .theme-pill-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 5px 4px;
+    font-size: 0.76rem;
+    gap: 3px;
+    white-space: nowrap;
+  }
+}
+
+/* ==========================================================================
+   임베드(Iframe) 환경 최적화
+   통합 허브 뷰어 내부에서는 불필요한 내부 네비게이션 헤더를 숨기고 여백을 최적화
+   ========================================================================== */
+.is-embedded .top-nav {
+  display: none !important;
+}
+
+.is-embedded body {
+  padding-bottom: 24px !important;
+  background-color: var(--bg-page) !important;
+}
+
+.is-embedded .container {
+  margin: 16px auto !important;
+  padding: 0 16px !important;
+}
+

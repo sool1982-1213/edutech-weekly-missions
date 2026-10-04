@@ -58,6 +58,11 @@
   const initialTheme = getStoredTheme();
   document.documentElement.setAttribute('data-theme', initialTheme);
 
+  // Detect if embedded inside an iframe (e.g., inside portal viewer)
+  if (window.self !== window.top) {
+    document.documentElement.classList.add('is-embedded');
+  }
+
   // Mount UI when DOM is ready
   function initThemeUI() {
     applyTheme(getStoredTheme(), false);
