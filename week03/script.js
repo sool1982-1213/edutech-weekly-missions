@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = (m * x + b);
       return `<td>${Number.isInteger(y) ? y : y.toFixed(1)}</td>`;
     });
-    tableYRow.innerHTML = `<th>$y$</th>${yCells.join('')}`;
+    tableYRow.innerHTML = `<th>y</th>${yCells.join('')}`;
 
     drawGraph();
   }
