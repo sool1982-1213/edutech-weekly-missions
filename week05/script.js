@@ -725,41 +725,47 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
 
   if (printPageBtn && printModal) {
     printPageBtn.addEventListener('click', () => {
-      printModal.style.display = 'flex';
+      printModal.classList.add('open');
     });
   }
 
   if (closePrintModalBtn && printModal) {
     closePrintModalBtn.addEventListener('click', () => {
-      printModal.style.display = 'none';
+      printModal.classList.remove('open');
     });
   }
 
   if (printModal) {
     printModal.addEventListener('click', (e) => {
       if (e.target === printModal) {
-        printModal.style.display = 'none';
+        printModal.classList.remove('open');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && printModal.classList.contains('open')) {
+        printModal.classList.remove('open');
       }
     });
   }
 
   if (printStudentWorksheetBtn) {
     printStudentWorksheetBtn.addEventListener('click', () => {
-      printModal.style.display = 'none';
+      printModal.classList.remove('open');
       printHtmlDirectly(false);
     });
   }
 
   if (printTeacherGuideBtn) {
     printTeacherGuideBtn.addEventListener('click', () => {
-      printModal.style.display = 'none';
+      printModal.classList.remove('open');
       printHtmlDirectly(true);
     });
   }
 
   if (printDirectScreenBtn) {
     printDirectScreenBtn.addEventListener('click', () => {
-      printModal.style.display = 'none';
+      printModal.classList.remove('open');
       window.print();
     });
   }
