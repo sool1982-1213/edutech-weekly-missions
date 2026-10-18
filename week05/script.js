@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentHintCount = 0;
   let correctRetryOptionIndex = 1; // 0 or 1
 
-  // Format matrix to string [a, b; c, d]
+  // Format matrix to string (a, b; c, d) - 2022 개정 공통수학1 소괄호 표준
   function formatMatrix(m) {
-    return `[${m.map(row => row.join(', ')).join('; ')}]`;
+    return `(${m.map(row => row.join(', ')).join('; ')})`;
   }
 
   // Escape HTML characters
@@ -483,11 +483,13 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
     const matrixHtml = (label, mat) => `
       <figure style="display:inline-block; vertical-align:top; margin:10px 20px 10px 0;">
         <figcaption style="font-size:13px; font-weight:bold; color:#475569; margin-bottom:4px;">${escapeHtml(label)}</figcaption>
-        <div style="position:relative; display:inline-block; padding:2px 14px; border-left:3px solid #0f172a; border-right:3px solid #0f172a;">
+        <div style="position:relative; display:inline-block; padding:3px 16px;">
+          <span style="position:absolute; left:2px; top:0; bottom:0; width:12px; border-left:2.5px solid #0f172a; border-top:2px solid #0f172a; border-bottom:2px solid #0f172a; border-top-left-radius:14px 50%; border-bottom-left-radius:14px 50%;"></span>
           <table style="border-collapse:collapse;">
-            <tr><td style="padding:6px 14px; font-size:18px; font-weight:bold; text-align:center;">${mat[0][0]}</td><td style="padding:6px 14px; font-size:18px; font-weight:bold; text-align:center;">${mat[0][1]}</td></tr>
-            <tr><td style="padding:6px 14px; font-size:18px; font-weight:bold; text-align:center;">${mat[1][0]}</td><td style="padding:6px 14px; font-size:18px; font-weight:bold; text-align:center;">${mat[1][1]}</td></tr>
+            <tr><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[0][0]}</td><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[0][1]}</td></tr>
+            <tr><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[1][0]}</td><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[1][1]}</td></tr>
           </table>
+          <span style="position:absolute; right:2px; top:0; bottom:0; width:12px; border-right:2.5px solid #0f172a; border-top:2px solid #0f172a; border-bottom:2px solid #0f172a; border-top-right-radius:14px 50%; border-bottom-right-radius:14px 50%;"></span>
         </div>
       </figure>
     `;

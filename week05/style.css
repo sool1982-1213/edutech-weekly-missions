@@ -549,29 +549,38 @@ button {
 .matrix-brackets {
   position: relative;
   display: inline-block;
-  padding: 4px 16px;
+  padding: 4px 18px;
 }
 
-/* Square bracket borders */
-.matrix-brackets:before,
+/* Parentheses '( )' curved borders - 2022 개정 공통수학1 한국 고교 표준 소괄호 표기 */
+.matrix-brackets:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 14px;
+  border-left: 2.5px solid var(--text-main);
+  border-top: 2px solid var(--text-main);
+  border-bottom: 2px solid var(--text-main);
+  border-right: none;
+  border-top-left-radius: 16px 50%;
+  border-bottom-left-radius: 16px 50%;
+}
+
 .matrix-brackets:after {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 9px;
-  border-top: 3px solid var(--text-main);
-  border-bottom: 3px solid var(--text-main);
-}
-
-.matrix-brackets:before {
-  left: 0;
-  border-left: 3px solid var(--text-main);
-}
-
-.matrix-brackets:after {
-  right: 0;
-  border-right: 3px solid var(--text-main);
+  right: 2px;
+  width: 14px;
+  border-right: 2.5px solid var(--text-main);
+  border-top: 2px solid var(--text-main);
+  border-bottom: 2px solid var(--text-main);
+  border-left: none;
+  border-top-right-radius: 16px 50%;
+  border-bottom-right-radius: 16px 50%;
 }
 
 .matrix-table {
@@ -592,7 +601,25 @@ button {
 }
 
 .mini-matrix .matrix-brackets {
-  padding: 2px 12px;
+  padding: 2px 14px;
+}
+
+.mini-matrix .matrix-brackets:before {
+  width: 11px;
+  border-left-width: 2px;
+  border-top-width: 1.8px;
+  border-bottom-width: 1.8px;
+  border-top-left-radius: 13px 50%;
+  border-bottom-left-radius: 13px 50%;
+}
+
+.mini-matrix .matrix-brackets:after {
+  width: 11px;
+  border-right-width: 2px;
+  border-top-width: 1.8px;
+  border-bottom-width: 1.8px;
+  border-top-right-radius: 13px 50%;
+  border-bottom-right-radius: 13px 50%;
 }
 
 .mini-matrix .matrix-table td {
@@ -602,7 +629,7 @@ button {
   padding: 1px 4px;
 }
 
-/* Inline Compact Matrix Components */
+/* Inline Compact Matrix Components with Parentheses '( )' */
 .matrix-inline-badge {
   display: inline-flex;
   align-items: center;
@@ -617,29 +644,38 @@ button {
 .matrix-bracket-inline {
   position: relative;
   display: inline-block;
-  padding: 2px 7px;
+  padding: 2px 9px;
   vertical-align: middle;
 }
 
-.matrix-bracket-inline:before,
+.matrix-bracket-inline:before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 1px;
+  width: 8px;
+  border-left: 1.8px solid var(--text-main);
+  border-top: 1.5px solid var(--text-main);
+  border-bottom: 1.5px solid var(--text-main);
+  border-right: none;
+  border-top-left-radius: 10px 50%;
+  border-bottom-left-radius: 10px 50%;
+}
+
 .matrix-bracket-inline:after {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 5px;
-  border-top: 2px solid var(--text-main);
-  border-bottom: 2px solid var(--text-main);
-}
-
-.matrix-bracket-inline:before {
-  left: 0;
-  border-left: 2px solid var(--text-main);
-}
-
-.matrix-bracket-inline:after {
-  right: 0;
-  border-right: 2px solid var(--text-main);
+  top: -1px;
+  bottom: -1px;
+  right: 1px;
+  width: 8px;
+  border-right: 1.8px solid var(--text-main);
+  border-top: 1.5px solid var(--text-main);
+  border-bottom: 1.5px solid var(--text-main);
+  border-left: none;
+  border-top-right-radius: 10px 50%;
+  border-bottom-right-radius: 10px 50%;
 }
 
 .matrix-table-compact {
