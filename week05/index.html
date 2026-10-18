@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 행렬 오답 클리닉 | 5주차 중수 미션</title>
+  <link rel="stylesheet" href="../styles/themes.css?v=20261018_1">
+  <link rel="stylesheet" href="style.css?v=20261018_1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <script src="../styles/theme-switcher.js?v=20261018_1"></script>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="nav-right">
+        <div class="theme-switcher-mount"></div>
+        <div class="badge badge-level">WEEK 05 · LEVEL 03 중수</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Header -->
+    <header class="page-header no-print">
+      <div class="curriculum-tag">2022 개정 공통수학1 [10공수1-04-01, 10공수1-04-02] · 행렬 오답 클리닉</div>
+      <h1>설명에서 끝내지 않는<br><span class="highlight-text">수현T의 행렬 곱셈 순서 재도전 클리닉</span></h1>
+      <p class="description">실수의 곱셈처럼 순서를 바꾸는 오류(AB = BA)를 구체적인 수치 예시로 확인하고, 숫자가 다른 행렬로 다시 도전하여 곱셈 순서의 원리를 체화합니다.</p>
+      
+      <!-- Week Continuity Breadcrumb -->
+      <div class="continuity-bar">
+        <div class="cont-item"><span>3주차</span> 조작하며 이해하기</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item"><span>4주차</span> 눈에 보이는 자료 만들기</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item active"><span>5주차</span> 실수를 설명하고 재도전하기 (중수)</div>
+      </div>
+    </header>
+
+    <!-- Workspace Grid -->
+    <div class="workspace-grid">
+      <!-- Left Panel: Controls / Settings -->
+      <section class="panel controls-panel no-print">
+        <div class="panel-header">
+          <h2 class="panel-title">⚙️ 수업 자료 설정</h2>
+          <span class="panel-sub">중수 · 25~40분</span>
+        </div>
+
+        <div class="form-group">
+          <label for="teacherInput">만든 선생님 · 별명</label>
+          <input type="text" id="teacherInput" value="수현T" maxlength="32" placeholder="선생님 별명을 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label>수학 교육과정 범위 안내</label>
+          <div class="info-callout">
+            <strong>2022 개정 고등학교 공통수학1</strong>
+            <p>행과 열이 각각 2 이하인 행렬의 덧셈·뺄셈·실수배·곱셈만 다룹니다. (역행렬·행렬식 배제)</p>
+          </div>
+        </div>
+
+        <!-- Slider Parameters for Matrix A -->
+        <div class="param-box">
+          <div class="param-header">
+            <h3>행렬의 숫자 바꾸기 (Matrix A)</h3>
+            <span class="param-sub">A = [[a, b], [1, c]]</span>
+          </div>
+
+          <!-- Parameter a -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label for="paramA">A의 (1,1) 성분 <strong>a</strong></label>
+              <span class="param-badge badge-blue" id="dispA">3</span>
+            </div>
+            <input type="range" id="paramA" min="2" max="9" step="1" value="3">
+            <div class="slider-scale">
+              <span>2</span>
+              <span>4</span>
+              <span>6</span>
+              <span>8</span>
+              <span>9</span>
+            </div>
+            <small class="slider-hint">정수 범위: 2 ~ 9</small>
+          </div>
+
+          <!-- Parameter b -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label for="paramB">A의 (1,2) 성분 <strong>b</strong></label>
+              <span class="param-badge badge-teal" id="dispB">2</span>
+            </div>
+            <input type="range" id="paramB" min="1" max="8" step="1" value="2">
+            <div class="slider-scale">
+              <span>1</span>
+              <span>3</span>
+              <span>5</span>
+              <span>7</span>
+              <span>8</span>
+            </div>
+            <small class="slider-hint">정수 범위: 1 ~ 8</small>
+          </div>
+
+          <!-- Parameter c -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <label for="paramC">A의 (2,2) 성분 <strong>c</strong></label>
+              <span class="param-badge badge-purple" id="dispC">4</span>
+            </div>
+            <input type="range" id="paramC" min="1" max="9" step="1" value="4">
+            <div class="slider-scale">
+              <span>1</span>
+              <span>3</span>
+              <span>5</span>
+              <span>7</span>
+              <span>9</span>
+            </div>
+            <small class="slider-hint">정수 범위: 1 ~ 9</small>
+          </div>
+
+          <div class="condition-note">
+            💡 <strong>실시간 연동 & 자동 초기화:</strong> 성분을 변경하면 오답 카드, 정답 계산, 힌트 진행도, 재도전 문제가 즉시 새로 생성되며 이전 선택과 힌트가 안전하게 초기화됩니다.
+          </div>
+
+          <button type="button" id="resetParamsBtn" class="btn-secondary btn-full">
+            🔄 기본 예시로 복원 (a=3, b=2, c=4)
+          </button>
+        </div>
+
+        <!-- Teacher Feedback -->
+        <div class="form-group" style="margin-top: 18px;">
+          <label for="teacherFeedback">교사 피드백 한 문장</label>
+          <textarea id="teacherFeedback" rows="3" maxlength="1200">“실수의 곱셈처럼 순서를 바꾸면 안 돼요!” 행렬에서는 곱하는 순서에 따라 결과가 완전히 달라집니다. 성분별로 꼼꼼히 행과 열을 곱해 더합시다. 😊</textarea>
+        </div>
+      </section>
+
+      <!-- Right Panel: Live Clinic Card & Interactive Workflow -->
+      <section class="panel clinic-main-panel">
+        <!-- Clinic Card View -->
+        <article class="clinic-card" id="clinicCardView">
+          <div class="clinic-card-header">
+            <div class="card-meta">
+              <span class="card-badge">오답을 찾는 수업 카드</span>
+              <strong class="teacher-tag" id="cardTeacherTag">수현T</strong>
+            </div>
+            <span class="topic-tag">AB와 BA의 구체적 비교 (곱셈 순서)</span>
+          </div>
+
+          <h2 class="clinic-problem-title">
+            주어진 행렬에서 <span class="math-expr">AB</span>를 구하고 <span class="math-expr">BA</span>와 비교하시오.
+          </h2>
+
+          <!-- Matrix Inputs Display -->
+          <div class="matrix-display-row">
+            <!-- Matrix A -->
+            <figure class="matrix-block" id="blockMatrixA">
+              <figcaption>행렬 A</figcaption>
+              <div class="matrix-brackets">
+                <table class="matrix-table" aria-label="행렬 A">
+                  <tbody>
+                    <tr><td id="cellA11">3</td><td id="cellA12">2</td></tr>
+                    <tr><td id="cellA21">1</td><td id="cellA22">4</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+
+            <span class="operator-dot">×</span>
+
+            <!-- Matrix B -->
+            <figure class="matrix-block" id="blockMatrixB">
+              <figcaption>행렬 B</figcaption>
+              <div class="matrix-brackets">
+                <table class="matrix-table" aria-label="행렬 B">
+                  <tbody>
+                    <tr><td>1</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+          </div>
+
+          <!-- Step 1: Find Wrong Line -->
+          <section class="clinic-section">
+            <div class="section-badge-header">
+              <span class="step-badge">STEP 1</span>
+              <h3>오류 줄 찾기</h3>
+            </div>
+            <p class="section-guide-text">
+              아래는 학생의 오답 풀이입니다. <strong>처음으로 규칙이 어긋난 줄</strong>을 클릭하여 찾아보세요.
+            </p>
+
+            <div class="worked-lines-list" id="workedLinesList">
+              <div class="worked-line-item" data-line="1" tabindex="0" role="button" aria-pressed="false">
+                <span class="line-num">01</span>
+                <span class="line-text">행렬의 곱 <span class="math-expr">AB</span>를 계산한다.</span>
+                <span class="line-status-icon"></span>
+              </div>
+              <div class="worked-line-item" data-line="2" tabindex="0" role="button" aria-pressed="false">
+                <span class="line-num">02</span>
+                <span class="line-text">실수의 곱처럼 이 예시에서도 <span class="math-expr">AB = BA</span>라고 두고 순서를 바꾼다.</span>
+                <span class="line-status-icon"></span>
+              </div>
+              <div class="worked-line-item" data-line="3" tabindex="0" role="button" aria-pressed="false">
+                <span class="line-num">03</span>
+                <span class="line-text" id="wrongLine3Text">AB = [4, 6; 1, 4]</span>
+                <span class="line-status-icon"></span>
+              </div>
+            </div>
+
+            <!-- Line Feedback Alert -->
+            <div class="feedback-alert" id="lineFeedbackAlert" style="display: none;"></div>
+          </section>
+
+          <!-- Step 2: 3-Step Guided Hints -->
+          <section class="clinic-section">
+            <div class="hints-header-row">
+              <div class="section-badge-header">
+                <span class="step-badge">STEP 2</span>
+                <h3>정답보다 먼저, 질문 (3단계 힌트)</h3>
+              </div>
+              <span class="hints-progress-chip" id="hintsProgress">0 / 3 힌트 오픈</span>
+            </div>
+            <p class="section-guide-text">
+              막혔을 때 필요한 만큼만 순서대로 힌트를 열어보세요.
+            </p>
+
+            <div class="hints-container">
+              <div class="hint-card" id="hintCard1" style="display: none;">
+                <div class="hint-tag">힌트 1 · 관찰하기</div>
+                <div class="hint-body">이 예시에서 곱셈 순서를 바꾸어도 결과가 같을까요?</div>
+              </div>
+              <div class="hint-card" id="hintCard2" style="display: none;">
+                <div class="hint-tag">힌트 2 · 행과 열 선택</div>
+                <div class="hint-body">AB의 (1,1)성분과 BA의 (1,1)성분을 각각 따로 구해 보세요.</div>
+              </div>
+              <div class="hint-card" id="hintCard3" style="display: none;">
+                <div class="hint-tag">힌트 3 · 계산 단서</div>
+                <div class="hint-body" id="hintBody3">
+                  AB의 (1,1)은 3×1 + 2×0 = 3, BA의 (1,1)은 1×3 + 1×1 = 4입니다.
+                </div>
+              </div>
+            </div>
+
+            <div class="hints-action-row">
+              <button type="button" id="nextHintBtn" class="btn-primary">💡 다음 힌트 보기</button>
+              <button type="button" id="foldHintsBtn" class="btn-outline" disabled>힌트 접기</button>
+            </div>
+          </section>
+
+          <!-- Step 3: Reveal Correct Solution & Verification -->
+          <section class="clinic-section">
+            <div class="section-badge-header">
+              <span class="step-badge">STEP 3</span>
+              <h3>교정 풀이 및 성분별 검산</h3>
+            </div>
+            
+            <button type="button" id="revealSolutionBtn" class="btn-reveal btn-full">
+              👁️ 교정 풀이 · 성분별 검산 확인하기
+            </button>
+
+            <div class="solution-box" id="solutionBox" style="display: none;">
+              <!-- AB vs BA Detailed Calculation -->
+              <div class="solution-grid">
+                <!-- Correct AB -->
+                <div class="calc-card correct-side">
+                  <h4>✅ 올바른 AB 계산 (A의 행 × B의 열)</h4>
+                  <div class="step-calc" id="stepCalcAB">
+                    (1,1): 3×1 + 2×0 = 3<br>
+                    (1,2): 3×1 + 2×1 = 5<br>
+                    (2,1): 1×1 + 4×0 = 1<br>
+                    (2,2): 1×1 + 4×1 = 5
+                  </div>
+                  <figure class="matrix-block mini-matrix">
+                    <figcaption>올바른 AB</figcaption>
+                    <div class="matrix-brackets">
+                      <table class="matrix-table">
+                        <tbody>
+                          <tr><td id="resAB11">3</td><td id="resAB12">5</td></tr>
+                          <tr><td id="resAB21">1</td><td id="resAB22">5</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </figure>
+                </div>
+
+                <!-- Correct BA -->
+                <div class="calc-card diff-side">
+                  <h4>⚠️ 순서를 바꾼 BA 계산 (B의 행 × A의 열)</h4>
+                  <div class="step-calc" id="stepCalcBA">
+                    (1,1): 1×3 + 1×1 = 4<br>
+                    (1,2): 1×2 + 1×4 = 6<br>
+                    (2,1): 0×3 + 1×1 = 1<br>
+                    (2,2): 0×2 + 1×4 = 4
+                  </div>
+                  <figure class="matrix-block mini-matrix">
+                    <figcaption>순서 바꾼 BA</figcaption>
+                    <div class="matrix-brackets">
+                      <table class="matrix-table">
+                        <tbody>
+                          <tr><td id="resBA11">4</td><td id="resBA12">6</td></tr>
+                          <tr><td id="resBA21">1</td><td id="resBA22">4</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </figure>
+                </div>
+              </div>
+
+              <!-- Comparison Highlight Box -->
+              <div class="comparison-banner" id="comparisonBanner">
+                <div class="comp-title">🔍 같은 위치 성분 비교:</div>
+                <p id="compDescription">
+                  (AB)₁₁ = <strong>3</strong>, (BA)₁₁ = <strong>4</strong> 이므로 <span class="diff-highlight">AB ≠ BA</span> 입니다!
+                </p>
+              </div>
+
+              <!-- Prescription & Cause -->
+              <div class="diagnosis-card">
+                <div class="diag-item">
+                  <strong>🚨 오류 원인:</strong>
+                  <p>실수 계산처럼 곱셈 순서를 임의로 바꾸어 계산했습니다. 주어진 두 행렬에서는 순서가 바뀌면 결과도 완전히 달라집니다.</p>
+                </div>
+                <div class="diag-item">
+                  <strong>💊 지도 처방:</strong>
+                  <p>이 수치 예시에서 AB와 BA를 따로 계산하고, 같은 위치의 성분((1,1) 성분 등)을 직접 비교하게 지도하세요.</p>
+                </div>
+                <div class="diag-item">
+                  <strong>✅ 성분별 검산:</strong>
+                  <p id="diagVerification">
+                    AB = [3, 5; 1, 5], BA = [4, 6; 1, 4]. 첫 성분 3과 4가 명확히 다릅니다. 이 구체적인 계산에서 순서를 바꾼 풀이가 틀렸음을 명확히 확인할 수 있습니다.
+                  </p>
+                </div>
+                <div class="diag-item teacher-memo-view">
+                  <strong>👨‍🏫 교사 지도 메모:</strong>
+                  <p id="diagTeacherMemo">“실수의 곱셈처럼 순서를 바꾸면 안 돼요!” 행렬에서는 곱하는 순서에 따라 결과가 완전히 달라집니다. 성분별로 꼼꼼히 행과 열을 곱해 더합시다. 😊</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Export Actions -->
+          <div class="export-actions-bar no-print">
+            <button type="button" id="copyCardTextBtn" class="btn-action">
+              📋 설명 카드 복사
+            </button>
+            <button type="button" id="downloadStudentHtmlBtn" class="btn-action">
+              📥 학생용 활동지 (HTML)
+            </button>
+            <button type="button" id="downloadTeacherHtmlBtn" class="btn-action">
+              📑 교사용 해설지 (HTML)
+            </button>
+            <button type="button" id="printPageBtn" class="btn-action">
+              🖨️ 인쇄 / PDF
+            </button>
+          </div>
+        </article>
+
+        <!-- Retry Section: 설명 다음에는 혼자 다시 풀기 (Criteria 2) -->
+        <article class="clinic-panel retry-panel" id="retryPanel">
+          <div class="retry-header">
+            <div class="section-badge-header">
+              <span class="step-badge badge-retry">STEP 4</span>
+              <h2>설명 다음에는 혼자 다시 풀기</h2>
+            </div>
+            <span class="topic-tag">같은 규칙, 다른 숫자 (재도전)</span>
+          </div>
+
+          <p class="retry-desc">
+            위 문제의 답을 단순히 기억하는 것과 새로운 숫자에 규칙을 적용하는 것은 다릅니다. 숫자가 바뀐 새 행렬에서 <strong>AB</strong>를 구하고 정답을 골라보세요.
+          </p>
+
+          <!-- Retry Matrices Display -->
+          <div class="retry-problem-box">
+            <h3 class="retry-task-title">
+              [재도전 문제] 주어진 새 행렬에서 <span class="math-expr">AB</span>를 구하시오.
+            </h3>
+
+            <div class="matrix-display-row">
+              <figure class="matrix-block" id="blockRetryA">
+                <figcaption>새로운 행렬 A'</figcaption>
+                <div class="matrix-brackets">
+                  <table class="matrix-table" aria-label="새로운 행렬 A">
+                    <tbody>
+                      <tr><td id="retryA11">4</td><td id="retryA12">3</td></tr>
+                      <tr><td id="retryA21">1</td><td id="retryA22">5</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </figure>
+
+              <span class="operator-dot">×</span>
+
+              <figure class="matrix-block" id="blockRetryB">
+                <figcaption>새로운 행렬 B'</figcaption>
+                <div class="matrix-brackets">
+                  <table class="matrix-table" aria-label="새로운 행렬 B">
+                    <tbody>
+                      <tr><td>1</td><td>1</td></tr>
+                      <tr><td>0</td><td>1</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Radio Options for Retry -->
+          <div class="retry-options-list" id="retryOptionsList">
+            <!-- Option 1 -->
+            <label class="retry-option-item" for="retryOpt0">
+              <input type="radio" name="retryChoice" id="retryOpt0" value="0">
+              <div class="option-content">
+                <span class="option-title" id="optTitle0">선택지 1</span>
+                <figure class="matrix-block mini-matrix">
+                  <div class="matrix-brackets">
+                    <table class="matrix-table">
+                      <tbody>
+                        <tr><td id="opt0_11">5</td><td id="opt0_12">8</td></tr>
+                        <tr><td id="opt0_21">1</td><td id="opt0_22">5</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </figure>
+                <span class="option-subtext" id="optSub0">순서를 바꾼 계산 (BA)</span>
+              </div>
+            </label>
+
+            <!-- Option 2 -->
+            <label class="retry-option-item" for="retryOpt1">
+              <input type="radio" name="retryChoice" id="retryOpt1" value="1">
+              <div class="option-content">
+                <span class="option-title" id="optTitle1">선택지 2</span>
+                <figure class="matrix-block mini-matrix">
+                  <div class="matrix-brackets">
+                    <table class="matrix-table">
+                      <tbody>
+                        <tr><td id="opt1_11">4</td><td id="opt1_12">7</td></tr>
+                        <tr><td id="opt1_21">1</td><td id="opt1_22">6</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </figure>
+                <span class="option-subtext" id="optSub1">올바른 행·열 계산 (AB)</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="retry-btn-row">
+            <button type="button" id="checkRetryBtn" class="btn-primary">
+              🎯 재도전 답안 확인하기
+            </button>
+          </div>
+
+          <div class="retry-result-alert" id="retryResultAlert" style="display: none;"></div>
+        </article>
+
+        <!-- Classroom Flow Guide -->
+        <article class="clinic-panel flow-panel no-print">
+          <div class="flow-header">
+            <h3>🏫 수업에서는 이렇게 이어 가세요 (5단계 흐름)</h3>
+          </div>
+          <div class="flow-steps-grid">
+            <div class="flow-step-card">
+              <span class="flow-num">01</span>
+              <strong>오류 줄 찾기</strong>
+              <p>어느 줄에서 규칙이 어긋났는지 학생이 직접 지목</p>
+            </div>
+            <div class="flow-step-card">
+              <span class="flow-num">02</span>
+              <strong>말로 설명</strong>
+              <p>왜 그 줄이 틀렸는지 자기 언어로 표현</p>
+            </div>
+            <div class="flow-step-card">
+              <span class="flow-num">03</span>
+              <strong>필요한 힌트</strong>
+              <p>행과 열의 대응을 질문 형식으로 유도</p>
+            </div>
+            <div class="flow-step-card">
+              <span class="flow-num">04</span>
+              <strong>다른 숫자 재도전</strong>
+              <p>단순 암기가 아닌 규칙 적용을 새 문제로 확인</p>
+            </div>
+            <div class="flow-step-card">
+              <span class="flow-num">05</span>
+              <strong>성분별 검산</strong>
+              <p>같은 위치 성분끼리 직접 비교해 차이 증명</p>
+            </div>
+          </div>
+          <div class="teacher-closing-prompt">
+            💬 <strong>수업 마무리 추천 발문:</strong>
+            <p>“A의 숫자를 바꾸어도 같은 위치의 성분을 각각 비교하면 어떤 차이가 보이나요?”</p>
+          </div>
+        </article>
+
+        <!-- Quick Copy Comment Box for Week 5 -->
+        <article class="clinic-panel submit-box no-print">
+          <div class="submit-box-header">
+            <h3>📝 5주차 주간미션 완료 댓글 양식 복사</h3>
+            <span class="badge badge-teal">중수 미션 제출용</span>
+          </div>
+          <p class="submit-guide">
+            초강스 공지 단톡방 또는 과제 게시판에 제출할 인증 댓글 양식입니다. 아래 버튼을 누르면 원클릭으로 복사됩니다.
+          </p>
+          <div class="comment-preview-box">
+            <pre id="commentTemplatePreview">수현T / 중수 / 미션 완료 / https://sool1982-1213.github.io/edutech-weekly-missions/week05/ / 학생이 처음 틀린 줄(AB=BA 가정)을 직접 찾고, 숫자를 바꾼 재도전 문제로 행렬 곱셈의 순서 규칙을 스스로 체화하도록 수업에 활용하겠습니다.</pre>
+          </div>
+          <button type="button" id="copyCommentBtn" class="btn-hero btn-full">
+            📋 5주차 완료 댓글 양식 복사하기
+          </button>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">복사되었습니다!</div>
+
+  <!-- Scripts -->
+  <script src="script.js?v=20261018_1"></script>
+</body>
+</html>

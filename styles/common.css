@@ -199,8 +199,8 @@ body {
 /* Week Tabs Bar */
 .week-tabs-bar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
   margin-bottom: 26px;
 }
 
@@ -384,9 +384,12 @@ body {
   opacity: 1;
 }
 
-/* ==========================================================================
-   반응형 모바일 UI 최적화
-   ========================================================================== */
+@media (max-width: 1200px) {
+  .week-tabs-bar {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 960px) {
   .week-tabs-bar {
     grid-template-columns: repeat(2, 1fr);

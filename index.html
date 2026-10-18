@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>초강스 에듀테크 LAB · 수현T의 주간 AI 미션 통합 포털</title>
-  <link rel="stylesheet" href="styles/themes.css?v=20261004_3">
-  <link rel="stylesheet" href="styles/common.css?v=20261004_3">
+  <link rel="stylesheet" href="styles/themes.css?v=20261018_1">
+  <link rel="stylesheet" href="styles/common.css?v=20261018_1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-  <script src="styles/theme-switcher.js?v=20261004_3"></script>
+  <script src="styles/theme-switcher.js?v=20261018_1"></script>
 </head>
 <body>
   <!-- Header -->
@@ -26,7 +26,7 @@
           <span>👨‍🏫 지도교사:</span>
           <strong>수현T</strong>
           <span>|</span>
-          <span style="color: var(--text-muted);">난이도: 개초보</span>
+          <span style="color: var(--accent); font-weight: 700;">난이도: 03 중수 (5주차)</span>
         </div>
       </div>
     </div>
@@ -36,15 +36,15 @@
     <!-- Current Mission Hero Banner -->
     <section class="hero-banner">
       <div class="hero-content">
-        <h2>🔥 4주차 진행 중: AI로 만드는 수학 아트</h2>
-        <p>꽃잎 수와 이름을 바꾸면 회전대칭 공식(360° ÷ n)이 시각화되는 '대칭 엽서 제작기'입니다. 아래 뷰어에서 직접 조작해 보거나 새 창으로 열 수 있습니다.</p>
+        <h2>🔥 5주차 진행 중: 행렬 오답 클리닉 (곱셈 순서 재도전)</h2>
+        <p>실수의 곱셈처럼 순서를 바꾸는 오류(AB = BA)를 구체적인 수치 예시로 반증하고, 3단계 질문 힌트 및 숫자가 다른 재도전 문제로 행렬 곱셈 순서의 원리를 체화하는 오답 클리닉입니다.</p>
       </div>
       <div class="hero-action">
-        <a href="week04/index.html" target="_blank" class="btn-hero">
-          🌸 4주차 단독 페이지 열기 ↗
+        <a href="week05/index.html" target="_blank" class="btn-hero">
+          🔢 5주차 단독 페이지 열기 ↗
         </a>
         <button id="copyCommentMainBtn" class="btn-copy-submit">
-          📋 4주차 제출 댓글 양식 복사
+          📋 5주차 제출 댓글 양식 복사
         </button>
       </div>
     </section>
@@ -81,14 +81,24 @@
         <p class="tab-desc">기울기 m과 y절편 b를 움직이는 그래프로 조작하며 식·좌표표 동시 탐구</p>
       </button>
 
-      <!-- Week 4 (Active Default) -->
-      <button type="button" class="week-tab-item active" data-week="4" data-url="week04/index.html" data-title="WEEK 04 · 회전대칭 엽서 (AI 수학 아트)">
+      <!-- Week 4 -->
+      <button type="button" class="week-tab-item" data-week="4" data-url="week04/index.html" data-title="WEEK 04 · 회전대칭 엽서 (AI 수학 아트)">
         <div class="tab-top-row">
           <span class="tab-week-num">WEEK 04</span>
-          <span class="tab-status-badge badge-active">이번 주 미션</span>
+          <span class="tab-status-badge badge-done">완료</span>
         </div>
         <div class="tab-title">회전대칭 엽서 제작기</div>
         <p class="tab-desc">꽃잎 수(4~16)에 따른 회전각 계산, 중심축 표시, 테마 변경 및 SVG 다운로드</p>
+      </button>
+
+      <!-- Week 5 (Active Default) -->
+      <button type="button" class="week-tab-item active" data-week="5" data-url="week05/index.html" data-title="WEEK 05 · 행렬 오답 클리닉 (곱셈 순서 재도전 · 중수)">
+        <div class="tab-top-row">
+          <span class="tab-week-num">WEEK 05</span>
+          <span class="tab-status-badge badge-active">이번 주 미션 (중수)</span>
+        </div>
+        <div class="tab-title">행렬 오답 클리닉</div>
+        <p class="tab-desc">AB와 BA 구체적 비교, 3단계 힌트, 조건 변경 시 자동 초기화 및 다른 숫자로 재도전</p>
       </button>
     </nav>
 
@@ -101,16 +111,16 @@
             <span class="browser-dot dot-yellow"></span>
             <span class="browser-dot dot-green"></span>
           </div>
-          <span class="vh-title" id="viewerTitle">WEEK 04 · 회전대칭 엽서 (AI 수학 아트)</span>
+          <span class="vh-title" id="viewerTitle">WEEK 05 · 행렬 오답 클리닉 (곱셈 순서 재도전 · 중수)</span>
         </div>
         <div class="vh-right">
-          <a href="week04/index.html" target="_blank" id="viewerExtLink" class="btn-open-ext">
+          <a href="week05/index.html" target="_blank" id="viewerExtLink" class="btn-open-ext">
             <span class="btn-ext-desktop">새 창으로 전체화면 열기 ↗</span>
             <span class="btn-ext-mobile">새 창으로 ↗</span>
           </a>
         </div>
       </div>
-      <iframe id="appViewerFrame" class="app-iframe" src="week04/index.html" title="주간 미션 인터랙티브 뷰어"></iframe>
+      <iframe id="appViewerFrame" class="app-iframe" src="week05/index.html" title="주간 미션 인터랙티브 뷰어"></iframe>
     </section>
   </main>
 
@@ -140,19 +150,18 @@
         });
       });
 
-      // Quick Copy for Week 4 Comment
+      // Quick Copy for Week 5 Comment
       copyBtn.addEventListener('click', () => {
         const origin = window.location.origin;
         const pathname = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
-        const fullWeek4Url = `${origin}${pathname}/week04/index.html`;
+        const cleanUrl = origin.includes('github.io') || origin.includes('vercel.app')
+          ? `${origin}${pathname}/week05/`
+          : 'https://sool1982-1213.github.io/edutech-weekly-missions/week05/';
 
-        const comment = `이름: 수현T
-선택 난이도: 개초보
-결과물 링크: ${fullWeek4Url}
-만들면서 발견하거나 배운 점 한 문장: 꽃잎 수를 조절하며 360°를 n으로 나눈 각도로 균등 회전하는 원리를 직접 시각화해볼 수 있었고, 수학 수업에서 학생들과 대칭성을 탐구하기에 훌륭한 교구가 될 수 있음을 배웠습니다.`;
+        const comment = `수현T / 중수 / 미션 완료 / ${cleanUrl} / 학생이 처음 틀린 줄(AB=BA 가정)을 직접 찾고, 숫자를 바꾼 재도전 문제로 행렬 곱셈의 순서 규칙을 체화하도록 수업에 활용하겠습니다.`;
 
         navigator.clipboard.writeText(comment).then(() => {
-          showToast('4주차 제출 댓글 양식이 복사되었습니다!');
+          showToast('5주차 제출 댓글 양식이 복사되었습니다!');
         }).catch(() => {
           prompt('아래 댓글 양식을 복사하세요:', comment);
         });
