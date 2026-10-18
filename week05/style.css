@@ -1396,27 +1396,305 @@ button {
 }
 
 @media print {
-  .no-print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 12mm 12mm 12mm;
+  }
+
+  :root {
+    --text-main: #0f172a !important;
+    --text-muted: #334155 !important;
+    --text-dim: #64748b !important;
+    --border-color: #cbd5e1 !important;
+    --bg-card: #ffffff !important;
+    --bg-panel: #f8fafc !important;
+    --bg-hover: #f1f5f9 !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide screen-only interactive controls and toasts */
+  .no-print,
+  .btn-reveal,
+  .hints-action-row,
+  .retry-btn-row,
+  .hints-progress-chip,
+  .feedback-alert,
+  .retry-result-alert,
+  .toast,
+  .line-status-icon {
     display: none !important;
   }
 
   body {
     background: #ffffff !important;
-    color: #000000 !important;
+    color: #0f172a !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
   }
 
   .container {
     max-width: 100% !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
 
   .panel, .clinic-card {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .clinic-main-panel {
+    gap: 14px !important;
+  }
+
+  .clinic-card-header {
+    margin-bottom: 8px !important;
+    padding-bottom: 6px !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+
+  .clinic-problem-title {
+    font-size: 1.15rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Matrix Display Row */
+  .matrix-display-row {
+    padding: 8px 14px !important;
+    margin-bottom: 12px !important;
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Clinic Sections - Prevent awkward breaks */
+  .clinic-section {
+    margin-top: 12px !important;
+    padding-top: 10px !important;
+    border-top: 1px solid #e2e8f0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .section-badge-header {
+    margin-bottom: 6px !important;
+  }
+
+  .section-guide-text {
+    font-size: 0.82rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* STEP 1: Worked Lines */
+  .worked-lines-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .worked-line-item {
+    padding: 8px 14px !important;
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #ffffff !important;
+  }
+
+  /* STEP 2: Show all 3 hint cards in print */
+  .hints-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .hints-container .hint-card {
+    display: block !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+  }
+
+  .hint-tag {
+    font-size: 0.76rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .hint-body {
+    font-size: 0.84rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* ==========================================================================
+     STEP 3: Starts on clean Page 2 - Zero splitting or clipping
+     ========================================================================== */
+  .clinic-step3 {
+    break-before: page !important;
+    page-break-before: always !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
   }
 
   .solution-box {
     display: block !important;
+    margin-top: 6px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .solution-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 10px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .calc-card {
+    padding: 10px 12px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background: #f8fafc !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .calc-card h4 {
+    font-size: 0.85rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .step-calc {
+    font-size: 0.8rem !important;
+    padding: 6px 8px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .mini-matrix .matrix-brackets {
+    padding: 2px 10px !important;
+  }
+
+  .mini-matrix .matrix-table td {
+    min-width: 26px !important;
+    height: 22px !important;
+    font-size: 0.95rem !important;
+    padding: 1px 3px !important;
+  }
+
+  /* Comparison Banner */
+  .comparison-banner {
+    padding: 8px 14px !important;
+    margin-bottom: 10px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid #0f766e !important;
+    background: #f0fdfa !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .comp-title {
+    font-size: 0.8rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .comparison-banner p {
+    font-size: 0.88rem !important;
+    margin: 0 !important;
+  }
+
+  /* Diagnosis & Verification */
+  .diagnosis-card {
+    padding: 10px 14px !important;
+    gap: 6px !important;
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .diag-item strong {
+    font-size: 0.8rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .teacher-memo-view {
+    padding: 6px 10px !important;
+    border-left: 3px solid #0f766e !important;
+    background: #f8fafc !important;
+  }
+
+  /* ==========================================================================
+     STEP 4: Retry Section (Prints cleanly beneath Step 3 on Page 2)
+     ========================================================================== */
+  .clinic-step4,
+  .retry-panel {
+    margin-top: 12px !important;
+    padding: 12px 14px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    background: #ffffff !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .retry-header {
+    margin-bottom: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .retry-desc {
+    font-size: 0.8rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .retry-task-title {
+    font-size: 0.9rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .retry-problem-box .matrix-display-row {
+    padding: 6px 12px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .retry-options-list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-bottom: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .retry-option-item {
+    padding: 8px 12px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background: #f8fafc !important;
+  }
+
+  .retry-option-item input[type="radio"] {
+    display: none !important;
   }
 }
