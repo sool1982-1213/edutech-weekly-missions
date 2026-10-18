@@ -491,8 +491,8 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
     });
   });
 
-  // Generate and Download HTML Files (Student Worksheet vs Teacher Solution)
-  function downloadHtmlFile(isTeacher) {
+  // Generate Clean HTML for Student Worksheet or Teacher Guide
+  function generateWorksheetHtml(isTeacher) {
     const a = parseInt(paramASlider.value, 10);
     const b = parseInt(paramBSlider.value, 10);
     const c = parseInt(paramCSlider.value, 10);
@@ -511,112 +511,196 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
     const rA = [[aPrime, bPrime], [1, cPrime]];
     const rB = [[1, 1], [0, 1]];
     const rAB = [[aPrime, aPrime + bPrime], [1, 1 + cPrime]];
+    const rBA = [[aPrime + 1, bPrime + cPrime], [1, cPrime]];
 
     const matrixHtml = (label, mat) => `
-      <figure style="display:inline-block; vertical-align:top; margin:10px 20px 10px 0;">
-        <figcaption style="font-size:13px; font-weight:bold; color:#475569; margin-bottom:4px;">${escapeHtml(label)}</figcaption>
-        <div style="position:relative; display:inline-block; padding:3px 16px;">
-          <span style="position:absolute; left:2px; top:0; bottom:0; width:12px; border-left:2.5px solid #0f172a; border-top:2px solid #0f172a; border-bottom:2px solid #0f172a; border-top-left-radius:14px 50%; border-bottom-left-radius:14px 50%;"></span>
+      <figure style="display:inline-block; vertical-align:top; margin:6px 16px 6px 0;">
+        <figcaption style="font-size:12px; font-weight:bold; color:#475569; margin-bottom:2px;">${escapeHtml(label)}</figcaption>
+        <div style="position:relative; display:inline-block; padding:2px 14px;">
+          <span style="position:absolute; left:1px; top:0; bottom:0; width:10px; border-left:2.2px solid #0f172a; border-top:1.8px solid #0f172a; border-bottom:1.8px solid #0f172a; border-top-left-radius:12px 50%; border-bottom-left-radius:12px 50%;"></span>
           <table style="border-collapse:collapse;">
-            <tr><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[0][0]}</td><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[0][1]}</td></tr>
-            <tr><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[1][0]}</td><td style="padding:4px 12px; font-size:18px; font-weight:bold; text-align:center;">${mat[1][1]}</td></tr>
+            <tr><td style="padding:2px 10px; font-size:16px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][0]}</td><td style="padding:2px 10px; font-size:16px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][1]}</td></tr>
+            <tr><td style="padding:2px 10px; font-size:16px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][0]}</td><td style="padding:2px 10px; font-size:16px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][1]}</td></tr>
           </table>
-          <span style="position:absolute; right:2px; top:0; bottom:0; width:12px; border-right:2.5px solid #0f172a; border-top:2px solid #0f172a; border-bottom:2px solid #0f172a; border-top-right-radius:14px 50%; border-bottom-right-radius:14px 50%;"></span>
+          <span style="position:absolute; right:1px; top:0; bottom:0; width:10px; border-right:2.2px solid #0f172a; border-top:1.8px solid #0f172a; border-bottom:1.8px solid #0f172a; border-top-right-radius:12px 50%; border-bottom-right-radius:12px 50%;"></span>
         </div>
       </figure>
     `;
 
     const matrixInlineHtml = (mat) => `
-      <span style="position:relative; display:inline-block; padding:1px 12px; vertical-align:middle;">
-        <span style="position:absolute; left:1px; top:0; bottom:0; width:8px; border-left:2px solid #0f172a; border-top:1.5px solid #0f172a; border-bottom:1.5px solid #0f172a; border-top-left-radius:12px 50%; border-bottom-left-radius:12px 50%;"></span>
+      <span style="position:relative; display:inline-block; padding:1px 10px; vertical-align:middle;">
+        <span style="position:absolute; left:1px; top:0; bottom:0; width:7px; border-left:2px solid #0f172a; border-top:1.5px solid #0f172a; border-bottom:1.5px solid #0f172a; border-top-left-radius:10px 50%; border-bottom-left-radius:10px 50%;"></span>
         <table style="border-collapse:collapse; display:inline-table; vertical-align:middle;">
-          <tr><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][0]}</td><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][1]}</td></tr>
-          <tr><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][0]}</td><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][1]}</td></tr>
+          <tr><td style="padding:1px 4px; font-size:14px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][0]}</td><td style="padding:1px 4px; font-size:14px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][1]}</td></tr>
+          <tr><td style="padding:1px 4px; font-size:14px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][0]}</td><td style="padding:1px 4px; font-size:14px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][1]}</td></tr>
         </table>
-        <span style="position:absolute; right:1px; top:0; bottom:0; width:8px; border-right:2px solid #0f172a; border-top:1.5px solid #0f172a; border-bottom:1.5px solid #0f172a; border-top-right-radius:12px 50%; border-bottom-right-radius:12px 50%;"></span>
+        <span style="position:absolute; right:1px; top:0; bottom:0; width:7px; border-right:2px solid #0f172a; border-top:1.5px solid #0f172a; border-bottom:1.5px solid #0f172a; border-top-right-radius:10px 50%; border-bottom-right-radius:10px 50%;"></span>
       </span>
     `;
 
-    const htmlContent = `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${escapeHtml(teacher)}의 행렬 오답 클리닉 - ${isTeacher ? '교사용 해설본' : '학생용 활동지'}</title>
+  <title>${escapeHtml(teacher)}의 행렬 오답 클리닉 - ${isTeacher ? '교사용 정답·지도안' : '학생용 활동지'}</title>
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; max-width: 840px; margin: 30px auto; padding: 24px; color: #1e293b; line-height: 1.6; }
-    header { border-bottom: 2px solid #0f766e; padding-bottom: 14px; margin-bottom: 24px; }
-    h1 { margin: 0 0 8px; font-size: 24px; color: #0f766e; }
-    .meta { font-size: 14px; color: #64748b; }
-    article { border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0; background: #ffffff; }
-    h2 { font-size: 18px; margin-top: 0; color: #0f172a; }
-    pre { background: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px; font-size: 15px; }
-    .answer-box { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 8px; padding: 16px; margin-top: 18px; }
-    .answer-box strong { color: #0f766e; }
-    .print-btn { background: #0f766e; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 16px; }
-    @media print { .no-print { display: none; } body { padding: 0; } }
+    @page { size: A4 portrait; margin: 12mm 12mm 12mm 12mm; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 0 auto; padding: 10px; color: #0f172a; line-height: 1.5; font-size: 13px; }
+    header { border-bottom: 2px solid #0f766e; padding-bottom: 8px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: flex-end; }
+    h1 { margin: 0; font-size: 20px; color: #0f766e; font-weight: 800; }
+    .curriculum-meta { font-size: 11px; color: #64748b; font-weight: bold; margin-bottom: 2px; }
+    .student-info-box { font-size: 12px; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 6px; background: #f8fafc; }
+    article { border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px 16px; margin: 10px 0; background: #ffffff; }
+    h2 { font-size: 15px; margin: 0 0 8px 0; color: #0f172a; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
+    .wrong-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-size: 13px; line-height: 1.7; }
+    .write-line { border-bottom: 1px dashed #94a3b8; height: 26px; margin: 4px 0 10px; }
+    .answer-box { background: #f0fdfa; border: 1.5px solid #0f766e; border-radius: 8px; padding: 12px 14px; margin-top: 12px; }
+    .hint-chip { background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
+    .calc-subcard { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 10px; }
+    .print-bar { margin-bottom: 12px; text-align: right; }
+    .print-btn { background: #0f766e; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    @media print { .no-print { display: none !important; } body { padding: 0; } }
   </style>
 </head>
 <body>
-  <div class="no-print">
+  <div class="no-print print-bar">
     <button class="print-btn" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
   </div>
   <header>
-    <h1>${escapeHtml(teacher)}의 행렬 오답 클리닉</h1>
-    <div class="meta">초강스 에듀테크 LAB · 5주차 중수 미션 · ${isTeacher ? '교사용 해설본 (답안·검산 포함)' : '학생용 활동지'}</div>
-    <div class="meta">2022 개정 공통수학1 [10공수1-04-01, 10공수1-04-02] · 행렬의 곱셈 순서</div>
+    <div>
+      <div class="curriculum-meta">2022 개정 공통수학1 [10공수1-04-01, 10공수1-04-02] · 행렬 오답 클리닉</div>
+      <h1>${escapeHtml(teacher)}의 행렬 곱셈 순서 클리닉 ${isTeacher ? '<span style="font-size:15px; color:#0369a1;">(교사용 정답·지도안)</span>' : '<span style="font-size:15px; color:#0f766e;">(학생용 활동지)</span>'}</h1>
+    </div>
+    ${isTeacher ? `
+    <div class="student-info-box" style="background:#f0fdfa; border-color:#99f6e4;">
+      교사: <strong>${escapeHtml(teacher)}</strong> · 수업 지도 및 해설본
+    </div>
+    ` : `
+    <div class="student-info-box">
+      학년: ___ &nbsp; 반: ___ &nbsp; 번호: ___ &nbsp; 이름: <strong>___________</strong>
+    </div>
+    `}
   </header>
 
   <article>
-    <h2>1. 오답 찾기 및 분석</h2>
-    <p><strong>[문제]</strong> 주어진 행렬에서 AB를 구하고 BA와 비교하시오.</p>
-    <div>
+    <h2>1. 오답 찾기 및 오류 분석 (STEP 1 &amp; 2)</h2>
+    <p style="margin:4px 0 6px;"><strong>[문제]</strong> 주어진 두 행렬에서 <span style="font-family:'Times New Roman',serif; font-style:italic;">AB</span>를 구하고 <span style="font-family:'Times New Roman',serif; font-style:italic;">BA</span>와 비교하시오.</p>
+    <div style="margin:4px 0 8px;">
       ${matrixHtml('행렬 A', mA)}
       ${matrixHtml('행렬 B', mB)}
     </div>
-    <p><strong>[학생의 오답 풀이]</strong></p>
-    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:14px; border-radius:8px; font-size:15px; line-height:1.8;">
-      1. 행렬의 곱 AB를 계산한다.<br>
-      2. 실수의 곱처럼 이 예시에서도 AB = BA라고 두고 순서를 바꾼다.<br>
-      3. AB = ${matrixInlineHtml(mBA)}
+    
+    <p style="margin:6px 0 2px;"><strong>[학생의 오답 풀이]</strong></p>
+    <div class="wrong-card">
+      01. 행렬의 곱 AB를 계산한다.<br>
+      02. 실수의 곱처럼 이 예시에서도 AB = BA라고 두고 순서를 바꾼다.<br>
+      03. AB = ${matrixInlineHtml(mBA)}
     </div>
-    <p>Q1. 위 풀이에서 처음으로 규칙이 어긋난 줄은 몇 번인가요? [ _________ 번 ]</p>
-    <p>Q2. 그 줄이 틀린 이유를 자신의 말로 설명해 보세요:</p>
-    <div style="border-bottom: 1px dashed #94a3b8; height: 32px; margin: 8px 0 16px;"></div>
 
-    <p><strong>💡 힌트:</strong> 이 수치 예시에서 AB의 (1,1)성분과 BA의 (1,1)성분을 각각 구해 비교해 보세요.</p>
+    <p style="margin:8px 0 4px;"><strong>Q1.</strong> 위 학생의 풀이에서 <strong>처음으로 규칙이 어긋난 줄</strong>은 몇 번인가요? &nbsp; <strong>[ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] 번 줄</strong></p>
+    
+    <p style="margin:6px 0 2px;"><strong>Q2.</strong> 그 줄이 틀린 이유를 행렬의 곱셈 법칙을 바탕으로 서술해 보세요:</p>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
 
-    <h2>2. 같은 규칙, 다른 숫자 (재도전)</h2>
-    <p><strong>[재도전 문제]</strong> 주어진 새 행렬에서 AB를 구하시오.</p>
-    <div>
-      ${matrixHtml("새 행렬 A'", rA)}
-      ${matrixHtml("새 행렬 B'", rB)}
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:6px 10px; margin-top:8px;">
+      <span class="hint-chip">💡 생각 열기 힌트</span> &nbsp;
+      이 수치 예시에서 AB의 (1,1)성분과 BA의 (1,1)성분을 각각 구해 비교해 보세요.
     </div>
-    <p>나의 풀이 과정 및 답: __________________________________________________</p>
-
-    ${isTeacher ? `
-    <section class="answer-box">
-      <strong>[교사용 정답 및 해설]</strong>
-      <p><strong>1. 교정 풀이:</strong></p>
-      <ul style="list-style:none; padding-left:0; line-height:2;">
-        <li>• 올바른 AB = ${matrixInlineHtml(mAB)}</li>
-        <li>• 순서 바꾼 BA = ${matrixInlineHtml(mBA)}</li>
-        <li>• (AB)₁₁ = <strong>${a}</strong>, (BA)₁₁ = <strong>${a + 1}</strong> 이므로 AB ≠ BA 입니다.</li>
-      </ul>
-      <p><strong>2. 오류 원인:</strong> 실수의 교환법칙을 행렬 곱셈에 무비판적으로 적용함.</p>
-      <p><strong>3. 지도 처방:</strong> 성분별 계산(행×열)을 전개하여 같은 위치 성분의 수치가 다름을 직접 목격하도록 지도.</p>
-      <p><strong>4. 재도전 정답:</strong> A'B' = ${matrixInlineHtml(rAB)}</p>
-      <p><strong>5. 교사 지도 메모:</strong> ${escapeHtml(memo)}</p>
-    </section>
-    ` : ''}
   </article>
 
-  <footer style="margin-top: 30px; font-size: 13px; color: #94a3b8; text-align: center;">
-    초강스 에듀테크 LAB · 함께 성장하는 수학 수업 · 실제 학생 정보는 포함되지 않은 교재입니다.
+  <article>
+    <h2>2. 같은 규칙, 다른 숫자 (STEP 4 스스로 재도전)</h2>
+    <p style="margin:4px 0 6px;"><strong>[재도전 문제]</strong> 주어진 새로운 행렬에서 <span style="font-family:'Times New Roman',serif; font-style:italic;">AB</span>를 구하시오.</p>
+    <div style="margin:4px 0 8px;">
+      ${matrixHtml("새로운 행렬 A'", rA)}
+      ${matrixHtml("새로운 행렬 B'", rB)}
+    </div>
+
+    <p style="margin:6px 0 4px;"><strong>[나의 풀이 과정 및 계산]</strong></p>
+    <div style="border:1px solid #cbd5e1; border-radius:6px; height:80px; padding:8px; background:#ffffff; font-size:12px; color:#94a3b8;">
+      여기에 A'의 행과 B'의 열을 곱해 더하는 풀이 과정을 직접 적어보세요.
+    </div>
+
+    <p style="margin:8px 0 4px;"><strong>[최종 답안 선택]</strong> 올바른 AB를 계산한 보기를 고르시오:</p>
+    <div style="display:flex; gap:16px; margin-top:4px;">
+      <div style="border:1px solid #cbd5e1; border-radius:6px; padding:6px 14px; background:#f8fafc;">
+        <input type="checkbox"> <strong>1번 보기:</strong> ${matrixInlineHtml(rBA)}
+      </div>
+      <div style="border:1px solid #cbd5e1; border-radius:6px; padding:6px 14px; background:#f8fafc;">
+        <input type="checkbox"> <strong>2번 보기:</strong> ${matrixInlineHtml(rAB)}
+      </div>
+    </div>
+  </article>
+
+  ${isTeacher ? `
+  <section class="answer-box">
+    <h2 style="color:#0f766e; border-bottom-color:#99f6e4;">3. 교사용 정답 및 수업 지도 처방 (STEP 3 교정 해설)</h2>
+    <div class="calc-grid">
+      <div class="calc-subcard">
+        <strong style="color:#0f766e;">✅ 올바른 AB 계산 (A의 행 × B의 열)</strong><br>
+        (1,1): ${a}×1 + ${b}×0 = <strong>${a}</strong><br>
+        (1,2): ${a}×1 + ${b}×1 = <strong>${a + b}</strong><br>
+        (2,1): 1×1 + ${c}×0 = <strong>1</strong><br>
+        (2,2): 1×1 + ${c}×1 = <strong>${1 + c}</strong><br>
+        결과: AB = ${matrixInlineHtml(mAB)}
+      </div>
+      <div class="calc-subcard">
+        <strong style="color:#b45309;">⚠️ 순서 바꾼 BA 계산 (B의 행 × A의 열)</strong><br>
+        (1,1): 1×${a} + 1×1 = <strong>${a + 1}</strong><br>
+        (1,2): 1×${b} + 1×${c} = <strong>${b + c}</strong><br>
+        (2,1): 0×${a} + 1×1 = <strong>1</strong><br>
+        (2,2): 0×${b} + 1×${c} = <strong>${c}</strong><br>
+        결과: BA = ${matrixInlineHtml(mBA)}
+      </div>
+    </div>
+    <p style="margin:6px 0;"><strong>🔍 성분별 검산:</strong> (AB)₁₁ = <strong>${a}</strong>, (BA)₁₁ = <strong>${a + 1}</strong> 로 서로 다르므로 <strong>AB ≠ BA</strong> 입니다.</p>
+    <p style="margin:4px 0;"><strong>🚨 오류 원인:</strong> 실수의 교환법칙(ab = ba)을 행렬 곱셈에 무비판적으로 적용함 (02번 줄 오류).</p>
+    <p style="margin:4px 0;"><strong>💊 지도 처방:</strong> 성분별 계산(앞 행렬의 행 × 뒷 행렬의 열)을 전개하여 같은 위치의 수치가 다름을 직접 목격하도록 지도.</p>
+    <p style="margin:4px 0;"><strong>🎯 재도전 정답:</strong> <strong>2번 보기</strong> (A'B' = ${matrixInlineHtml(rAB)})</p>
+    <p style="margin:4px 0;"><strong>👨‍🏫 교사 지도 메모:</strong> ${escapeHtml(memo)}</p>
+  </section>
+  ` : ''}
+
+  <footer style="margin-top: 14px; font-size: 11px; color: #94a3b8; text-align: center;">
+    초강스 에듀테크 LAB · 함께 성장하는 수학 수업 · 2022 개정 공통수학1
   </footer>
 </body>
 </html>`;
+  }
 
+  // Print HTML directly via invisible iframe (Fast, no download friction)
+  function printHtmlDirectly(isTeacher) {
+    const htmlContent = generateWorksheetHtml(isTeacher);
+    let printIframe = document.getElementById('printHiddenIframe');
+    if (!printIframe) {
+      printIframe = document.createElement('iframe');
+      printIframe.id = 'printHiddenIframe';
+      printIframe.style.position = 'fixed';
+      printIframe.style.right = '0';
+      printIframe.style.bottom = '0';
+      printIframe.style.width = '0';
+      printIframe.style.height = '0';
+      printIframe.style.border = '0';
+      printIframe.style.visibility = 'hidden';
+      document.body.appendChild(printIframe);
+    }
+    const doc = printIframe.contentWindow.document;
+    doc.open();
+    doc.write(htmlContent);
+    doc.close();
+    printIframe.contentWindow.focus();
+    setTimeout(() => {
+      printIframe.contentWindow.print();
+    }, 300);
+  }
+
+  // Download HTML file
+  function downloadHtmlFile(isTeacher) {
+    const teacher = teacherInput.value.trim() || '수현T';
+    const htmlContent = generateWorksheetHtml(isTeacher);
     const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -631,7 +715,54 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
 
   downloadStudentHtmlBtn.addEventListener('click', () => downloadHtmlFile(false));
   downloadTeacherHtmlBtn.addEventListener('click', () => downloadHtmlFile(true));
-  printPageBtn.addEventListener('click', () => window.print());
+
+  // Print Modal Event Handlers
+  const printModal = document.getElementById('printModal');
+  const closePrintModalBtn = document.getElementById('closePrintModalBtn');
+  const printStudentWorksheetBtn = document.getElementById('printStudentWorksheetBtn');
+  const printTeacherGuideBtn = document.getElementById('printTeacherGuideBtn');
+  const printDirectScreenBtn = document.getElementById('printDirectScreenBtn');
+
+  if (printPageBtn && printModal) {
+    printPageBtn.addEventListener('click', () => {
+      printModal.style.display = 'flex';
+    });
+  }
+
+  if (closePrintModalBtn && printModal) {
+    closePrintModalBtn.addEventListener('click', () => {
+      printModal.style.display = 'none';
+    });
+  }
+
+  if (printModal) {
+    printModal.addEventListener('click', (e) => {
+      if (e.target === printModal) {
+        printModal.style.display = 'none';
+      }
+    });
+  }
+
+  if (printStudentWorksheetBtn) {
+    printStudentWorksheetBtn.addEventListener('click', () => {
+      printModal.style.display = 'none';
+      printHtmlDirectly(false);
+    });
+  }
+
+  if (printTeacherGuideBtn) {
+    printTeacherGuideBtn.addEventListener('click', () => {
+      printModal.style.display = 'none';
+      printHtmlDirectly(true);
+    });
+  }
+
+  if (printDirectScreenBtn) {
+    printDirectScreenBtn.addEventListener('click', () => {
+      printModal.style.display = 'none';
+      window.print();
+    });
+  }
 
   // Copy Comment Template
   copyCommentBtn.addEventListener('click', () => {

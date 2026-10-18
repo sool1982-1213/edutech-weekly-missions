@@ -1393,6 +1393,162 @@ button {
     width: 100%;
     justify-content: center;
   }
+/* ==========================================================================
+   Print Options Modal
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  max-width: 880px;
+  width: 100%;
+  padding: 24px 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  color: var(--text-main);
+  animation: slideDown 0.25s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.btn-close-modal:hover {
+  color: var(--text-main);
+  background: var(--bg-hover);
+}
+
+.modal-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.print-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .print-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.print-option-card {
+  background: var(--bg-panel);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.print-option-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.print-option-card.opt-student {
+  border-color: var(--accent);
+  background: rgba(45, 212, 191, 0.05);
+}
+
+.opt-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.badge-student {
+  background: var(--accent);
+  color: #042f2e;
+}
+
+.badge-teacher {
+  background: var(--accent-blue);
+  color: #082f49;
+}
+
+.badge-screen {
+  background: var(--bg-hover);
+  color: var(--text-muted);
+}
+
+.print-option-card h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: var(--text-main);
+}
+
+.opt-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0 0 10px 0;
+}
+
+.opt-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.opt-features li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 @media print {
@@ -1401,7 +1557,14 @@ button {
     margin: 12mm 12mm 12mm 12mm;
   }
 
-  :root {
+  :root,
+  html,
+  body,
+  [data-theme],
+  [data-theme="dark"],
+  [data-theme="light"],
+  [data-theme="pastel"],
+  [data-theme="sky"] {
     --text-main: #0f172a !important;
     --text-muted: #334155 !important;
     --text-dim: #64748b !important;
@@ -1409,6 +1572,23 @@ button {
     --bg-card: #ffffff !important;
     --bg-panel: #f8fafc !important;
     --bg-hover: #f1f5f9 !important;
+    --bg-input: #ffffff !important;
+    --accent: #0f766e !important;
+    --accent-blue: #0284c7 !important;
+  }
+
+  body,
+  [data-theme] body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .matrix-brackets:before,
+  .matrix-brackets:after,
+  .matrix-bracket-inline:before,
+  .matrix-bracket-inline:after {
+    background-color: #0f172a !important;
+    background-image: none !important;
   }
 
   * {
