@@ -64,7 +64,17 @@
         <div class="param-box">
           <div class="param-header">
             <h3>행렬의 숫자 바꾸기 (Matrix A)</h3>
-            <span class="param-sub">A = [[a, b], [1, c]]</span>
+            <div class="matrix-inline-badge" title="행렬 A = [[a, b], [1, c]]">
+              <span class="math-expr">A</span> = 
+              <span class="matrix-bracket-inline">
+                <table class="matrix-table-compact" aria-label="행렬 A 수식">
+                  <tbody>
+                    <tr><td>a</td><td>b</td></tr>
+                    <tr><td>1</td><td>c</td></tr>
+                  </tbody>
+                </table>
+              </span>
+            </div>
           </div>
 
           <!-- Parameter a -->
@@ -204,7 +214,17 @@
               </div>
               <div class="worked-line-item" data-line="3" tabindex="0" role="button" aria-pressed="false">
                 <span class="line-num">03</span>
-                <span class="line-text" id="wrongLine3Text">AB = [4, 6; 1, 4]</span>
+                <div class="line-text line-matrix-flex">
+                  <span class="math-expr">AB</span> = 
+                  <span class="matrix-bracket-inline">
+                    <table class="matrix-table-compact" aria-label="행렬 AB 오답 결과">
+                      <tbody>
+                        <tr><td id="wrongLine3_11">4</td><td id="wrongLine3_12">6</td></tr>
+                        <tr><td id="wrongLine3_21">1</td><td id="wrongLine3_22">4</td></tr>
+                      </tbody>
+                    </table>
+                  </span>
+                </div>
                 <span class="line-status-icon"></span>
               </div>
             </div>

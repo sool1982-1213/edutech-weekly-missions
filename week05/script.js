@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const cellA12 = document.getElementById('cellA12');
   const cellA21 = document.getElementById('cellA21');
   const cellA22 = document.getElementById('cellA22');
+  const wrongLine3_11 = document.getElementById('wrongLine3_11');
+  const wrongLine3_12 = document.getElementById('wrongLine3_12');
+  const wrongLine3_21 = document.getElementById('wrongLine3_21');
+  const wrongLine3_22 = document.getElementById('wrongLine3_22');
   const wrongLine3Text = document.getElementById('wrongLine3Text');
 
   // Elements - Step 1: Worked Lines
@@ -152,8 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
       [1, c]
     ];
 
-    // Step 1: Wrong Line 03 Text (the student mistakenly equated AB to BA)
-    wrongLine3Text.textContent = `AB = ${formatMatrix(mBA)}`;
+    // Step 1: Wrong Line 03 Matrix (the student mistakenly equated AB to BA)
+    if (wrongLine3_11) wrongLine3_11.textContent = mBA[0][0];
+    if (wrongLine3_12) wrongLine3_12.textContent = mBA[0][1];
+    if (wrongLine3_21) wrongLine3_21.textContent = mBA[1][0];
+    if (wrongLine3_22) wrongLine3_22.textContent = mBA[1][1];
+    if (wrongLine3Text) wrongLine3Text.textContent = `AB = ${formatMatrix(mBA)}`;
 
     // Step 2: Hint 3 Calculation Clue
     hintBody3.innerHTML = `AB의 (1,1)은 ${a}×1 + ${b}×0 = <strong>${a}</strong>, BA의 (1,1)은 1×${a} + 1×1 = <strong>${a + 1}</strong>입니다.`;

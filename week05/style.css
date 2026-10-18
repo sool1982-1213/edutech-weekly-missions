@@ -602,6 +602,70 @@ button {
   padding: 1px 4px;
 }
 
+/* Inline Compact Matrix Components */
+.matrix-inline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-hover);
+  padding: 3px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
+}
+
+.matrix-bracket-inline {
+  position: relative;
+  display: inline-block;
+  padding: 2px 7px;
+  vertical-align: middle;
+}
+
+.matrix-bracket-inline:before,
+.matrix-bracket-inline:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  border-top: 2px solid var(--text-main);
+  border-bottom: 2px solid var(--text-main);
+}
+
+.matrix-bracket-inline:before {
+  left: 0;
+  border-left: 2px solid var(--text-main);
+}
+
+.matrix-bracket-inline:after {
+  right: 0;
+  border-right: 2px solid var(--text-main);
+}
+
+.matrix-table-compact {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.matrix-table-compact td {
+  min-width: 18px;
+  height: 18px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.96rem;
+  font-weight: 700;
+  font-family: 'Times New Roman', Times, serif;
+  color: var(--text-main);
+  padding: 1px 3px;
+  line-height: 1.15;
+}
+
+.line-matrix-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .operator-dot {
   font-size: 1.6rem;
   font-weight: 800;
