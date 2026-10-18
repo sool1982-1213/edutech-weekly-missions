@@ -55,6 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const resBA22 = document.getElementById('resBA22');
   const compDescription = document.getElementById('compDescription');
   const diagVerification = document.getElementById('diagVerification');
+  const diagAB11 = document.getElementById('diagAB11');
+  const diagAB12 = document.getElementById('diagAB12');
+  const diagAB21 = document.getElementById('diagAB21');
+  const diagAB22 = document.getElementById('diagAB22');
+  const diagBA11 = document.getElementById('diagBA11');
+  const diagBA12 = document.getElementById('diagBA12');
+  const diagBA21 = document.getElementById('diagBA21');
+  const diagBA22 = document.getElementById('diagBA22');
+  const diagVerificationText = document.getElementById('diagVerificationText');
   const diagTeacherMemo = document.getElementById('diagTeacherMemo');
 
   // Elements - Step 4: Retry
@@ -94,6 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Format matrix to string (a, b; c, d) - 2022 개정 공통수학1 소괄호 표준
   function formatMatrix(m) {
     return `(${m.map(row => row.join(', ')).join('; ')})`;
+  }
+
+  // Get Korean subject particle (이/가) for integers
+  function getSubjectParticle(num) {
+    const n = Math.abs(num);
+    const lastDigit = n % 10;
+    if (n > 0 && lastDigit === 0) return '이';
+    return [0, 1, 3, 6, 7, 8].includes(lastDigit) ? '이' : '가';
   }
 
   // Escape HTML characters
@@ -188,7 +205,22 @@ document.addEventListener('DOMContentLoaded', () => {
     resBA22.textContent = mBA[1][1];
 
     compDescription.innerHTML = `(AB)₁₁ = <strong>${mAB[0][0]}</strong>, (BA)₁₁ = <strong>${mBA[0][0]}</strong> 이므로 <span class="diff-highlight">AB ≠ BA</span> 입니다!`;
-    diagVerification.textContent = `AB = ${formatMatrix(mAB)}, BA = ${formatMatrix(mBA)}. 첫 성분 ${mAB[0][0]}과 ${mBA[0][0]}이 다릅니다. 이 구체적인 계산에서 순서를 바꾼 풀이가 틀렸음을 명확히 확인할 수 있습니다.`;
+    
+    // Step 3: Verification 2x2 Matrix with Curved Parentheses
+    if (diagAB11) diagAB11.textContent = mAB[0][0];
+    if (diagAB12) diagAB12.textContent = mAB[0][1];
+    if (diagAB21) diagAB21.textContent = mAB[1][0];
+    if (diagAB22) diagAB22.textContent = mAB[1][1];
+
+    if (diagBA11) diagBA11.textContent = mBA[0][0];
+    if (diagBA12) diagBA12.textContent = mBA[0][1];
+    if (diagBA21) diagBA21.textContent = mBA[1][0];
+    if (diagBA22) diagBA22.textContent = mBA[1][1];
+
+    const particle = getSubjectParticle(mBA[0][0]);
+    if (diagVerificationText) {
+      diagVerificationText.innerHTML = `첫 성분 <strong>${mAB[0][0]}</strong>과 <strong>${mBA[0][0]}</strong>${particle} 다릅니다. 이 구체적인 계산에서 순서를 바꾼 풀이가 틀렸음을 명확히 확인할 수 있습니다.`;
+    }
     diagTeacherMemo.textContent = memo;
 
     // Step 4: Retry Problem Generation (Using official curriculum generator rule)
@@ -494,6 +526,17 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
       </figure>
     `;
 
+    const matrixInlineHtml = (mat) => `
+      <span style="position:relative; display:inline-block; padding:1px 12px; vertical-align:middle;">
+        <span style="position:absolute; left:1px; top:0; bottom:0; width:8px; border-left:2px solid #0f172a; border-top:1.5px solid #0f172a; border-bottom:1.5px solid #0f172a; border-top-left-radius:12px 50%; border-bottom-left-radius:12px 50%;"></span>
+        <table style="border-collapse:collapse; display:inline-table; vertical-align:middle;">
+          <tr><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][0]}</td><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[0][1]}</td></tr>
+          <tr><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][0]}</td><td style="padding:1px 5px; font-size:15px; font-weight:bold; text-align:center; font-family:'Times New Roman',serif;">${mat[1][1]}</td></tr>
+        </table>
+        <span style="position:absolute; right:1px; top:0; bottom:0; width:8px; border-right:2px solid #0f172a; border-top:1.5px solid #0f172a; border-bottom:1.5px solid #0f172a; border-top-right-radius:12px 50%; border-bottom-right-radius:12px 50%;"></span>
+      </span>
+    `;
+
     const htmlContent = `<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -532,9 +575,11 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
       ${matrixHtml('행렬 B', mB)}
     </div>
     <p><strong>[학생의 오답 풀이]</strong></p>
-    <pre>1. 행렬의 곱 AB를 계산한다.
-2. 실수의 곱처럼 이 예시에서도 AB = BA라고 두고 순서를 바꾼다.
-3. AB = ${formatMatrix(mBA)}</pre>
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:14px; border-radius:8px; font-size:15px; line-height:1.8;">
+      1. 행렬의 곱 AB를 계산한다.<br>
+      2. 실수의 곱처럼 이 예시에서도 AB = BA라고 두고 순서를 바꾼다.<br>
+      3. AB = ${matrixInlineHtml(mBA)}
+    </div>
     <p>Q1. 위 풀이에서 처음으로 규칙이 어긋난 줄은 몇 번인가요? [ _________ 번 ]</p>
     <p>Q2. 그 줄이 틀린 이유를 자신의 말로 설명해 보세요:</p>
     <div style="border-bottom: 1px dashed #94a3b8; height: 32px; margin: 8px 0 16px;"></div>
@@ -553,14 +598,14 @@ A = ${formatMatrix(mA)}, B = ${formatMatrix(mB)}
     <section class="answer-box">
       <strong>[교사용 정답 및 해설]</strong>
       <p><strong>1. 교정 풀이:</strong></p>
-      <ul>
-        <li>올바른 AB = ${formatMatrix(mAB)}</li>
-        <li>순서 바꾼 BA = ${formatMatrix(mBA)}</li>
-        <li>(AB)₁₁ = ${a}, (BA)₁₁ = ${a + 1} 이므로 AB ≠ BA 입니다.</li>
+      <ul style="list-style:none; padding-left:0; line-height:2;">
+        <li>• 올바른 AB = ${matrixInlineHtml(mAB)}</li>
+        <li>• 순서 바꾼 BA = ${matrixInlineHtml(mBA)}</li>
+        <li>• (AB)₁₁ = <strong>${a}</strong>, (BA)₁₁ = <strong>${a + 1}</strong> 이므로 AB ≠ BA 입니다.</li>
       </ul>
       <p><strong>2. 오류 원인:</strong> 실수의 교환법칙을 행렬 곱셈에 무비판적으로 적용함.</p>
       <p><strong>3. 지도 처방:</strong> 성분별 계산(행×열)을 전개하여 같은 위치 성분의 수치가 다름을 직접 목격하도록 지도.</p>
-      <p><strong>4. 재도전 정답:</strong> A'B' = ${formatMatrix(rAB)}</p>
+      <p><strong>4. 재도전 정답:</strong> A'B' = ${matrixInlineHtml(rAB)}</p>
       <p><strong>5. 교사 지도 메모:</strong> ${escapeHtml(memo)}</p>
     </section>
     ` : ''}

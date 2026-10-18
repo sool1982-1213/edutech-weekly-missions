@@ -740,6 +740,14 @@ button {
   gap: 8px;
 }
 
+.diag-verification-flex {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  line-height: 1.6;
+}
+
 .operator-dot {
   font-size: 1.6rem;
   font-weight: 800;
