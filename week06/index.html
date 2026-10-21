@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>수현T의 15분 두 갈래 수업 설계 · 이차함수 최대·최소 | 6주차 고수 미션</title>
-  <link rel="stylesheet" href="../styles/themes.css?v=20261021_8">
-  <link rel="stylesheet" href="style.css?v=20261021_8">
+  <link rel="stylesheet" href="../styles/themes.css?v=20261021_9">
+  <link rel="stylesheet" href="style.css?v=20261021_9">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-  <script src="../styles/theme-switcher.js?v=20261021_8"></script>
+  <script src="../styles/theme-switcher.js?v=20261021_9"></script>
 </head>
 <body>
   <!-- Top Navigation -->
@@ -359,18 +359,44 @@
             </label>
           </div>
 
-          <div class="export-actions">
-            <button type="button" class="btn-export-student" id="btnDownloadStudent">
-              📄 학생용 활동지 HTML 저장
-            </button>
-            <button type="button" class="btn-export-teacher" id="btnDownloadTeacher" disabled>
-              📑 교사용 해설 HTML 저장 (검산 확인 시 활성화)
-            </button>
+          <div class="export-columns-grid">
+            <!-- Student Box -->
+            <div class="export-card-col student-card-col">
+              <div class="export-card-header">
+                <span class="export-card-badge student-badge">📄 학생용 활동지</span>
+                <span class="export-card-sub">정답·해설 배제 / 필기용 빈칸</span>
+              </div>
+              <div class="export-btn-pair">
+                <button type="button" class="btn-action-primary student-btn" id="btnDownloadStudent">
+                  <span>💾</span> HTML 파일 저장
+                </button>
+                <button type="button" class="btn-action-outline student-outline" id="btnPrintStudentPdf">
+                  <span>🖨️</span> PDF 저장 / 인쇄
+                </button>
+              </div>
+            </div>
+
+            <!-- Teacher Box -->
+            <div class="export-card-col teacher-card-col">
+              <div class="export-card-header">
+                <span class="export-card-badge teacher-badge">📑 교사용 해설 & 수업안</span>
+                <span class="export-card-sub" id="teacherLockText">검산 확인 시 활성화</span>
+              </div>
+              <div class="export-btn-pair">
+                <button type="button" class="btn-action-primary teacher-btn" id="btnDownloadTeacher" disabled>
+                  <span>💾</span> HTML 파일 저장
+                </button>
+                <button type="button" class="btn-action-outline teacher-outline" id="btnPrintTeacherPdf" disabled>
+                  <span>🖨️</span> PDF 저장 / 인쇄
+                </button>
+              </div>
+            </div>
           </div>
 
           <div class="export-notes">
-            <p>• <strong>학생용 HTML:</strong> 정답, 해설, 교사 메모, 집계 보드를 완전히 배제하고, 깔끔한 도입 질문·그래프·손글씨 필기용 빈칸으로 구성되어 즉시 인쇄/배포가 가능합니다.</p>
-            <p>• <strong>교사용 HTML:</strong> 후보점 대입표, 정답 및 단계별 해설, 변경 구간 검산 정답, 교사 메모, 집계 해석 가이드가 포함되어 수업 지도안으로 활용됩니다.</p>
+            <p>• <strong>학생용 자료:</strong> 정답, 해설, 교사 메모, 집계 보드를 완전히 배제하고, 깔끔한 도입 질문·그래프·손글씨 필기용 빈칸으로 구성되어 즉시 인쇄/배포가 가능합니다.</p>
+            <p>• <strong>교사용 자료:</strong> 후보점 대입표, 정답 및 단계별 해설, 변경 구간 검산 정답, 교사 메모, 집계 해석 가이드가 포함되어 수업 지도안으로 활용됩니다.</p>
+            <p>• <strong>PDF 저장 안내:</strong> [PDF 저장 / 인쇄] 버튼을 누른 후 브라우저 인쇄 대화상자에서 인쇄 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 바로 PDF 파일로 저장할 수 있습니다.</p>
           </div>
         </section>
       </div>
@@ -380,6 +406,6 @@
   <!-- Toast Message -->
   <div id="toast" class="toast" role="status" aria-live="polite">알림 메시지</div>
 
-  <script src="script.js?v=20261021_8"></script>
+  <script src="script.js?v=20261021_9"></script>
 </body>
 </html>

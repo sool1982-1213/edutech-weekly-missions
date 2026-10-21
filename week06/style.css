@@ -1178,65 +1178,159 @@ body {
   accent-color: var(--accent);
 }
 
-.export-actions {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 18px;
-  flex-wrap: wrap;
+/* Export Columns Grid */
+.export-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.btn-export-student {
-  flex: 1;
-  min-width: 240px;
+.export-card-col {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.export-card-col.student-card-col {
+  border-left: 4px solid #10b981;
+}
+
+.export-card-col.teacher-card-col {
+  border-left: 4px solid #3b82f6;
+}
+
+.export-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.export-card-badge {
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.student-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+[data-theme="dark"] .student-badge {
+  color: #34d399;
+}
+
+.teacher-badge {
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+}
+
+[data-theme="dark"] .teacher-badge {
+  color: #60a5fa;
+}
+
+.export-card-sub {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.export-btn-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.btn-action-primary,
+.btn-action-outline {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Student buttons */
+.student-btn {
   background: linear-gradient(135deg, #059669 0%, #10b981 100%);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 14px 20px;
-  font-size: 0.98rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.25);
 }
 
-.btn-export-student:hover {
+.student-btn:hover {
   opacity: 0.92;
   transform: translateY(-1px);
 }
 
-.btn-export-teacher {
-  flex: 1;
-  min-width: 240px;
+.student-outline {
+  background: var(--bg-panel);
+  border: 1.5px solid #10b981;
+  color: #059669;
+}
+
+[data-theme="dark"] .student-outline {
+  color: #34d399;
+  border-color: #34d399;
+}
+
+.student-outline:hover {
+  background: #10b981;
+  color: #fff;
+}
+
+/* Teacher buttons */
+.teacher-btn {
   background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 14px 20px;
-  font-size: 0.98rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
 }
 
-.btn-export-teacher:hover:not(:disabled) {
+.teacher-btn:hover:not(:disabled) {
   opacity: 0.92;
   transform: translateY(-1px);
 }
 
-.btn-export-teacher:disabled {
+.teacher-outline {
+  background: var(--bg-panel);
+  border: 1.5px solid #3b82f6;
+  color: #2563eb;
+}
+
+[data-theme="dark"] .teacher-outline {
+  color: #60a5fa;
+  border-color: #60a5fa;
+}
+
+.teacher-outline:hover:not(:disabled) {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.teacher-btn:disabled,
+.teacher-outline:disabled {
   opacity: 0.45;
   cursor: not-allowed;
   box-shadow: none;
+  transform: none;
+  border-color: var(--border-color);
+  color: var(--text-dim);
 }
 
 .export-notes {
@@ -1310,6 +1404,10 @@ body {
   .route-selector {
     grid-template-columns: 1fr;
   }
+
+  .export-columns-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1325,13 +1423,8 @@ body {
     font-size: 1.4rem;
   }
 
-  .export-actions {
-    flex-direction: column;
-  }
-
-  .btn-export-student,
-  .btn-export-teacher {
-    width: 100%;
+  .export-btn-pair {
+    grid-template-columns: 1fr;
   }
 
   .toast {

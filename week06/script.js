@@ -76,7 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const teacherNoteInput = document.getElementById('teacherNoteInput');
   const checkVerified = document.getElementById('checkVerified');
   const btnDownloadStudent = document.getElementById('btnDownloadStudent');
+  const btnPrintStudentPdf = document.getElementById('btnPrintStudentPdf');
   const btnDownloadTeacher = document.getElementById('btnDownloadTeacher');
+  const btnPrintTeacherPdf = document.getElementById('btnPrintTeacherPdf');
+  const teacherLockText = document.getElementById('teacherLockText');
   const toast = document.getElementById('toast');
 
   // --- 3. Mathematical Calculations ---
@@ -678,6 +681,10 @@ document.addEventListener('DOMContentLoaded', () => {
     state.isVerified = false;
     checkVerified.checked = false;
     btnDownloadTeacher.disabled = true;
+    if (btnPrintTeacherPdf) btnPrintTeacherPdf.disabled = true;
+    if (teacherLockText) {
+      teacherLockText.textContent = '검산 확인 시 활성화';
+    }
 
     // Reset preset active state
     presetOutside.classList.remove('active');
@@ -821,8 +828,12 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
   checkVerified.addEventListener('change', e => {
     state.isVerified = e.target.checked;
     btnDownloadTeacher.disabled = !state.isVerified;
+    if (btnPrintTeacherPdf) btnPrintTeacherPdf.disabled = !state.isVerified;
+    if (teacherLockText) {
+      teacherLockText.textContent = state.isVerified ? '✅ 검산 완료 · 다운로드 가능' : '검산 확인 시 활성화';
+    }
     if (state.isVerified) {
-      showToast('검산이 확인되어 교사용 해설 저장이 활성화되었습니다.');
+      showToast('검산이 확인되어 교사용 해설 저장 및 PDF 인쇄가 활성화되었습니다.');
     }
   });
 
@@ -852,22 +863,25 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       .replace(/'/g, '&#39;');
   }
 
+  // --- 9. Export Functions (HTML Generation & Direct PDF Print) ---
+
   // Student Activity Sheet HTML (정답·해설·메모·집계 배제)
-  btnDownloadStudent.addEventListener('click', () => {
+  function buildStudentHtml() {
     const questions = generateQuestions(state.params);
     const priorityInfo = getPriorityInfo();
     const timeline = generateTimeline(state.params, state.route, priorityInfo);
     const routeName = state.route === 'support' ? '개념 다지기' : '적용 확장';
     const svgCode = renderSvgGraph(state.params, false);
 
-    const htmlContent = `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>수업 시작 5분 진단 & 15분 활동지 - ${esc(state.author)}</title>
   <style>
-    @page { size: A4 portrait; margin: 15mm; }
+    @page { size: A4 portrait; margin: 12mm 15mm; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
     body {
       max-width: 820px;
       margin: 20px auto;
@@ -875,6 +889,32 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
       color: #173c50;
       line-height: 1.7;
+    }
+    .no-print {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .print-tip {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .print-bar-btn {
+      background: #087f82;
+      color: #fff;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
     }
     .sheet-header {
       display: flex;
@@ -1006,6 +1046,11 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
   </style>
 </head>
 <body>
+  <div class="no-print">
+    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 PDF 파일로 보관하실 수 있습니다.</span>
+    <button class="print-bar-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
+  </div>
+
   <div class="sheet-header">
     <div class="sheet-title">
       <h1>수학1 · 제한된 구간에서 이차함수의 최대·최소</h1>
@@ -1053,17 +1098,10 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
   </div>
 </body>
 </html>`;
-
-    downloadFile(htmlContent, `week6-4-student-${state.params.left}_${state.params.right}.html`, 'text/html;charset=utf-8');
-  });
+  }
 
   // Teacher Guide Sheet HTML (모든 정답·해설·검산표·교사메모 포함)
-  btnDownloadTeacher.addEventListener('click', () => {
-    if (!state.isVerified) {
-      showToast('먼저 검산 완료 확인 체크박스를 체크해 주세요.');
-      return;
-    }
-
+  function buildTeacherHtml() {
     const questions = generateQuestions(state.params);
     const analysis = computeIntervalAnalysis(state.params);
     const priorityInfo = getPriorityInfo();
@@ -1073,14 +1111,15 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
     const routeName = state.route === 'support' ? '개념 다지기' : '적용 확장';
     const svgCode = renderSvgGraph(state.params, true);
 
-    const htmlContent = `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[교사용 수업안] 수업 시작 5분 진단 & 15분 후속 설계 - ${esc(state.author)}</title>
   <style>
-    @page { size: A4 portrait; margin: 15mm; }
+    @page { size: A4 portrait; margin: 12mm 15mm; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
     body {
       max-width: 860px;
       margin: 20px auto;
@@ -1088,6 +1127,32 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
       color: #0f172a;
       line-height: 1.7;
+    }
+    .no-print {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .print-tip {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e40af;
+    }
+    .print-bar-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
     }
     .header-bar {
       border-bottom: 3px solid #2563eb;
@@ -1170,10 +1235,16 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
     }
     @media print {
       body { margin: 0; padding: 0; }
+      .no-print { display: none !important; }
     }
   </style>
 </head>
 <body>
+  <div class="no-print">
+    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 PDF 파일로 보관하실 수 있습니다.</span>
+    <button class="print-bar-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
+  </div>
+
   <div class="header-bar">
     <h1>[교사용 수업안 & 해설] 수업 시작 5분 → 15분 두 갈래 수업 설계</h1>
     <p class="meta-p">작성 교사: ${esc(state.author)} | 2022 개정 공통수학1 [10공수1-02-06] 제한된 구간에서 이차함수의 최대·최소</p>
@@ -1248,8 +1319,63 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
   </div>
 </body>
 </html>`;
+  }
 
-    downloadFile(htmlContent, `week6-4-teacher-${state.params.left}_${state.params.right}.html`, 'text/html;charset=utf-8');
+  // Direct Print / Save as PDF via invisible iframe
+  function printPdfDirectly(isTeacher) {
+    if (isTeacher && !state.isVerified) {
+      showToast('먼저 검산 완료 확인 체크박스를 체크해 주세요.');
+      return;
+    }
+
+    let printIframe = document.getElementById('printHiddenIframe');
+    if (!printIframe) {
+      printIframe = document.createElement('iframe');
+      printIframe.id = 'printHiddenIframe';
+      printIframe.style.position = 'fixed';
+      printIframe.style.right = '0';
+      printIframe.style.bottom = '0';
+      printIframe.style.width = '0';
+      printIframe.style.height = '0';
+      printIframe.style.border = '0';
+      printIframe.style.visibility = 'hidden';
+      document.body.appendChild(printIframe);
+    }
+
+    const htmlContent = isTeacher ? buildTeacherHtml() : buildStudentHtml();
+    const doc = printIframe.contentWindow.document;
+    doc.open();
+    doc.write(htmlContent);
+    doc.close();
+
+    showToast(`${isTeacher ? '교사용 해설' : '학생용 활동지'} 인쇄 창을 열었습니다. 대상에서 'PDF로 저장'을 선택하세요.`);
+
+    setTimeout(() => {
+      printIframe.contentWindow.focus();
+      printIframe.contentWindow.print();
+    }, 280);
+  }
+
+  // Student download & print events
+  btnDownloadStudent.addEventListener('click', () => {
+    downloadFile(buildStudentHtml(), `week6-4-student-${state.params.left}_${state.params.right}.html`, 'text/html;charset=utf-8');
+  });
+
+  btnPrintStudentPdf.addEventListener('click', () => {
+    printPdfDirectly(false);
+  });
+
+  // Teacher download & print events
+  btnDownloadTeacher.addEventListener('click', () => {
+    if (!state.isVerified) {
+      showToast('먼저 검산 완료 확인 체크박스를 체크해 주세요.');
+      return;
+    }
+    downloadFile(buildTeacherHtml(), `week6-4-teacher-${state.params.left}_${state.params.right}.html`, 'text/html;charset=utf-8');
+  });
+
+  btnPrintTeacherPdf.addEventListener('click', () => {
+    printPdfDirectly(true);
   });
 
   // --- 10. Toast Notification Helper ---
