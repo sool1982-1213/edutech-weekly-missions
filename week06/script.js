@@ -283,9 +283,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const y0Pos = mapY(0);
     const xAxisLine = y0Pos >= 42 && y0Pos <= 278 ? `<line x1="42" y1="${y0Pos}" x2="578" y2="${y0Pos}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 2"/>` : '';
 
+    const axisX = mapX(params.h);
+
     return `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" role="img" aria-label="${formatFormula(params)}, ${params.left} 이상 ${params.right} 이하의 구간">
         <rect width="620" height="320" rx="16" fill="#f0f6f5"/>
+        
+        <!-- Header Info in SVG (좌우 분리 배치로 중앙 축 라벨과의 겹침 방지) -->
+        <text x="32" y="26" fill="#0f766e" font-size="13" font-weight="700">포물선 좌표평면</text>
+        <text x="588" y="26" text-anchor="end" fill="#64748b" font-size="12" font-weight="600">${params.left} ≤ x ≤ ${params.right}</text>
+
         <!-- Interval Highlight Area -->
         <rect x="${intervalLeftX}" y="42" width="${intervalWidth}" height="236" fill="#d4edac" opacity="0.7"/>
         
@@ -303,15 +310,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <line x1="${intervalRightX}" y1="42" x2="${intervalRightX}" y2="278" stroke="#527566" stroke-width="2" stroke-dasharray="5 5"/>
         <text x="${intervalRightX}" y="304" text-anchor="middle" fill="#183e49" font-size="14" font-weight="700">x=${params.right}</text>
         
-        <!-- Vertex Dotted Line (if vertex is relevant) -->
-        <line x1="${mapX(params.h)}" y1="42" x2="${mapX(params.h)}" y2="278" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="3 3"/>
-        <text x="${mapX(params.h)}" y="35" text-anchor="middle" fill="#0369a1" font-size="12" font-weight="600">축 x=${params.h}</text>
+        <!-- Vertex Dotted Line & Badge (상단 텍스트와 분리된 전용 배지) -->
+        <line x1="${axisX}" y1="42" x2="${axisX}" y2="278" stroke="#0ea5e9" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <g transform="translate(${axisX}, 50)">
+          <rect x="-30" y="-11" width="60" height="22" rx="11" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1"/>
+          <text x="0" y="4" text-anchor="middle" fill="#0369a1" font-size="11" font-weight="700">축 x=${params.h}</text>
+        </g>
         
         <!-- Answer Points -->
         ${answerCircles}
-        
-        <!-- Header Info in SVG -->
-        <text x="42" y="25" fill="#183e49" font-size="13" font-weight="600">${formatFormula(params)} · 연두색 영역: 주어진 닫힌구간</text>
       </svg>
     `;
   }
@@ -414,6 +421,16 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="summary-min">📉 최솟값: <b>${analysis.minY}</b></div>
       <div class="summary-max">📈 최댓값: <b>${analysis.maxY}</b></div>
     `;
+
+    // Dynamic legend labels (사용자가 설정한 구간 값 반영)
+    const legendInterval = document.getElementById('legendInterval');
+    const legendBoundaries = document.getElementById('legendBoundaries');
+    if (legendInterval) {
+      legendInterval.textContent = `${state.params.left}, ${state.params.right}`;
+    }
+    if (legendBoundaries) {
+      legendBoundaries.textContent = `x = ${state.params.left}, x = ${state.params.right}`;
+    }
   }
 
   function renderDiagnostics() {
