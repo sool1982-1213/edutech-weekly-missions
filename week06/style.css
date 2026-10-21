@@ -420,6 +420,17 @@ body {
   font-family: 'Times New Roman', Georgia, serif;
 }
 
+.formula-inline {
+  font-family: 'Times New Roman', Georgia, 'Cambria Math', serif;
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
+}
+
+.form-group label .formula-inline {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .question-quote {
   display: flex;
   align-items: center;
