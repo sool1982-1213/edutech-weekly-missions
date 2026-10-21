@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 15분 두 갈래 수업 설계 · 이차함수 최대·최소 | 6주차 고수 미션</title>
+  <link rel="stylesheet" href="../styles/themes.css?v=20261021_6">
+  <link rel="stylesheet" href="style.css?v=20261021_6">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <script src="../styles/theme-switcher.js?v=20261021_6"></script>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="nav-right">
+        <div class="theme-switcher-mount"></div>
+        <div class="badge badge-level">WEEK 06 · LEVEL 04 고수</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Header -->
+    <header class="page-header no-print">
+      <div class="curriculum-tag">2022 개정 공통수학1 [10공수1-02-06] · 제한된 구간에서 이차함수의 최대·최소</div>
+      <h1>수업 시작 5분 익명 진단 → <span class="highlight-text">15분 두 갈래 수업 설계</span></h1>
+      <p class="description">
+        학생의 답에서 출발하는 수업. 5분 동안 짧게 묻고 생각을 확인한 뒤, 
+        응답 신호에 맞춰 <strong>개념 다지기</strong>와 <strong>적용 확장</strong> 중 오늘의 15분 수업 경로를 교사가 직접 선택합니다.
+      </p>
+
+      <!-- Week Continuity Breadcrumb -->
+      <div class="continuity-bar">
+        <div class="cont-item"><span>4주차</span> 시각 자료 만들기</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item"><span>5주차</span> 오답 설명과 재도전</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item active"><span>6주차</span> 응답으로 수업 설계 (고수) 🌟</div>
+      </div>
+
+      <!-- 3 Criteria Badges -->
+      <div class="criteria-bar">
+        <div class="crit-chip">
+          <span class="crit-num">기준 1</span>
+          <span class="crit-txt">교사가 선택하는 두 가지 수업 경로 (다지기 vs 확장)</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">기준 2</span>
+          <span class="crit-txt">합계 15분인 체계적 활동 순서 (도입·대입·짝설명·출구)</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">기준 3</span>
+          <span class="crit-txt">학생용 활동지 & 교사용 해설 HTML 완벽 분리 저장</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Workspace Grid -->
+    <div class="workspace-grid">
+      <!-- Left Panel: Controls / Settings -->
+      <aside class="panel controls-panel no-print">
+        <div class="panel-header">
+          <h2 class="panel-title">⚙️ 수업 조건 설정</h2>
+          <span class="panel-sub">고수 · 40~60분</span>
+        </div>
+
+        <div class="form-group">
+          <label for="authorInput">선생님 별명</label>
+          <input type="text" id="authorInput" value="수현T" maxlength="30" placeholder="선생님 별명을 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="openingInput">수업 도입 질문</label>
+          <textarea id="openingInput" rows="2" maxlength="200" placeholder="수업 시작 시 띄울 질문을 입력하세요">최대·최소를 찾으려면 어떤 x를 비교해야 할까? 꼭짓점이 보인다고 바로 써도 될까?</textarea>
+        </div>
+
+        <div class="form-group">
+          <label>함수와 닫힌구간 [ $f(x) = a(x - h)^2 + k$ ]</label>
+          <div class="param-grid">
+            <div class="param-item">
+              <span class="param-lbl">계수 a (1~3)</span>
+              <select id="paramA" aria-label="계수 a">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="param-item">
+              <span class="param-lbl">꼭짓점 h (-3~3)</span>
+              <select id="paramH" aria-label="꼭짓점 x좌표 h">
+                <option value="-3">-3</option>
+                <option value="-2">-2</option>
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="param-item">
+              <span class="param-lbl">꼭짓점 k (-3~3)</span>
+              <select id="paramK" aria-label="꼭짓점 y좌표 k">
+                <option value="-3">-3</option>
+                <option value="-2" selected>-2</option>
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="param-item">
+              <span class="param-lbl">구간 왼쪽 끝</span>
+              <select id="paramLeft" aria-label="구간 왼쪽 끝">
+                <option value="-4">-4</option>
+                <option value="-3">-3</option>
+                <option value="-2">-2</option>
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="param-item">
+              <span class="param-lbl">구간 오른쪽 끝</span>
+              <select id="paramRight" aria-label="구간 오른쪽 끝">
+                <option value="-3">-3</option>
+                <option value="-2">-2</option>
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4" selected>4</option>
+              </select>
+            </div>
+          </div>
+          <p class="field-hint">양 끝점과 구간 안의 꼭짓점을 후보로 삼아 직접 대입·비교해 검산합니다.</p>
+        </div>
+
+        <!-- Presets -->
+        <div class="form-group">
+          <label>꼭짓점 위치별 대표 프리셋</label>
+          <div class="preset-btn-group">
+            <button type="button" class="btn-preset active" id="presetOutside">꼭짓점이 구간 밖 (기본)</button>
+            <button type="button" class="btn-preset" id="presetInside">꼭짓점이 구간 안</button>
+            <button type="button" class="btn-preset" id="presetBoundary">꼭짓점이 구간 경계</button>
+          </div>
+        </div>
+
+        <div class="info-callout">
+          <strong>💡 교육과정 & 개인정보 원칙</strong>
+          <p>• 2022 개정 공통수학1 범위 준수 (미분 사용 금지)</p>
+          <p>• 실제 학생 이름·성적·연락처를 일체 수집하지 않는 익명 집계 방식입니다.</p>
+          <p>• 조건 변경 시 답 선택과 집계가 자동으로 초기화됩니다.</p>
+        </div>
+      </aside>
+
+      <!-- Center & Right: Main Workspace -->
+      <div class="main-content">
+        <!-- 1. 수업 시작 5분 도입 질문 카드 & SVG 그래프 -->
+        <section class="panel live-card-panel">
+          <div class="panel-header">
+            <div>
+              <span class="card-badge">STEP 01 · 수업 시작 5분</span>
+              <h2 class="panel-title" id="cardTeacherTitle">수현T의 도입 질문 카드</h2>
+            </div>
+            <button type="button" class="btn-toggle-answer" id="btnToggleTeacherAnswer" aria-expanded="false">
+              🔍 교사용 확인 · 후보와 검산
+            </button>
+          </div>
+
+          <div class="hero-formula-box">
+            <div class="formula-meta">
+              <span class="badge-topic">이차함수 · 제한된 구간의 최대·최소</span>
+              <span class="badge-interval" id="intervalDisplay">2 ≤ x ≤ 4</span>
+            </div>
+            <div class="math-formula" id="formulaDisplay">f(x) = (x - 1)² - 2</div>
+            <div class="question-quote">
+              <span class="quote-mark">“</span>
+              <p id="quoteText">최대·최소를 찾으려면 어떤 x를 비교해야 할까? 꼭짓점이 보인다고 바로 써도 될까?</p>
+              <span class="quote-mark">”</span>
+            </div>
+          </div>
+
+          <!-- SVG Graph -->
+          <div class="graph-container">
+            <div class="graph-wrapper" id="graphContainer" aria-label="이차함수 및 제한된 구간 그래프">
+              <!-- Dynamically generated SVG -->
+            </div>
+            <p class="graph-legend">
+              <span class="legend-color-box"></span> 연두색 영역: 주어진 닫힌구간 $[left, right]$ · 점선: 구간 경계선 ($x=left, x=right$)
+            </p>
+          </div>
+
+          <!-- Teacher Check Drawer (Collapsible) -->
+          <div class="teacher-check-drawer" id="teacherCheckDrawer" hidden>
+            <div class="drawer-header">
+              <h3>📐 교사용 검산 대입표 (양 끝점 & 구간 내 꼭짓점)</h3>
+              <span class="vertex-status-chip" id="vertexStatusChip">꼭짓점 x=1은 구간 밖 (후보 제외)</span>
+            </div>
+            <div class="chips-row" id="valuesChipsRow">
+              <!-- Dynamically rendered value chips -->
+            </div>
+            <div class="minmax-summary-box" id="minmaxSummaryBox">
+              <!-- Summary -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. 생각 꺼내기 3문항 (Mini Diagnostic) -->
+        <section class="panel diagnostic-panel">
+          <div class="panel-header">
+            <div>
+              <span class="card-badge">STEP 02 · 생각 꺼내기</span>
+              <h2 class="panel-title">3문항 미니 진단 (풀기 전 생각 확인)</h2>
+            </div>
+            <span class="panel-sub">답을 고르고 해설을 확인해 보세요</span>
+          </div>
+
+          <div class="questions-grid" id="questionsContainer">
+            <!-- Questions rendered dynamically -->
+          </div>
+
+          <div class="diagnostic-actions">
+            <button type="button" class="btn-primary" id="btnCheckDiagnostic">
+              ✍️ 선택한 답 확인 & 피드백 보기
+            </button>
+            <button type="button" class="btn-secondary" id="btnResetDiagnostic">
+              선택 초기화
+            </button>
+            <p class="diagnostic-note">
+              ※ 이 진단 선택은 수업 전 모의 체험용입니다. 아래 학급 익명 집계에 자동으로 합산되지 않습니다.
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. 익명 응답 집계 보드 (Classroom Signals) -->
+        <section class="panel signals-panel" id="sectionSignals">
+          <div class="panel-header">
+            <div>
+              <span class="card-badge">STEP 03 · 익명 응답 확인</span>
+              <h2 class="panel-title">보기별 응답 집계 보드 (Classroom Signals)</h2>
+            </div>
+            <div class="header-action-group">
+              <button type="button" class="btn-small secondary" id="btnLoadMockData">
+                👥 가상 20명 데이터 불러오기
+              </button>
+              <button type="button" class="btn-small secondary" id="btnClearCounts">
+                집계 비우기
+              </button>
+            </div>
+          </div>
+
+          <div class="signals-meta-bar">
+            <div class="class-size-control">
+              <label for="classSizeInput">학급 전체 인원 (1~60명):</label>
+              <input type="number" id="classSizeInput" min="1" max="60" value="20">
+              <span>명</span>
+            </div>
+            <p class="signals-guide-note">
+              이름이나 번호 없이 <strong>각 보기별 손든 학생 수만</strong> 입력합니다. 가상 데이터로 시뮬레이션할 수 있습니다.
+            </p>
+          </div>
+
+          <!-- Questions Count Grid -->
+          <div class="counts-grid" id="countsGridContainer">
+            <!-- Dynamically generated inputs and rate progress bars -->
+          </div>
+
+          <!-- Priority Suggestion Box -->
+          <div class="priority-box" id="priorityRecommendationBox">
+            <div class="prio-tag">🎯 오늘의 후속 수업 참고 신호</div>
+            <h3 class="prio-title" id="priorityTitle">응답을 입력하면 추가 질문을 추천합니다.</h3>
+            <p class="prio-desc" id="priorityDesc">집계가 없는 문항은 우선순위 계산에서 제외됩니다.</p>
+            <div class="prio-caution">
+              ※ 정답률 = 정답 인원 ÷ 해당 문항 응답자 수 (동률 시 앞 문항 우선). 문항별 단순 집계로 개별 학생의 능력을 판정하거나 오개념을 확정하지 않습니다.
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. ★ 고수 특화: 15분 두 갈래 수업 설계 (Choose the Next 15 Minutes) -->
+        <section class="panel route-panel" id="sectionRoutes">
+          <div class="panel-header">
+            <div>
+              <span class="card-badge badge-accent">STEP 04 · LEVEL 04 고수 핵심</span>
+              <h2 class="panel-title">오늘의 15분 후속 수업 설계 (두 갈래 경로)</h2>
+            </div>
+            <div class="total-time-badge">
+              ⏱ 합계 <strong>15분</strong> 수업안
+            </div>
+          </div>
+
+          <p class="route-intro">
+            집계 신호를 바탕으로 오늘의 수업 경로를 <strong>선생님이 직접 선택</strong>합니다. 
+            학생을 기계적으로 분류하는 대신, 전체 학급에 더 알맞은 활동 방향을 결정합니다.
+          </p>
+
+          <!-- Route Selector Tabs -->
+          <div class="route-selector" role="tablist" aria-label="15분 수업 경로">
+            <button type="button" class="route-tab-btn active" id="btnRouteSupport" role="tab" aria-selected="true" aria-controls="routeSupportContent">
+              <div class="route-tab-title">
+                <span class="route-icon">🌱</span>
+                <strong>경로 A · 개념 다지기</strong>
+              </div>
+              <p class="route-tab-desc">후보 선택·대입·비교 과정을 차근차근 함께 확인</p>
+            </button>
+            <button type="button" class="route-tab-btn" id="btnRouteExtend" role="tab" aria-selected="false" aria-controls="routeExtendContent">
+              <div class="route-tab-title">
+                <span class="route-icon">🚀</span>
+                <strong>경로 B · 적용 확장</strong>
+              </div>
+              <p class="route-tab-desc">구간을 변경하고 경계 사례의 논리적 이유까지 설명</p>
+            </button>
+          </div>
+
+          <!-- Route Timeline Container -->
+          <div class="timeline-container" id="routeTimelineContainer">
+            <!-- Dynamically rendered timeline items -->
+          </div>
+
+          <!-- Route Actions -->
+          <div class="route-actions">
+            <button type="button" class="btn-copy-route" id="btnCopyRoute">
+              📋 15분 수업안 클립보드 복사
+            </button>
+            <span class="action-hint">수업 일지나 메모에 바로 붙여넣을 수 있습니다.</span>
+          </div>
+
+          <!-- Fallback manual copy box (if clipboard restricted) -->
+          <div class="manual-copy-box" id="manualCopyBox" hidden>
+            <label for="manualCopyTextarea">아래 내용을 선택하여 수동으로 복사하세요 (Ctrl+C):</label>
+            <textarea id="manualCopyTextarea" rows="6" readonly></textarea>
+          </div>
+        </section>
+
+        <!-- 5. 수업 자료 내보내기 (Export & Classroom Takeaway) -->
+        <section class="panel export-panel" id="sectionExport">
+          <div class="panel-header">
+            <div>
+              <span class="card-badge">STEP 05 · 자료 저장 & 인쇄</span>
+              <h2 class="panel-title">질문은 학생에게, 해설은 선생님에게</h2>
+            </div>
+            <span class="panel-sub">완벽한 자료 분리 원칙</span>
+          </div>
+
+          <div class="form-group">
+            <label for="teacherNoteInput">수업 지도 메모 (선택 / 최대 800자)</label>
+            <textarea id="teacherNoteInput" rows="3" maxlength="800" placeholder="수업 중 관찰할 점이나 학생 피드백 메모를 남겨보세요.">학생들의 생각을 먼저 듣고, 제 설명 욕심은 잠깐 접어 두겠습니다. 익명 응답을 통해 어디서 망설이는지 확인하고 15분 후속 활동을 유연하게 진행하겠습니다.</textarea>
+          </div>
+
+          <div class="verification-box">
+            <label class="checkbox-label">
+              <input type="checkbox" id="checkVerified">
+              <span><strong>수학적 검산 완료:</strong> 함수식, 구간, 꼭짓점 위치, 후보 대입 계산 결과를 직접 확인했습니다.</span>
+            </label>
+          </div>
+
+          <div class="export-actions">
+            <button type="button" class="btn-export-student" id="btnDownloadStudent">
+              📄 학생용 활동지 HTML 저장
+            </button>
+            <button type="button" class="btn-export-teacher" id="btnDownloadTeacher" disabled>
+              📑 교사용 해설 HTML 저장 (검산 확인 시 활성화)
+            </button>
+          </div>
+
+          <div class="export-notes">
+            <p>• <strong>학생용 HTML:</strong> 정답, 해설, 교사 메모, 집계 보드를 완전히 배제하고, 깔끔한 도입 질문·그래프·손글씨 필기용 빈칸으로 구성되어 즉시 인쇄/배포가 가능합니다.</p>
+            <p>• <strong>교사용 HTML:</strong> 후보점 대입표, 정답 및 단계별 해설, 변경 구간 검산 정답, 교사 메모, 집계 해석 가이드가 포함되어 수업 지도안으로 활용됩니다.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Message -->
+  <div id="toast" class="toast" role="status" aria-live="polite">알림 메시지</div>
+
+  <script src="script.js?v=20261021_6"></script>
+</body>
+</html>

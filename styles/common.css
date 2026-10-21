@@ -199,7 +199,7 @@ body {
 /* Week Tabs Bar */
 .week-tabs-bar {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   margin-bottom: 26px;
 }
