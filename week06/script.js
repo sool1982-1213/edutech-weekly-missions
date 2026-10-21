@@ -884,18 +884,18 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
     body {
       max-width: 820px;
-      margin: 20px auto;
-      padding: 20px;
+      margin: 10px auto;
+      padding: 10px 15px;
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
       color: #173c50;
-      line-height: 1.7;
+      line-height: 1.5;
     }
     .no-print {
       background: #f1f5f9;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
       padding: 10px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -921,90 +921,99 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       justify-content: space-between;
       align-items: flex-end;
       border-bottom: 2px solid #087f82;
-      padding-bottom: 12px;
-      margin-bottom: 16px;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
     }
     .sheet-title h1 {
-      font-size: 22px;
-      margin: 0 0 4px;
+      font-size: 19px;
+      margin: 0 0 3px;
       color: #087f82;
     }
     .sheet-title p {
       margin: 0;
-      font-size: 13px;
+      font-size: 12px;
       color: #64748b;
     }
     .student-info-box {
       border: 1px solid #cbd5e1;
-      padding: 6px 14px;
+      padding: 4px 10px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 12px;
+      white-space: nowrap;
     }
     .formula-banner {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 16px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
       text-align: center;
     }
     .math-title {
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 800;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-family: serif;
     }
     .opening-quote {
-      font-size: 14px;
+      font-size: 12.5px;
       font-weight: 600;
       color: #0f766e;
     }
     .graph-box {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     .graph-box svg {
-      max-width: 100%;
+      max-width: 440px;
+      max-height: 160px;
       height: auto;
+      margin: 0 auto;
+      display: block;
     }
     .section-heading {
-      font-size: 16px;
+      font-size: 14.5px;
       font-weight: 800;
       border-left: 4px solid #087f82;
       padding-left: 8px;
-      margin: 20px 0 12px;
+      margin: 12px 0 8px;
       color: #0f172a;
     }
     .question-item {
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 7px;
       break-inside: avoid;
     }
     .question-item h3 {
-      font-size: 14px;
-      margin: 0 0 8px;
+      font-size: 13px;
+      margin: 0 0 4px;
+      line-height: 1.35;
     }
     .options-row {
       display: flex;
-      gap: 16px;
-      font-size: 13px;
-      margin-bottom: 8px;
+      gap: 14px;
+      font-size: 12px;
+      margin-bottom: 4px;
     }
     .blank-box {
-      height: 48px;
+      height: 32px;
       border: 1px dashed #94a3b8;
-      border-radius: 6px;
+      border-radius: 4px;
       background: #fdfdfd;
-      padding: 4px 8px;
-      font-size: 12px;
+      padding: 3px 6px;
+      font-size: 11px;
       color: #94a3b8;
     }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
     .timeline-item {
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 10px 14px;
       margin-bottom: 10px;
       break-inside: avoid;
     }
@@ -1019,7 +1028,7 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       color: #fff;
       font-size: 11px;
       font-weight: 700;
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 4px;
     }
     .timeline-title {
@@ -1027,74 +1036,89 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       font-weight: 700;
     }
     .timeline-desc {
-      font-size: 13px;
+      font-size: 12.5px;
       color: #334155;
       margin-bottom: 6px;
+      line-height: 1.45;
+    }
+    .timeline-item .blank-box {
+      height: 54px;
+      font-size: 11.5px;
     }
     .footer-note {
       text-align: center;
       font-size: 11px;
       color: #94a3b8;
-      margin-top: 24px;
+      margin-top: 20px;
       border-top: 1px solid #e2e8f0;
       padding-top: 10px;
     }
     @media print {
-      body { margin: 0; padding: 0; }
+      body { margin: 0; padding: 0; max-width: 100%; }
       .no-print { display: none !important; }
+      .page-break { page-break-after: always !important; break-after: page !important; }
     }
   </style>
 </head>
 <body>
   <div class="no-print">
-    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 PDF 파일로 보관하실 수 있습니다.</span>
+    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 2페이지 활동지로 깔끔하게 저장됩니다.</span>
     <button class="print-bar-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
   </div>
 
-  <div class="sheet-header">
-    <div class="sheet-title">
-      <h1>수학1 · 제한된 구간에서 이차함수의 최대·최소</h1>
-      <p>지도교사: ${esc(state.author)} | 2022 개정 공통수학1 [10공수1-02-06]</p>
-    </div>
-    <div class="student-info-box">
-      <span>학년 / 반: _______  번호: _____  이름: ______________</span>
-    </div>
-  </div>
-
-  <div class="formula-banner">
-    <div class="math-title">${esc(formatFormula(state.params))} &nbsp; ( ${state.params.left} ≤ x ≤ ${state.params.right} )</div>
-    <div class="opening-quote">“${esc(state.opening)}”</div>
-  </div>
-
-  <div class="graph-box">
-    ${svgCode}
-  </div>
-
-  <div class="section-heading">PART 1 · 5분 생각 꺼내기 (답을 고르고 이유를 적어보세요)</div>
-  ${questions.map((q, idx) => `
-    <div class="question-item">
-      <h3>${idx + 1}. [${esc(q.skill)}] ${esc(q.title)}</h3>
-      <div class="options-row">
-        ${q.options.map((opt, oIdx) => `<span>(${oIdx + 1}) ${esc(opt)}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;')}
+  <!-- [PAGE 1] PART 1: 5분 생각 꺼내기 (도입 + 그래프 + 3문항 전체가 한 페이지에 쏙!) -->
+  <div class="sheet-page">
+    <div class="sheet-header">
+      <div class="sheet-title">
+        <h1>수학1 · 제한된 구간에서 이차함수의 최대·최소</h1>
+        <p>지도교사: ${esc(state.author)} | 2022 개정 공통수학1 [10공수1-02-06]</p>
       </div>
-      <div class="blank-box">선택한 이유와 풀이 과정을 간단히 서술하세요:</div>
-    </div>
-  `).join('')}
-
-  <div class="section-heading">PART 2 · 15분 후속 활동 [경로: ${esc(routeName)}]</div>
-  ${timeline.map(s => `
-    <div class="timeline-item">
-      <div class="timeline-top">
-        <span class="badge-min">${s.minutes}분</span>
-        <span class="timeline-title">${esc(s.title)}</span>
+      <div class="student-info-box">
+        <span>학년 / 반: _______  번호: _____  이름: ______________</span>
       </div>
-      <p class="timeline-desc">${esc(s.task)}</p>
-      <div class="blank-box">활동 기록 및 짝 설명 요약:</div>
     </div>
-  `).join('')}
 
-  <div class="footer-note">
-    초강스 에듀테크 LAB · 6주차 수업 설계 활동지 | 개인정보 수집 없음
+    <div class="formula-banner">
+      <div class="math-title">${esc(formatFormula(state.params))} &nbsp; ( ${state.params.left} ≤ x ≤ ${state.params.right} )</div>
+      <div class="opening-quote">“${esc(state.opening)}”</div>
+    </div>
+
+    <div class="graph-box">
+      ${svgCode}
+    </div>
+
+    <div class="section-heading">PART 1 · 5분 생각 꺼내기 (답을 고르고 이유를 적어보세요)</div>
+    ${questions.map((q, idx) => `
+      <div class="question-item">
+        <h3>${idx + 1}. [${esc(q.skill)}] ${esc(q.title)}</h3>
+        <div class="options-row">
+          ${q.options.map((opt, oIdx) => `<span>(${oIdx + 1}) ${esc(opt)}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;')}
+        </div>
+        <div class="blank-box">선택한 이유와 풀이 과정을 간단히 서술하세요:</div>
+      </div>
+    `).join('')}
+  </div>
+
+  <!-- PART 1과 PART 2 분리를 위한 강제 페이지 넘김 -->
+  <div class="page-break"></div>
+
+  <!-- [PAGE 2] PART 2: 15분 후속 활동 (4단계 활동 순서 및 기록란이 한 페이지에 쏙!) -->
+  <div class="sheet-page">
+    <div class="section-heading" style="margin-top: 0;">PART 2 · 15분 후속 활동 [선택 경로: ${esc(routeName)}]</div>
+    ${timeline.map(s => `
+      <div class="timeline-item">
+        <div class="timeline-top">
+          <span class="badge-min">${s.minutes}분</span>
+          <span class="timeline-title">${esc(s.title)}</span>
+        </div>
+        <p class="timeline-desc">${esc(s.task)}</p>
+        <div class="blank-box">활동 기록 및 짝 설명 요약:</div>
+      </div>
+    `).join('')}
+
+    <div class="footer-note">
+      초강스 에듀테크 LAB · 6주차 수업 설계 활동지 | 가상 예시 · 개인정보 수집 없음
+    </div>
   </div>
 </body>
 </html>`;
@@ -1122,18 +1146,18 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
     body {
       max-width: 860px;
-      margin: 20px auto;
-      padding: 20px;
+      margin: 10px auto;
+      padding: 10px 15px;
       font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
       color: #0f172a;
-      line-height: 1.7;
+      line-height: 1.5;
     }
     .no-print {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
       border-radius: 8px;
       padding: 10px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1155,45 +1179,65 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
       cursor: pointer;
     }
     .header-bar {
-      border-bottom: 3px solid #2563eb;
-      padding-bottom: 12px;
-      margin-bottom: 18px;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
     }
     h1 {
-      font-size: 24px;
+      font-size: 19px;
       color: #1e3a8a;
-      margin: 0 0 6px;
+      margin: 0 0 3px;
     }
     .meta-p {
       margin: 0;
-      font-size: 13px;
+      font-size: 12px;
       color: #64748b;
     }
     .box-info {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 18px;
-      font-size: 14px;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.5;
     }
     .section-title {
-      font-size: 17px;
+      font-size: 14.5px;
       font-weight: 800;
       color: #1e40af;
       border-left: 4px solid #2563eb;
       padding-left: 8px;
-      margin: 22px 0 12px;
+      margin: 10px 0 6px;
+    }
+    .side-by-side {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .side-graph {
+      flex: 1.1;
+      text-align: center;
+    }
+    .side-graph svg {
+      max-width: 100%;
+      max-height: 155px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .side-table {
+      flex: 1;
     }
     .check-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 16px;
-      font-size: 13px;
+      font-size: 11.5px;
     }
     .check-table th, .check-table td {
       border: 1px solid #cbd5e1;
-      padding: 8px 12px;
+      padding: 5px 6px;
       text-align: center;
     }
     .check-table th {
@@ -1202,120 +1246,156 @@ ${timeline.map((s, idx) => `${idx + 1}. [${s.minutes}분] ${s.title}\n   - ${s.t
     }
     .q-box {
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 12px;
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 6px;
       background: #f8fafc;
       break-inside: avoid;
     }
     .q-box h3 {
-      font-size: 14px;
-      margin: 0 0 6px;
+      font-size: 12.5px;
+      margin: 0 0 3px;
       color: #0f172a;
+      line-height: 1.35;
     }
     .ans-tag {
       color: #2563eb;
       font-weight: 800;
     }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+    .timeline-step-row {
+      border-bottom: 1px dashed #cbd5e1;
+      padding: 8px 0;
+      font-size: 12px;
+    }
     .memo-box {
       background: #fefce8;
       border: 1px solid #fef08a;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 14px;
-      line-height: 1.6;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px;
+      line-height: 1.55;
     }
     .caution-box {
       background: #f1f5f9;
       border-left: 4px solid #64748b;
-      padding: 10px 14px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 11px;
       color: #475569;
-      margin-top: 18px;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 16px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
     }
     @media print {
-      body { margin: 0; padding: 0; }
+      body { margin: 0; padding: 0; max-width: 100%; }
       .no-print { display: none !important; }
+      .page-break { page-break-after: always !important; break-after: page !important; }
     }
   </style>
 </head>
 <body>
   <div class="no-print">
-    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 PDF 파일로 보관하실 수 있습니다.</span>
+    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 2페이지 교사용 수업안으로 깔끔하게 저장됩니다.</span>
     <button class="print-bar-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
   </div>
 
-  <div class="header-bar">
-    <h1>[교사용 수업안 & 해설] 수업 시작 5분 → 15분 두 갈래 수업 설계</h1>
-    <p class="meta-p">작성 교사: ${esc(state.author)} | 2022 개정 공통수학1 [10공수1-02-06] 제한된 구간에서 이차함수의 최대·최소</p>
-  </div>
-
-  <div class="box-info">
-    <strong>📐 수업 기본 조건:</strong> ${esc(formatFormula(state.params))} &nbsp;|&nbsp; 닫힌구간: ${state.params.left} ≤ x ≤ ${state.params.right}<br>
-    <strong>도입 질문:</strong> “${esc(state.opening)}”<br>
-    <strong>꼭짓점 판정:</strong> x = ${state.params.h} (${analysis.inside ? '구간 안에 포함됨' : '구간 밖이므로 후보 제외'})
-  </div>
-
-  <div style="text-align:center; margin-bottom: 20px;">
-    ${svgCode}
-  </div>
-
-  <div class="section-title">1. 후보점 및 대입 검산표</div>
-  <table class="check-table">
-    <thead>
-      <tr>
-        <th>후보 x</th>
-        <th>대입 계산 과정</th>
-        <th>함숫값 f(x)</th>
-        <th>판정</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${analysis.points.map(p => `
-        <tr>
-          <td>x = ${p.x}</td>
-          <td>f(${p.x}) = ${state.params.a === 1 ? '' : state.params.a}(${p.x} - ${state.params.h})² + (${state.params.k})</td>
-          <td><strong>${p.y}</strong></td>
-          <td>${p.y === analysis.minY ? '<span style="color:#0284c7;font-weight:700;">최솟값</span>' : p.y === analysis.maxY ? '<span style="color:#7c3aed;font-weight:700;">최댓값</span>' : '중간값'}</td>
-        </tr>
-      `).join('')}
-    </tbody>
-  </table>
-
-  <div class="section-title">2. 3문항 미니 진단 정답 & 교사용 해설</div>
-  ${questions.map((q, idx) => `
-    <div class="q-box">
-      <h3>${idx + 1}. [${esc(q.skill)}] ${esc(q.title)}</h3>
-      <p style="margin:4px 0;"><span class="ans-tag">정답: ${q.answer + 1}번 (${esc(q.options[q.answer])})</span></p>
-      <p style="margin:4px 0 8px; font-size:13px; color:#334155;"><strong>해설:</strong> ${esc(q.explanation)}</p>
-      <p style="margin:0; font-size:13px; color:#0369a1;"><strong>교사용 추가 발문:</strong> ${esc(q.followup)}</p>
+  <!-- [PAGE 1] 교사용 5분 진단 & 함수 분석 & 3문항 해설 전체가 한 페이지에 쏙! -->
+  <div class="sheet-page">
+    <div class="header-bar">
+      <h1>[교사용 수업안 & 해설] 수업 시작 5분 → 15분 두 갈래 수업 설계</h1>
+      <p class="meta-p">작성 교사: ${esc(state.author)} | 2022 개정 공통수학1 [10공수1-02-06] 제한된 구간에서 이차함수의 최대·최소</p>
     </div>
-  `).join('')}
 
-  <div class="section-title">3. 오늘의 15분 후속 수업 설계 [선택 경로: ${esc(routeName)}]</div>
-  <div style="margin-bottom: 16px;">
-    ${timeline.map((s, idx) => `
-      <div style="border-bottom: 1px dashed #cbd5e1; padding: 8px 0;">
-        <strong>[${s.minutes}분] ${idx + 1}. ${esc(s.title)}</strong><br>
-        <span style="font-size: 13px; color:#334155;">${esc(s.task)}</span>
+    <div class="box-info">
+      <strong>📐 수업 기본 조건:</strong> ${esc(formatFormula(state.params))} &nbsp;|&nbsp; 닫힌구간: ${state.params.left} ≤ x ≤ ${state.params.right}<br>
+      <strong>도입 질문:</strong> “${esc(state.opening)}”<br>
+      <strong>꼭짓점 판정:</strong> x = ${state.params.h} (${analysis.inside ? '구간 안에 포함됨' : '구간 밖이므로 후보 제외'})
+    </div>
+
+    <div class="side-by-side">
+      <div class="side-graph">
+        ${svgCode}
+      </div>
+      <div class="side-table">
+        <div class="section-title" style="margin-top: 0;">1. 후보점 및 대입 검산표</div>
+        <table class="check-table">
+          <thead>
+            <tr>
+              <th>후보 x</th>
+              <th>f(x) 대입 과정</th>
+              <th>함숫값</th>
+              <th>판정</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${analysis.points.map(p => `
+              <tr>
+                <td>x = ${p.x}</td>
+                <td>f(${p.x}) = ${state.params.a === 1 ? '' : state.params.a}(${p.x} - ${state.params.h})² + (${state.params.k})</td>
+                <td><strong>${p.y}</strong></td>
+                <td>${p.y === analysis.minY ? '<span style="color:#0284c7;font-weight:700;">최솟값</span>' : p.y === analysis.maxY ? '<span style="color:#7c3aed;font-weight:700;">최댓값</span>' : '중간값'}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-title">2. 3문항 미니 진단 정답 & 교사용 해설</div>
+    ${questions.map((q, idx) => `
+      <div class="q-box">
+        <h3>${idx + 1}. [${esc(q.skill)}] ${esc(q.title)}</h3>
+        <p style="margin:2px 0;"><span class="ans-tag">정답: ${q.answer + 1}번 (${esc(q.options[q.answer])})</span></p>
+        <p style="margin:2px 0 4px; font-size:11.5px; color:#334155;"><strong>해설:</strong> ${esc(q.explanation)}</p>
+        <p style="margin:0; font-size:11.5px; color:#0369a1;"><strong>교사용 추가 발문:</strong> ${esc(q.followup)}</p>
       </div>
     `).join('')}
   </div>
 
-  <div class="section-title">4. 변경 구간 적용 검산 해설</div>
-  <div class="box-info">
-    <strong>새로운 구간:</strong> [ ${shifted.left}, ${shifted.right} ]<br>
-    <strong>후보 대입 결과:</strong> ${shiftedAnalysis.points.map(p => `f(${p.x}) = ${p.y}`).join(', ')}<br>
-    <strong>결과:</strong> 최솟값 <strong>${shiftedAnalysis.minY}</strong>, 최댓값 <strong>${shiftedAnalysis.maxY}</strong>
-  </div>
+  <!-- 페이지 분리를 위한 강제 페이지 넘김 -->
+  <div class="page-break"></div>
 
-  <div class="section-title">5. 교사 수업 지도 메모</div>
-  <div class="memo-box">
-    ${esc(state.teacherNote) || '작성된 교사 메모가 없습니다.'}
-  </div>
+  <!-- [PAGE 2] 오늘의 15분 후속 수업 설계 & 변경 구간 & 지도 메모 & 평가 원칙이 한 페이지에 쏙! -->
+  <div class="sheet-page">
+    <div class="section-title" style="margin-top: 0;">3. 오늘의 15분 후속 수업 설계 [선택 경로: ${esc(routeName)}]</div>
+    <div style="margin-bottom: 12px;">
+      ${timeline.map((s, idx) => `
+        <div class="timeline-step-row">
+          <strong>[${s.minutes}분] ${idx + 1}. ${esc(s.title)}</strong><br>
+          <span style="color:#334155; line-height: 1.45;">${esc(s.task)}</span>
+        </div>
+      `).join('')}
+    </div>
 
-  <div class="caution-box">
-    ※ <strong>익명 집계 및 평가 원칙:</strong> 학급 보기별 응답 인원수는 오늘의 추가 질문과 후속 활동을 결정하기 위한 교육적 참고 신호이며, 개별 학생의 능력을 판정하거나 오개념을 확정하는 근거로 사용하지 않습니다.
+    <div class="section-title">4. 변경 구간 적용 검산 해설</div>
+    <div class="box-info">
+      <strong>새로운 구간:</strong> [ ${shifted.left}, ${shifted.right} ]<br>
+      <strong>후보 대입 결과:</strong> ${shiftedAnalysis.points.map(p => `f(${p.x}) = ${p.y}`).join(', ')}<br>
+      <strong>결과:</strong> 최솟값 <strong>${shiftedAnalysis.minY}</strong>, 최댓값 <strong>${shiftedAnalysis.maxY}</strong>
+    </div>
+
+    <div class="section-title">5. 교사 수업 지도 메모</div>
+    <div class="memo-box">
+      ${esc(state.teacherNote) || '작성된 교사 메모가 없습니다.'}
+    </div>
+
+    <div class="caution-box">
+      ※ <strong>익명 집계 및 평가 원칙:</strong> 학급 보기별 응답 인원수는 오늘의 추가 질문과 후속 활동을 결정하기 위한 교육적 참고 신호이며, 개별 학생의 능력을 판정하거나 오개념을 확정하는 근거로 사용하지 않습니다.
+    </div>
+
+    <div class="footer-note">
+      초강스 에듀테크 LAB · 6주차 교사용 수업안 | 가상 예시 · 개인정보 수집 없음
+    </div>
   </div>
 </body>
 </html>`;
