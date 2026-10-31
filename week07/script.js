@@ -212,153 +212,54 @@
     ];
   }
 
-  // 3. Standalone HTML Export Generators (Student vs Teacher)
+  // 3. Standalone HTML Export Generators (Student vs Teacher) - 2-Page Print Layout
   function exportHtml(isTeacher) {
     const sol = solveInterval(state);
     const ansText = answerString(state);
     const ineq = ineqString(state);
+    const expanded = expandedString(state);
     const compareOp = OP_FLIP_EQ[state.op];
     const compareParams = { ...state, op: compareOp };
     const compareIneq = ineqString(compareParams);
     const compareAns = answerString(compareParams);
+    const compareSol = solveInterval(compareParams);
+    const misconceptionAns = compareAns;
 
-    const misconceptionAns = compareAns; // omitted endpoints or added endpoints
-
-    const title = `${state.author}의 이차부등식 3단계 후속 과제 · ${isTeacher ? '교사용 해설집' : '학생용 과제지'}`;
+    const docTitle = `${isTeacher ? '[교사용 해설집]' : '[학생용 과제지]'} ${state.author}의 이차부등식 3단계 후속 과제`;
 
     return `<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${title}</title>
+  <title>${docTitle}</title>
   <style>
+    @page { size: A4 portrait; margin: 10mm 12mm; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
     body {
       max-width: 820px;
-      margin: 30px auto;
-      padding: 24px;
-      color: #1e293b;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif;
-      line-height: 1.7;
-    }
-    .header-box {
-      border-bottom: 2px solid #0f766e;
-      padding-bottom: 14px;
-      margin-bottom: 24px;
-    }
-    .title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    h1 {
-      font-size: 24px;
-      color: #0f766e;
-      margin: 0 0 6px 0;
-    }
-    .meta-line {
-      font-size: 14px;
-      color: #64748b;
-    }
-    .instruction-card {
-      background: #f1f5f9;
-      border-left: 4px solid #0f766e;
-      padding: 10px 16px;
-      margin-bottom: 24px;
-      font-size: 14.5px;
-    }
-    .card {
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 24px;
-      break-inside: avoid;
-    }
-    .card-header {
-      font-size: 16px;
-      font-weight: 700;
+      margin: 10px auto;
+      padding: 10px 15px;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, sans-serif;
       color: #0f172a;
-      margin-bottom: 10px;
-      border-bottom: 1px dashed #cbd5e1;
-      padding-bottom: 6px;
-    }
-    .math-formula {
-      font-family: "Cambria Math", serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #0f766e;
-    }
-    .answer-space {
-      min-height: 110px;
-      border: 1px dashed #94a3b8;
-      border-radius: 8px;
-      margin-top: 12px;
-      background: #fafafa;
-      padding: 12px;
-      font-size: 13px;
-      color: #94a3b8;
-    }
-    .solution-part {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin-top: 14px;
-    }
-    .solution-title {
-      font-weight: 800;
-      color: #166534;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-    svg {
-      max-width: 100%;
-      height: auto;
-      margin: 10px 0;
-    }
-    ol {
-      margin-left: 20px;
-      margin-bottom: 10px;
-    }
-    li {
-      margin-bottom: 4px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
+      line-height: 1.45;
       font-size: 13px;
     }
-    th, td {
-      border: 1px solid #cbd5e1;
-      padding: 6px 10px;
-      text-align: center;
-    }
-    th {
-      background: #e2e8f0;
-    }
-    .teacher-note {
+    .no-print {
       background: #eff6ff;
-      border-left: 4px solid #3b82f6;
-      padding: 10px 14px;
-      margin-top: 10px;
-      font-size: 13.5px;
-      color: #1e3a8a;
-    }
-    .print-bar {
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       padding: 10px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
     }
     .print-tip {
-      font-size: 13.5px;
-      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e40af;
     }
     .print-bar-btn {
       background: #0f766e;
@@ -371,126 +272,353 @@
       cursor: pointer;
       white-space: nowrap;
     }
-    .footer {
-      border-top: 1px solid #e2e8f0;
-      padding-top: 14px;
-      margin-top: 30px;
+    .sheet-page {
+      padding: 0;
+    }
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2px solid #0f766e;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .sheet-title h1 {
+      font-size: 18px;
+      margin: 0 0 2px;
+      color: #0f766e;
+      font-weight: 800;
+    }
+    .sheet-title p {
+      margin: 0;
+      font-size: 11.5px;
+      color: #64748b;
+    }
+    .student-info-box {
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 6px;
       font-size: 12px;
+      white-space: nowrap;
+      background: #f8fafc;
+    }
+    .instruction-box {
+      background: #f0fdf4;
+      border-left: 4px solid #0f766e;
+      padding: 6px 12px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f766e;
+      border-left: 4px solid #0f766e;
+      padding-left: 8px;
+      margin: 8px 0 6px;
+    }
+    .formula-banner {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .math-formula {
+      font-family: "Cambria Math", serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f766e;
+    }
+    .side-by-side {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .side-left {
+      flex: 1.15;
+    }
+    .side-right {
+      flex: 1;
+    }
+    .svg-wrap-print {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .step-list-print {
+      margin: 0 0 0 16px;
+      padding: 0;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+    .step-list-print li {
+      margin-bottom: 3px;
+    }
+    .check-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .check-table th, .check-table td {
+      border: 1px solid #cbd5e1;
+      padding: 4px 6px;
+      text-align: center;
+    }
+    .check-table th {
+      background: #e2e8f0;
+      font-weight: 700;
+    }
+    .teacher-memo-box {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      color: #1e3a8a;
+      line-height: 1.4;
+    }
+    .compare-card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .compare-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      font-size: 12px;
+    }
+    .misconception-print-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+    .fix-print-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+    .answer-write-box {
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      background: #fafafa;
+      padding: 10px;
+      min-height: 85px;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    .number-line-write-box {
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      background: #ffffff;
+      padding: 10px;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .footer-note {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6px;
+      margin-top: 10px;
+      font-size: 11px;
       color: #94a3b8;
       text-align: center;
     }
+    .page-break {
+      page-break-after: always !important;
+      break-after: page !important;
+    }
     @media print {
-      body { margin: 0; padding: 12px; max-width: 100%; color: #000; }
+      body { margin: 0; padding: 0; max-width: 100%; color: #000; }
       .no-print { display: none !important; }
-      .card { break-inside: avoid; page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <div class="no-print print-bar">
-    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 깔끔한 A4 규격으로 저장됩니다.</span>
+  <div class="no-print">
+    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 깔끔한 2페이지 활동지로 저장됩니다.</span>
     <button class="print-bar-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
   </div>
-  <div class="header-box">
-    <div class="title-row">
-      <h1>${title}</h1>
-      ${!isTeacher ? '<div><strong>이름:</strong> ____________________</div>' : ''}
-    </div>
-    <div class="meta-line">
-      2022 개정 공통수학1 [10공수1-02-11] · 지도: <strong>${state.author}</strong> | 출력일자: ${new Date().toLocaleDateString('ko-KR')}
-    </div>
-  </div>
 
-  <div class="instruction-card">
-    <strong>과제 안내:</strong> ${state.instruction}
-  </div>
+  <!-- ==================== [PAGE 1] ==================== -->
+  <div class="sheet-page">
+    <div class="sheet-header">
+      <div class="sheet-title">
+        <h1>${isTeacher ? '[교사용 수업안 & 해설집]' : '[학생용 후속 활동지]'} 이차부등식 3단계 배움</h1>
+        <p>2022 개정 공통수학1 [10공수1-02-11] · 지도교사: <strong>${state.author}</strong> | 출력일자: ${new Date().toLocaleDateString('ko-KR')}</p>
+      </div>
+      <div class="student-info-box">
+        ${!isTeacher ? '학년 / 반: _______ 번호: _____ 이름: ________________' : '<strong>대상:</strong> 공통수학1 학급 공통'}
+      </div>
+    </div>
 
-  <!-- Task 1: 따라 풀기 -->
-  <div class="card">
-    <div class="card-header">01. 따라 풀기 (숫자를 바꿔 원리 적용하기)</div>
-    <p>다음 이차부등식의 해를 구하고, 수직선 위에 부호와 해의 범위를 나타내세요.</p>
-    <p style="text-align: center; margin: 14px 0;"><span class="math-formula">${ineq}</span></p>
+    <div class="instruction-box">
+      <strong>과제 안내:</strong> ${state.instruction}
+    </div>
+
+    <!-- 01. 따라 풀기 -->
+    <div class="section-title">01. 따라 풀기 (숫자를 바꿔 원리 적용하기)</div>
+    <p style="margin: 0 0 6px; font-size: 12.5px;">다음 이차부등식의 해를 구하고, 아래 수직선 위에 부호(+ / −)와 해의 범위를 나타내세요.</p>
     
+    <div class="formula-banner">
+      <span class="math-formula">${ineq}</span>
+      ${isTeacher ? `&nbsp; <span style="font-size:11.5px; color:#64748b;">(전개형: ${expanded} ${OP_MAP[state.op]} 0)</span>` : ''}
+    </div>
+
     ${!isTeacher ? `
-      <div class="answer-space">
-        [풀이 과정 및 수직선 작도란]<br>
-        1. f(x) = 0의 두 실근:<br>
-        2. a의 부호에 따른 그래프 개형 및 구간별 부호 (+ / −):<br>
-        3. 부등호와 등호 조건에 따른 최종 해:
+      <div class="answer-write-box">
+        <strong>1. 영점 구하기:</strong> f(x) = 0을 만족하는 두 실근은 x = __________, &nbsp; x = __________<br>
+        <strong>2. 그래프 부호 판정:</strong> 최고차항 계수 a = ${state.a}이므로 두 근 바깥의 부호는 ( &nbsp;&nbsp;&nbsp;&nbsp; ), 사이의 부호는 ( &nbsp;&nbsp;&nbsp;&nbsp; )<br>
+        <strong>3. 최종 해:</strong> __________________________________________________________________
+      </div>
+
+      <div class="number-line-write-box">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 85" style="max-width: 440px; height: auto;">
+          <line x1="30" y1="42" x2="570" y2="42" stroke="#64748b" stroke-width="2"/>
+          <polygon points="570,38 580,42 570,46" fill="#64748b"/>
+          <polygon points="30,38 20,42 30,46" fill="#64748b"/>
+          <line x1="155" y1="32" x2="155" y2="52" stroke="#94a3b8" stroke-width="2"/>
+          <text x="155" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">${state.r}</text>
+          <line x1="445" y1="32" x2="445" y2="52" stroke="#94a3b8" stroke-width="2"/>
+          <text x="445" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#334155">${state.s}</text>
+          <text x="585" y="46" font-size="12" fill="#64748b">x</text>
+          <text x="80" y="24" text-anchor="middle" font-size="11" fill="#94a3b8">[부호: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</text>
+          <text x="300" y="24" text-anchor="middle" font-size="11" fill="#94a3b8">[부호: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</text>
+          <text x="520" y="24" text-anchor="middle" font-size="11" fill="#94a3b8">[부호: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</text>
+        </svg>
+        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">▲ 위 수직선에 영점의 점(열린 점 ○ / 닫힌 점 ●)과 부호(+ / −) 및 해의 영역(화살표 또는 선)을 표시하세요.</div>
       </div>
     ` : `
-      <div class="solution-part">
-        <div class="solution-title">★ 정답 및 해설 (교사용)</div>
-        <p><strong>정답 해:</strong> <span class="math-formula">${ansText}</span></p>
-        ${generateSvg(state)}
-        <ol>
-          ${generateSteps(state).map(s => `<li>${s}</li>`).join('')}
-        </ol>
-        <table>
-          <thead>
-            <tr><th>검산 구간</th><th>대입값 x</th><th>f(x) 계산 결과</th><th>부호 판정</th></tr>
-          </thead>
-          <tbody>
-            ${generateTestPoints(state).map(t => `
-              <tr><td>${t.point}</td><td>-</td><td>${t.expr}</td><td><strong>${t.sign}</strong></td></tr>
-            `).join('')}
-          </tbody>
-        </table>
-        <div class="teacher-note">
-          <strong>교사 지도 메모:</strong> ${state.note}
+      <div style="margin-bottom: 6px;">
+        <span style="background:#0f766e; color:#fff; padding:2px 8px; border-radius:4px; font-size:11.5px; font-weight:700;">★ 정답 해:</span>
+        <span class="math-formula" style="font-size:15px; margin-left: 6px;">${ansText}</span>
+      </div>
+
+      <div class="side-by-side">
+        <div class="side-left">
+          <div class="svg-wrap-print">
+            ${generateSvg(state)}
+          </div>
+          <ol class="step-list-print">
+            ${generateSteps(state).map(s => `<li>${s}</li>`).join('')}
+          </ol>
+        </div>
+        <div class="side-right">
+          <div style="font-weight:700; font-size:11.5px; color:#0f766e; margin-bottom:4px;">[구간별 수치 대입 검산표]</div>
+          <table class="check-table">
+            <thead>
+              <tr><th>검산 구간</th><th>계산 식</th><th>부호</th></tr>
+            </thead>
+            <tbody>
+              ${generateTestPoints(state).map(t => `
+                <tr><td>${t.point}</td><td><code>${t.expr}</code></td><td><strong>${t.sign}</strong></td></tr>
+              `).join('')}
+            </tbody>
+          </table>
+          <div class="teacher-memo-box">
+            <strong>교사 지도 메모:</strong> ${state.note}
+          </div>
         </div>
       </div>
     `}
   </div>
 
-  <!-- Task 2: 조건 비교 -->
-  <div class="card">
-    <div class="card-header">02. 조건 비교 (등호 하나, 달라지는 해)</div>
-    <p>두 부등식 <span class="math-formula">${ineq}</span> 과 <span class="math-formula">${compareIneq}</span> 의 해를 각각 구하고, 등호의 유무가 해의 범위와 수직선 표현에 미치는 차이점을 설명하세요.</p>
-    
+  <!-- 페이지 분리를 위한 강제 페이지 넘김 -->
+  <div class="page-break"></div>
+
+  <!-- ==================== [PAGE 2] ==================== -->
+  <div class="sheet-page">
+    <div class="sheet-header">
+      <div class="sheet-title">
+        <h1>${isTeacher ? '[교사용 후속 해설]' : '[학생용 후속 활동지]'} 02. 조건 비교 & 03. 이유 설명</h1>
+        <p>2022 개정 공통수학1 [10공수1-02-11] · ${state.author}</p>
+      </div>
+      <div class="student-info-box">
+        ${!isTeacher ? '이름: ________________' : '<strong>과제 연계:</strong> 개념 다지기 및 논리 확장'}
+      </div>
+    </div>
+
+    <!-- 02. 조건 비교 -->
+    <div class="section-title">02. 조건 비교 (등호 하나, 달라지는 해)</div>
+    <p style="margin: 0 0 6px; font-size: 12.5px;">
+      두 부등식 <span class="math-formula" style="font-size:13.5px;">${ineq}</span> 과 
+      <span class="math-formula" style="font-size:13.5px;">${compareIneq}</span> 의 해를 각각 구하고, 등호의 유무가 해의 범위와 수직선 표현에 미치는 차이점을 설명하세요.
+    </p>
+
     ${!isTeacher ? `
-      <div class="answer-space">
-        [비교 및 서술란]<br>
-        - 식 1의 해: <br>
-        - 식 2의 해: <br>
-        - 달라지는 점(영점 x = ${state.r}, ${state.s}의 포함 여부와 수직선 점의 모양):
+      <div class="answer-write-box">
+        <strong>• 식 1 (${ineq}) 의 해:</strong> <br><br>
+        <strong>• 식 2 (${compareIneq}) 의 해:</strong> <br><br>
+        <strong>• 달라지는 점 (영점 x = ${state.r}, ${state.s}의 포함 여부 및 수직선의 점 형태):</strong>
       </div>
     ` : `
-      <div class="solution-part">
-        <div class="solution-title">★ 정답 및 해설 (교사용)</div>
-        <p><strong>비교 결과:</strong></p>
-        <ul>
-          <li><strong>${ineq}</strong> → ${ansText} (${sol.closed ? '두 영점을 포함, 닫힌 점' : '두 영점을 제외, 열린 점'})</li>
-          <li><strong>${compareIneq}</strong> → ${compareAns} (${!sol.closed ? '두 영점을 포함, 닫힌 점' : '두 영점을 제외, 열린 점'})</li>
-        </ul>
-        <p><strong>핵심 원리:</strong> 등호가 있을 때에는 f(x)=0이 되는 경계점(영점)이 부등식을 만족하므로 해에 포함되지만, 등호가 없을 때에는 영점에서 부등식을 만족하지 않으므로 해에서 제외됩니다.</p>
+      <div class="compare-card-row">
+        <div class="compare-box">
+          <div style="font-weight:700; color:#0f766e; margin-bottom:2px;">조건 A: ${ineq}</div>
+          <div><strong>해:</strong> <span class="math-formula" style="font-size:13.5px;">${ansText}</span></div>
+          <div style="font-size:11px; color:#475569; margin-top:2px;">${sol.closed ? '등호 포함: 두 영점 포함 (닫힌 점 ●)' : '등호 제외: 두 영점 제외 (열린 점 ○)'}</div>
+        </div>
+        <div class="compare-box">
+          <div style="font-weight:700; color:#0284c7; margin-bottom:2px;">조건 B: ${compareIneq}</div>
+          <div><strong>해:</strong> <span class="math-formula" style="font-size:13.5px;">${compareAns}</span></div>
+          <div style="font-size:11px; color:#475569; margin-top:2px;">${compareSol.closed ? '등호 포함: 두 영점 포함 (닫힌 점 ●)' : '등호 제외: 두 영점 제외 (열린 점 ○)'}</div>
+        </div>
+      </div>
+      <div class="instruction-box" style="margin-bottom: 10px;">
+        <strong>💡 핵심 지도 원리:</strong> 등호가 있을 때에는 f(x)=0이 되는 경계값(영점)이 부등식을 만족하므로 해에 포함되지만(닫힌 점 ●), 등호가 없을 때에는 영점에서 부등식을 만족하지 않으므로 해에서 제외됩니다(열린 점 ○).
       </div>
     `}
-  </div>
 
-  <!-- Task 3: 이유 설명 -->
-  <div class="card">
-    <div class="card-header">03. 이유 설명 (오답 분석 및 올바른 논리 서술)</div>
-    <p>이차부등식 <span class="math-formula">${ineq}</span> 의 해를 구하는 과정에서 어떤 학생이 답을 <span class="math-formula">"${misconceptionAns}"</span> 라고 작성했습니다. 이 학생이 놓친 수학적 조건을 찾아 바르게 고치고, 그 이유를 영점과 등호의 관계를 들어 설명하세요.</p>
-    
+    <!-- 03. 이유 설명 -->
+    <div class="section-title">03. 이유 설명 (오답 분석 및 올바른 논리 서술)</div>
+    <p style="margin: 0 0 6px; font-size: 12.5px;">
+      이차부등식 <span class="math-formula" style="font-size:13.5px;">${ineq}</span> 의 해를 구하는 과정에서 어떤 학생이 답을 
+      <strong>"${misconceptionAns}"</strong> 라고 작성했습니다. 이 학생이 놓친 수학적 조건을 찾아 바르게 고치고, 그 이유를 영점과 등호의 관계를 들어 설명하세요.
+    </p>
+
     ${!isTeacher ? `
-      <div class="answer-space">
-        [오답 고치기 및 이유 서술란]<br>
-        - 올바른 해:<br>
-        - 학생이 놓친 조건 및 오류 이유:
+      <div class="answer-write-box">
+        <strong>• 올바른 해:</strong> <br><br>
+        <strong>• 학생이 놓친 수학적 조건 및 오류 원인 설명:</strong>
       </div>
     ` : `
-      <div class="solution-part">
-        <div class="solution-title">★ 정답 및 해설 (교사용)</div>
-        <p><strong>올바른 해:</strong> <span class="math-formula">${ansText}</span></p>
-        <p><strong>오류 원인:</strong> 학생은 부등식의 등호(${OP_MAP[state.op]}) 조건을 제대로 고려하지 못하고 ${OP_MAP[compareOp]}의 해로 오인했습니다.</p>
-        <p><strong>지도 가이드:</strong> x = ${state.r} 또는 x = ${state.s}일 때 f(x) = 0이 됨을 직접 대입해 보여주고, 등호가 부등식에 포함되어 있는지 반드시 확인하는 습관을 강조합니다.</p>
+      <div class="misconception-print-box">
+        <strong style="color:#b91c1c;">⚠️ 가상 학생의 오답:</strong> "${misconceptionAns}"
+        <div style="font-size:11.5px; color:#7f1d1d; margin-top:2px;">
+          오류 원인: 부등식의 등호(${OP_MAP[state.op]}) 조건을 간과하고 경계값(영점)을 제외한 오개념입니다.
+        </div>
+      </div>
+      <div class="fix-print-box">
+        <strong style="color:#15803d;">✅ 바른 해 및 수학적 지도 근거:</strong> "${ansText}"
+        <div style="font-size:11.5px; color:#14532d; margin-top:2px;">
+          x = ${state.r} 또는 x = ${state.s}일 때 f(x) = 0이 되므로 부등식(${OP_MAP[state.op]} 0)을 참으로 만족합니다. 따라서 두 영점을 해의 영역에 반드시 포함해야 함을 직접 대입으로 확인시킵니다.
+        </div>
+      </div>
+      <div class="teacher-memo-box" style="margin-top: 8px;">
+        ※ <strong>지도 및 평가 원칙:</strong> 단순히 부등호 모양만 보고 기계적으로 답을 쓰게 하지 않고, 영점을 식에 대입했을 때 0이 되는 원리와 등호 유무의 관계를 학생 스스로 구어로 설명하게 합니다.
       </div>
     `}
-  </div>
 
-  <div class="footer">
-    초강스 에듀테크 LAB · 7주차 주간미션 / 가상 학습 예시 (실제 학생 개인정보 일체 없음)
+    <div class="footer-note">
+      초강스 에듀테크 LAB · 7주차 주간미션 | 가상 학습 예시 (실제 학생 개인정보 일체 없음)
+    </div>
   </div>
 </body>
 </html>`;

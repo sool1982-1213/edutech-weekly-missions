@@ -140,12 +140,29 @@
       document.body.appendChild(printIframe);
     }
 
+    // Extract document title from htmlContent so Chrome suggests the proper PDF file name
+    let targetTitle = docLabel;
+    const titleMatch = htmlContent.match(/<title>([^<]+)<\/title>/i);
+    if (titleMatch && titleMatch[1]) {
+      targetTitle = titleMatch[1].trim();
+    }
+
+    const prevTitle = document.title;
+    document.title = targetTitle;
+    let prevParentTitle = null;
+    if (window.parent && window.parent !== window) {
+      try {
+        prevParentTitle = window.parent.document.title;
+        window.parent.document.title = targetTitle;
+      } catch (e) {}
+    }
+
     const doc = printIframe.contentWindow.document;
     doc.open();
     doc.write(htmlContent);
     doc.close();
 
-    window.dispatchEvent(new CustomEvent('edutech:print', { detail: { label: docLabel } }));
+    window.dispatchEvent(new CustomEvent('edutech:print', { detail: { label: docLabel, title: targetTitle } }));
 
     setTimeout(() => {
       try {
@@ -156,6 +173,15 @@
         }
       } catch (err) {
         console.error('[EdutechPrint] 인쇄 대화상자 호출 오류:', err);
+      } finally {
+        setTimeout(() => {
+          document.title = prevTitle;
+          if (prevParentTitle && window.parent && window.parent !== window) {
+            try {
+              window.parent.document.title = prevParentTitle;
+            } catch (e) {}
+          }
+        }, 1500);
       }
     }, 280);
   };
