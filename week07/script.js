@@ -345,6 +345,32 @@
       font-size: 13.5px;
       color: #1e3a8a;
     }
+    .print-bar {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .print-tip {
+      font-size: 13.5px;
+      color: #475569;
+    }
+    .print-bar-btn {
+      background: #0f766e;
+      color: #ffffff;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
     .footer {
       border-top: 1px solid #e2e8f0;
       padding-top: 14px;
@@ -354,12 +380,17 @@
       text-align: center;
     }
     @media print {
-      body { margin: 0; padding: 10px; }
+      body { margin: 0; padding: 12px; max-width: 100%; color: #000; }
       .no-print { display: none !important; }
+      .card { break-inside: avoid; page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
+  <div class="no-print print-bar">
+    <span class="print-tip">💡 인쇄 창에서 대상을 <strong>'PDF로 저장'</strong>으로 선택하시면 깔끔한 A4 규격으로 저장됩니다.</span>
+    <button class="print-bar-btn" onclick="window.print()">🖨️ PDF 저장 / 인쇄</button>
+  </div>
   <div class="header-box">
     <div class="title-row">
       <h1>${title}</h1>
@@ -825,26 +856,53 @@
       showToast('답안 선택과 해설 표시가 초기화되었습니다.');
     });
 
-    // Print & Export Action Handlers
-    function openPrintWindow(htmlContent) {
-      const win = window.open('', '_blank');
-      if (win) {
-        win.document.open();
-        win.document.write(htmlContent);
-        win.document.close();
+    // Print & Export Action Handlers (Chrome Native Print / Save as PDF Dialog)
+    function printPdfDirectly(isTeacher) {
+      const docLabel = isTeacher ? '교사용 해설집' : '학생용 과제지';
+      const htmlContent = exportHtml(isTeacher);
+
+      showToast(`🖨️ ${docLabel} 인쇄 창을 열었습니다. 대상에서 'PDF로 저장'을 선택하세요.`);
+
+      if (typeof window.EdutechPrint === 'function') {
+        window.EdutechPrint(htmlContent, docLabel);
       } else {
-        alert('팝업 차단이 설정되어 있습니다. 팝업을 허용해 주세요.');
+        let printIframe = document.getElementById('edutechPrintHiddenIframe');
+        if (!printIframe) {
+          printIframe = document.createElement('iframe');
+          printIframe.id = 'edutechPrintHiddenIframe';
+          printIframe.setAttribute('aria-hidden', 'true');
+          printIframe.style.position = 'fixed';
+          printIframe.style.right = '0';
+          printIframe.style.bottom = '0';
+          printIframe.style.width = '0';
+          printIframe.style.height = '0';
+          printIframe.style.border = '0';
+          printIframe.style.visibility = 'hidden';
+          document.body.appendChild(printIframe);
+        }
+
+        const doc = printIframe.contentWindow.document;
+        doc.open();
+        doc.write(htmlContent);
+        doc.close();
+
+        setTimeout(() => {
+          try {
+            printIframe.contentWindow.focus();
+            printIframe.contentWindow.print();
+          } catch (e) {
+            console.error('[EdutechPrint] 인쇄 대화상자 호출 오류:', e);
+          }
+        }, 280);
       }
     }
 
     btnPrintStudent.addEventListener('click', () => {
-      const html = exportHtml(false);
-      openPrintWindow(html);
+      printPdfDirectly(false);
     });
 
     btnPrintTeacher.addEventListener('click', () => {
-      const html = exportHtml(true);
-      openPrintWindow(html);
+      printPdfDirectly(true);
     });
 
     // Copy Task Text

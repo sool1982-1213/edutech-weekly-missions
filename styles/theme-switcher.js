@@ -114,6 +114,52 @@
     initThemeUI();
   }
 
+  /**
+   * 초강스 에듀테크 LAB 통합 인쇄 / PDF 저장 공통 표준 유틸리티
+   * 크롬에서 새로운 탭이 열리는 대신, 인라인 숨김 iframe을 통해
+   * 브라우저 네이티브 인쇄 대화상자('PDF로 저장')를 즉시 호출합니다.
+   * 모든 주차별 과제(현재 및 향후 과제 포함)에서 공통으로 호출 가능합니다.
+   *
+   * @param {string} htmlContent - 인쇄할 완성형 HTML 문서 문자열
+   * @param {string} [docLabel='문서'] - 문서명 (토스트 알림 표시용)
+   * @param {Function} [onComplete] - 완료 콜백
+   */
+  window.EdutechPrint = function (htmlContent, docLabel = '문서', onComplete = null) {
+    let printIframe = document.getElementById('edutechPrintHiddenIframe');
+    if (!printIframe) {
+      printIframe = document.createElement('iframe');
+      printIframe.id = 'edutechPrintHiddenIframe';
+      printIframe.setAttribute('aria-hidden', 'true');
+      printIframe.style.position = 'fixed';
+      printIframe.style.right = '0';
+      printIframe.style.bottom = '0';
+      printIframe.style.width = '0';
+      printIframe.style.height = '0';
+      printIframe.style.border = '0';
+      printIframe.style.visibility = 'hidden';
+      document.body.appendChild(printIframe);
+    }
+
+    const doc = printIframe.contentWindow.document;
+    doc.open();
+    doc.write(htmlContent);
+    doc.close();
+
+    window.dispatchEvent(new CustomEvent('edutech:print', { detail: { label: docLabel } }));
+
+    setTimeout(() => {
+      try {
+        printIframe.contentWindow.focus();
+        printIframe.contentWindow.print();
+        if (typeof onComplete === 'function') {
+          onComplete();
+        }
+      } catch (err) {
+        console.error('[EdutechPrint] 인쇄 대화상자 호출 오류:', err);
+      }
+    }, 280);
+  };
+
   // Expose to window
   window.EduTechTheme = {
     applyTheme,

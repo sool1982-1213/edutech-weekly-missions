@@ -44,7 +44,7 @@
       <div class="criteria-bar">
         <div class="crit-chip">
           <span class="crit-num">기준 1</span>
-          <span class="crit-txt">두 근·계수·부등호 조절 (a=−3~3, r&lt;s=−4~4, &lt;,≤,&gt;,≥ 실시간 갱신)</span>
+          <span class="crit-txt">두 근·계수·부등호 조절 (−3 ≤ a ≤ 3 [0 제외], −4 ≤ r &lt; s ≤ 4, 실시간 갱신)</span>
         </div>
         <div class="crit-chip">
           <span class="crit-num">기준 2</span>
@@ -122,7 +122,7 @@
           <!-- Parameter a -->
           <div class="param-group">
             <div class="param-label-row">
-              <label>최고차항 계수 a (0 제외, −3~3)</label>
+              <label>최고차항 계수 a (0 제외: −3부터 3까지)</label>
             </div>
             <div class="pill-grid">
               <button type="button" class="btn-pill btn-pill-a" data-a="-3">−3</button>
@@ -137,7 +137,7 @@
           <!-- Parameter r -->
           <div class="param-group">
             <div class="param-label-row">
-              <label for="sliderR">첫 번째 영점 r (−4 ~ 3)</label>
+              <label for="sliderR">첫 번째 영점 r (−4부터 3까지)</label>
               <span class="param-val-badge" id="valR">-1</span>
             </div>
             <div class="slider-container">
@@ -151,7 +151,7 @@
           <!-- Parameter s -->
           <div class="param-group">
             <div class="param-label-row">
-              <label for="sliderS">두 번째 영점 s (−3 ~ 4, r &lt; s)</label>
+              <label for="sliderS">두 번째 영점 s (−3부터 4까지, r &lt; s)</label>
               <span class="param-val-badge" id="valS">3</span>
             </div>
             <div class="slider-container">
