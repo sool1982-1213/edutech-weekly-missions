@@ -26,7 +26,7 @@
           <span>👨‍🏫 지도교사:</span>
           <strong>수현T</strong>
           <span>|</span>
-          <span style="color: var(--accent); font-weight: 700;">난이도: 04 고수 (6주차)</span>
+          <span style="color: var(--accent); font-weight: 700;">난이도: 03 중수 (7주차)</span>
         </div>
       </div>
     </div>
@@ -36,15 +36,15 @@
     <!-- Current Mission Hero Banner -->
     <section class="hero-banner">
       <div class="hero-content">
-        <h2>🔥 6주차 진행 중: 수업 시작 5분 진단 → 15분 두 갈래 수업 설계 (고수)</h2>
-        <p>학생의 답에서 출발하는 수업. 5분 동안 짧게 묻고 생각을 확인한 뒤, 보기별 응답 신호에 맞춰 개념 다지기와 적용 확장 중 오늘의 15분 수업 경로를 교사가 직접 선택하는 고수 단계 도구입니다.</p>
+        <h2>🔥 7주차 진행 중: 한 문제의 설명을, 세 번의 배움으로 · 조건을 바꾸는 문항 메이커 (중수)</h2>
+        <p>설명한 다음에 줄 과제까지. 근·계수·부등호를 조작하면 문제와 해설이 함께 바뀌며, 따라 풀기・조건 비교・이유 설명의 3단계 후속 과제를 학생 눈높이에 맞게 즉시 생성하고 검산합니다.</p>
       </div>
       <div class="hero-action">
-        <a href="week06/index.html" target="_blank" class="btn-hero">
-          📐 6주차 단독 페이지 열기 ↗
+        <a href="week07/index.html" target="_blank" class="btn-hero">
+          📐 7주차 단독 페이지 열기 ↗
         </a>
         <button id="copyCommentMainBtn" class="btn-copy-submit">
-          📋 6주차 제출 댓글 양식 복사
+          📋 7주차 제출 댓글 양식 복사
         </button>
       </div>
     </section>
@@ -101,14 +101,24 @@
         <p class="tab-desc">AB와 BA 구체적 비교, 3단계 힌트, 조건 변경 시 자동 초기화 및 다른 숫자로 재도전</p>
       </button>
 
-      <!-- Week 6 (Active Default) -->
-      <button type="button" class="week-tab-item active" data-week="6" data-url="week06/index.html" data-title="WEEK 06 · 15분 두 갈래 수업 설계 (이차함수 최대·최소 · 고수)">
+      <!-- Week 6 -->
+      <button type="button" class="week-tab-item" data-week="6" data-url="week06/index.html" data-title="WEEK 06 · 15분 두 갈래 수업 설계 (이차함수 최대·최소 · 고수)">
         <div class="tab-top-row">
           <span class="tab-week-num">WEEK 06</span>
-          <span class="tab-status-badge badge-active">이번 주 미션 (고수)</span>
+          <span class="tab-status-badge badge-done">완료</span>
         </div>
         <div class="tab-title">15분 두 갈래 수업 설계</div>
         <p class="tab-desc">수업 시작 5분 진단, 보기별 익명 집계, 개념 다지기 vs 적용 확장 15분 경로 선택</p>
+      </button>
+
+      <!-- Week 7 (Active Default) -->
+      <button type="button" class="week-tab-item active" data-week="7" data-url="week07/index.html" data-title="WEEK 07 · 조건을 바꾸는 문항 메이커 (이차부등식 후속 과제 · 중수)">
+        <div class="tab-top-row">
+          <span class="tab-week-num">WEEK 07</span>
+          <span class="tab-status-badge badge-active">이번 주 미션 (중수)</span>
+        </div>
+        <div class="tab-title">조건을 바꾸는 문항 메이커</div>
+        <p class="tab-desc">근·계수·부등호 조작, 따라 풀기·조건 비교·이유 설명 3단계 과제 및 검산</p>
       </button>
     </nav>
 
@@ -121,16 +131,16 @@
             <span class="browser-dot dot-yellow"></span>
             <span class="browser-dot dot-green"></span>
           </div>
-          <span class="vh-title" id="viewerTitle">WEEK 06 · 15분 두 갈래 수업 설계 (이차함수 최대·최소 · 고수)</span>
+          <span class="vh-title" id="viewerTitle">WEEK 07 · 조건을 바꾸는 문항 메이커 (이차부등식 후속 과제 · 중수)</span>
         </div>
         <div class="vh-right">
-          <a href="week06/index.html" target="_blank" id="viewerExtLink" class="btn-open-ext">
+          <a href="week07/index.html" target="_blank" id="viewerExtLink" class="btn-open-ext">
             <span class="btn-ext-desktop">새 창으로 전체화면 열기 ↗</span>
             <span class="btn-ext-mobile">새 창으로 ↗</span>
           </a>
         </div>
       </div>
-      <iframe id="appViewerFrame" class="app-iframe" src="week06/index.html" title="주간 미션 인터랙티브 뷰어"></iframe>
+      <iframe id="appViewerFrame" class="app-iframe" src="week07/index.html" title="주간 미션 인터랙티브 뷰어"></iframe>
     </section>
   </main>
 
@@ -160,18 +170,18 @@
         });
       });
 
-      // Quick Copy for Week 6 Comment
+      // Quick Copy for Week 7 Comment
       copyBtn.addEventListener('click', () => {
         const origin = window.location.origin;
         const pathname = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
         const cleanUrl = origin.includes('github.io') || origin.includes('vercel.app')
-          ? `${origin}${pathname}/week06/`
-          : 'https://sool1982-1213.github.io/edutech-weekly-missions/week06/';
+          ? `${origin}${pathname}/week07/`
+          : 'https://sool1982-1213.github.io/edutech-weekly-missions/week07/';
 
-        const comment = `수현T / 고수 / 미션 완료 / ${cleanUrl} / 수업 시작 5분 익명 진단으로 학생들의 망설이는 지점을 확인하고, 개념 다지기와 적용 확장 중 알맞은 15분 경로를 선택해 학생 눈높이에 맞춘 수업을 진행하겠습니다.`;
+        const comment = `수현T / 중수 / 미션 완료 / ${cleanUrl} / 근·계수·부등호를 조작하면 문제와 해설이 함께 바뀌는 도구로 학생 맞춤형 3단계 후속 과제를 지도하겠습니다.`;
 
         navigator.clipboard.writeText(comment).then(() => {
-          showToast('6주차 제출 댓글 양식이 복사되었습니다!');
+          showToast('7주차 제출 댓글 양식이 복사되었습니다!');
         }).catch(() => {
           prompt('아래 댓글 양식을 복사하세요:', comment);
         });

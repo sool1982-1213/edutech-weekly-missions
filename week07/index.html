@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 조건을 바꾸는 문항 메이커 · 이차부등식 3단계 후속 과제 | 7주차 중수 미션</title>
+  <link rel="stylesheet" href="../styles/themes.css?v=20261031_7">
+  <link rel="stylesheet" href="style.css?v=20261031_7">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <script src="../styles/theme-switcher.js?v=20261031_7"></script>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="nav-right">
+        <div class="theme-switcher-mount"></div>
+        <div class="badge badge-level">WEEK 07 · LEVEL 03 중수</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Header -->
+    <header class="page-header no-print">
+      <div class="curriculum-tag">2022 개정 공통수학1 [10공수1-02-11] · 이차부등식의 해와 이차함수 그래프의 관계</div>
+      <h1>한 문제의 설명을, 세 번의 배움으로 → <span class="highlight-text">조건을 바꾸는 문항 메이커</span></h1>
+      <p class="description">
+        설명 직후 학생에게 줄 후속 과제. 근·계수·부등호를 바꾸면 문제와 해설이 함께 바뀌며, 
+        <strong>따라 풀기</strong>, <strong>조건 비교</strong>, <strong>이유 설명</strong>의 3단계 배움을 통해 등호 유무와 영점 포함 여부의 원리를 체화합니다.
+      </p>
+
+      <!-- Week Continuity Breadcrumb -->
+      <div class="continuity-bar">
+        <div class="cont-item"><span>5주차</span> 오답 설명과 재도전</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item"><span>6주차</span> 응답으로 수업 설계</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item active"><span>7주차</span> 학생에게 줄 후속 과제 (중수) 🌟</div>
+      </div>
+
+      <!-- 3 Criteria Badges -->
+      <div class="criteria-bar">
+        <div class="crit-chip">
+          <span class="crit-num">기준 1</span>
+          <span class="crit-txt">두 근·계수·부등호 조절 (a=−3~3, r&lt;s=−4~4, &lt;,≤,&gt;,≥ 실시간 갱신)</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">기준 2</span>
+          <span class="crit-txt">조건 변경 시 답 선택·해설 즉시 자동 초기화</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">기준 3</span>
+          <span class="crit-txt">대입 검산표와 수직선(열린점/닫힌점/화살표) 일치 계산</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Workspace Grid -->
+    <div class="workspace-grid">
+      <!-- Left Panel: Controls / Settings -->
+      <aside class="panel controls-panel no-print">
+        <div class="panel-header">
+          <h2 class="panel-title">⚙️ 수업 조건 설정</h2>
+          <span class="panel-sub">중수 · 25~40분</span>
+        </div>
+
+        <div class="form-group">
+          <label for="authorInput">선생님 별명</label>
+          <input type="text" id="authorInput" value="수현T" maxlength="30" placeholder="선생님 별명을 입력하세요">
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="preset-section">
+          <div class="preset-title">
+            <span>💡 수업용 추천 프리셋</span>
+            <small style="color: var(--text-dim); font-weight: normal;">원클릭 조건 적용</small>
+          </div>
+          <div class="preset-grid">
+            <button type="button" class="btn-preset active" data-a="1" data-r="-1" data-s="3" data-op="le">
+              <span class="preset-name">기준 문제 (기본)</span>
+              <span class="preset-expr">(x+1)(x−3) ≤ 0</span>
+            </button>
+            <button type="button" class="btn-preset" data-a="1" data-r="-1" data-s="3" data-op="lt">
+              <span class="preset-name">등호 제외 비교</span>
+              <span class="preset-expr">(x+1)(x−3) &lt; 0</span>
+            </button>
+            <button type="button" class="btn-preset" data-a="-1" data-r="1" data-s="4" data-op="ge">
+              <span class="preset-name">위로 볼록 음수 계수</span>
+              <span class="preset-expr">−(x−1)(x−4) ≥ 0</span>
+            </button>
+            <button type="button" class="btn-preset" data-a="2" data-r="-2" data-s="1" data-op="gt">
+              <span class="preset-name">계수 2 바깥쪽 해</span>
+              <span class="preset-expr">2(x+2)(x−1) &gt; 0</span>
+            </button>
+            <button type="button" class="btn-preset" data-a="-2" data-r="-3" data-s="2" data-op="lt">
+              <span class="preset-name">음수 계수 바깥쪽</span>
+              <span class="preset-expr">−2(x+3)(x−2) &lt; 0</span>
+            </button>
+            <button type="button" class="btn-preset btn-preset-random" id="btnRandomPreset">
+              <span>🎲 무작위 부등식 생성하기</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Math Curriculum Guidance -->
+        <div class="form-group">
+          <div class="info-callout">
+            <strong>2022 개정 공통수학1 성취기준 안내</strong>
+            <p>서로 다른 두 정수 근을 가진 f(x)=a(x−r)(x−s)만 다루며, 미분 등 범위 밖 내용은 배제합니다. (중근 및 허근 사례는 지원하지 않습니다.)</p>
+          </div>
+        </div>
+
+        <!-- Parameter Controls -->
+        <div class="param-box">
+          <div class="param-title">
+            <span>수학적 조건 조절</span>
+            <span class="param-val-badge">f(x) = a(x−r)(x−s)</span>
+          </div>
+
+          <!-- Parameter a -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <label>최고차항 계수 a (0 제외, −3~3)</label>
+            </div>
+            <div class="pill-grid">
+              <button type="button" class="btn-pill btn-pill-a" data-a="-3">−3</button>
+              <button type="button" class="btn-pill btn-pill-a" data-a="-2">−2</button>
+              <button type="button" class="btn-pill btn-pill-a" data-a="-1">−1</button>
+              <button type="button" class="btn-pill btn-pill-a active" data-a="1">1</button>
+              <button type="button" class="btn-pill btn-pill-a" data-a="2">2</button>
+              <button type="button" class="btn-pill btn-pill-a" data-a="3">3</button>
+            </div>
+          </div>
+
+          <!-- Parameter r -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <label for="sliderR">첫 번째 영점 r (−4 ~ 3)</label>
+              <span class="param-val-badge" id="valR">-1</span>
+            </div>
+            <div class="slider-container">
+              <input type="range" id="sliderR" min="-4" max="3" step="1" value="-1">
+            </div>
+            <div class="slider-scale">
+              <span>-4</span><span>-2</span><span>0</span><span>2</span><span>3</span>
+            </div>
+          </div>
+
+          <!-- Parameter s -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <label for="sliderS">두 번째 영점 s (−3 ~ 4, r &lt; s)</label>
+              <span class="param-val-badge" id="valS">3</span>
+            </div>
+            <div class="slider-container">
+              <input type="range" id="sliderS" min="-3" max="4" step="1" value="3">
+            </div>
+            <div class="slider-scale">
+              <span>-3</span><span>-1</span><span>1</span><span>3</span><span>4</span>
+            </div>
+          </div>
+
+          <!-- Operator op -->
+          <div class="param-group">
+            <div class="param-label-row">
+              <label>부등호 선택</label>
+            </div>
+            <div class="op-grid">
+              <button type="button" class="btn-op" data-op="lt">&lt;</button>
+              <button type="button" class="btn-op active" data-op="le">≤</button>
+              <button type="button" class="btn-op" data-op="gt">&gt;</button>
+              <button type="button" class="btn-op" data-op="ge">≥</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Formula Card -->
+        <div class="formula-card">
+          <div class="fc-label">현재 생성된 이차부등식</div>
+          <div class="fc-main" id="dispFormulaMain">(x + 1)(x − 3) ≤ 0</div>
+          <div class="fc-expanded" id="dispFormulaExpanded">전개형: x² − 2x − 3 ≤ 0</div>
+          <div class="formula-badges">
+            <span class="f-badge active-a" id="badgeGraphType">아래로 볼록 (a &gt; 0)</span>
+            <span class="f-badge active-closed" id="badgeClosedType">등호 포함 (닫힌 점 ●)</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="instructionInput">학생용 과제 안내 문구</label>
+          <textarea id="instructionInput" rows="2" maxlength="300" placeholder="과제 안내를 입력하세요">부호를 판단한 근거와 영점의 포함 여부를 스스로 점검하고 적어보세요.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="teacherNoteInput">교사 지도 메모 (교사용 출력물에만 포함)</label>
+          <textarea id="teacherNoteInput" rows="2" maxlength="500" placeholder="교사 지도 유의점을 입력하세요">두 근 바깥과 사이의 부호를 대입으로 검산하고, 등호 유무에 따라 영점 포함 여부를 명확히 설명할 것</textarea>
+        </div>
+
+        <!-- Export Action Buttons -->
+        <div class="action-stack">
+          <button type="button" class="btn-primary" id="btnPrintStudent">
+            📄 학생용 과제 인쇄 / 저장 (정답 제외)
+          </button>
+          <button type="button" class="btn-secondary" id="btnPrintTeacher">
+            📝 교사용 해설 인쇄 / 저장 (수직선·검산 포함)
+          </button>
+          <button type="button" class="btn-secondary" id="btnCopyTasks">
+            📋 3단계 과제 내용 클립보드 복사
+          </button>
+          <button type="button" class="btn-secondary" id="btnCopySubmission">
+            📋 7주차 제출 댓글 양식 복사
+          </button>
+        </div>
+      </aside>
+
+      <!-- Right Panel: Interactive Task Workspace -->
+      <section class="panel content-panel">
+        <!-- Task Tabs -->
+        <nav class="task-tabs-nav" aria-label="3단계 과제 탭">
+          <button type="button" class="task-tab-btn active" data-tab="pane-solve">
+            <span>01 따라 풀기</span>
+            <span class="task-tab-badge">원리 적용</span>
+          </button>
+          <button type="button" class="task-tab-btn" data-tab="pane-compare">
+            <span>02 조건 비교</span>
+            <span class="task-tab-badge">등호 비교</span>
+          </button>
+          <button type="button" class="task-tab-btn" data-tab="pane-explain">
+            <span>03 이유 설명</span>
+            <span class="task-tab-badge">오답 교정</span>
+          </button>
+          <button type="button" class="task-tab-btn" data-tab="pane-summary">
+            <span>3단계 종합 과제지</span>
+            <span class="task-tab-badge">모아보기</span>
+          </button>
+        </nav>
+
+        <!-- Condition Change Alert (Criteria 2 Demonstration) -->
+        <div class="reset-alert" id="resetAlert">
+          <span>🔄</span>
+          <span>조건이 변경되었습니다. 객관식 선택과 정답 해설이 자동으로 초기화되었습니다.</span>
+        </div>
+
+        <!-- Tab Pane 1: Solve (따라 풀기) -->
+        <div class="tab-pane active" id="pane-solve">
+          <article class="task-card">
+            <div class="task-card-header">
+              <span class="task-tag">TASK 01 · 따라 풀기</span>
+              <span class="task-sub">설명 직후 풀어볼 첫 번째 유사문제</span>
+            </div>
+
+            <p class="task-prompt" id="taskPromptSolve">
+              <span class="formula-highlight">(x + 1)(x − 3) ≤ 0</span> 의 해를 구하고 수직선에 나타내세요.
+            </p>
+
+            <!-- 4 Multiple Choice Options -->
+            <div class="options-grid" id="optionsGrid" role="radiogroup" aria-label="이차부등식 해 보기">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div class="opt-actions">
+              <button type="button" class="btn-primary" id="btnCheckAnswer">
+                정답 및 해설 확인하기 🔍
+              </button>
+              <button type="button" class="btn-secondary" id="btnResetSelection">
+                선택 초기화 ↺
+              </button>
+            </div>
+
+            <!-- Solution & Step-by-Step Explanation Box -->
+            <div class="solution-box" id="solutionBox">
+              <div class="sol-header">
+                <div class="sol-verdict">
+                  <span class="verdict-tag correct" id="verdictTag">정답 확인</span>
+                  <span id="verdictMsg">올바른 해입니다.</span>
+                </div>
+              </div>
+
+              <!-- Interactive SVG Sign & Number Line Visualization -->
+              <div class="svg-wrap" id="svgMount">
+                <!-- SVG dynamically mounted -->
+              </div>
+
+              <!-- 4 Step Explanation -->
+              <h4 style="margin: 16px 0 8px; font-size: 1rem; color: var(--text-main);">단계별 풀이 및 개념 확인</h4>
+              <ol class="step-list" id="stepList">
+                <!-- Dynamically populated -->
+              </ol>
+
+              <!-- Substitution Table (Criteria 3) -->
+              <h4 style="margin: 20px 0 8px; font-size: 1rem; color: var(--text-main);">구간별 수치 대입 검산표</h4>
+              <div class="table-wrap">
+                <table class="calc-table">
+                  <thead>
+                    <tr>
+                      <th>검산 구간</th>
+                      <th>대입 계산 과정 f(x)</th>
+                      <th>계산된 부호</th>
+                      <th>이론적 부호 일치 여부</th>
+                    </tr>
+                  </thead>
+                  <tbody id="calcTableBody">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tab Pane 2: Compare (조건 비교) -->
+        <div class="tab-pane" id="pane-compare">
+          <article class="task-card">
+            <div class="task-card-header">
+              <span class="task-tag">TASK 02 · 조건 비교</span>
+              <span class="task-sub">등호 하나, 달라지는 해의 영역과 수직선</span>
+            </div>
+
+            <p class="task-prompt">
+              동일한 이차식에서 부등호의 <strong>등호 유무</strong>만 바꾸었을 때, 해의 범위와 수직선 표현이 어떻게 달라지는지 비교해 봅니다.
+            </p>
+
+            <div class="compare-grid">
+              <div class="compare-card-col">
+                <div class="compare-col-header">조건 A (현재 설정 식)</div>
+                <div class="compare-expr" id="compareExpr1">(x + 1)(x − 3) ≤ 0</div>
+                <div class="compare-ans" id="compareAns1">해: −1 ≤ x ≤ 3</div>
+                <div class="compare-point" id="comparePoint1">등호 포함: 영점 −1, 3 포함 (닫힌 점 ●)</div>
+              </div>
+              <div class="compare-card-col">
+                <div class="compare-col-header">조건 B (등호 반대 식)</div>
+                <div class="compare-expr" id="compareExpr2">(x + 1)(x − 3) &lt; 0</div>
+                <div class="compare-ans" id="compareAns2">해: −1 &lt; x &lt; 3</div>
+                <div class="compare-point" id="comparePoint2">등호 제외: 영점 −1, 3 제외 (열린 점 ○)</div>
+              </div>
+            </div>
+
+            <div class="info-callout" style="margin-top: 16px;">
+              <strong>💡 교사 지도 핵심 원리</strong>
+              <p id="compareSummaryText">
+                두 부등식의 식은 동일하지만 등호의 유무에 따라 영점 x = −1, 3의 포함 여부가 달라집니다.
+                부등호 밑에 막대기(=) 하나가 붙고 떨어짐에 따라 수직선의 점이 꽉 찬 원(●)과 빈 원(○)으로 달라집니다.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tab Pane 3: Explain (이유 설명) -->
+        <div class="tab-pane" id="pane-explain">
+          <article class="task-card">
+            <div class="task-card-header">
+              <span class="task-tag">TASK 03 · 이유 설명</span>
+              <span class="task-sub">틀린 해의 조건을 찾아 바르게 고치고 이유 서술</span>
+            </div>
+
+            <p class="task-prompt">
+              학생들이 가장 흔하게 범하는 오류 사례를 관찰하고, 빠뜨린 수학적 조건을 찾아 올바르게 교정합니다.
+            </p>
+
+            <div class="misconception-box">
+              <span class="misconception-badge">⚠️ 가상 학생의 오답 사례</span>
+              <p class="misconception-text">
+                이차부등식 <span class="formula-highlight" id="explainMisconceptionExpr">(x + 1)(x − 3) ≤ 0</span> 의 해를 구하는 과정에서,<br>
+                어떤 학생이 <strong id="explainMisconceptionAns">오답: "−1 &lt; x &lt; 3"</strong> 이라고 작성했습니다.
+              </p>
+            </div>
+
+            <div class="fix-box">
+              <span class="fix-badge">✅ 바른 풀이 및 수학적 이유</span>
+              <p class="fix-text" id="explainFixAns">
+                바른 해: "−1 ≤ x ≤ 3"
+              </p>
+              <p class="fix-text" id="explainFixReason" style="margin-top: 8px; color: var(--text-muted);">
+                주어진 부등식은 ≤ 0 형태이므로, x = −1 또는 x = 3을 대입했을 때 f(x) = 0이 되어 부등식을 참으로 만듭니다. 따라서 영점을 해의 영역에 반드시 포함해야 합니다.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tab Pane 4: Summary All-in-One (3단계 종합 과제지) -->
+        <div class="tab-pane" id="pane-summary">
+          <div class="summary-stack">
+            <div class="summary-item">
+              <div class="summary-header">
+                <span class="summary-title">01. 따라 풀기 (유사문제 한 장)</span>
+                <span class="task-sub">원리 적용</span>
+              </div>
+              <p><strong>문제:</strong> <span id="sumExpr1">...</span> 의 해를 구하고 수직선에 나타내시오.</p>
+              <p style="color: var(--accent); font-weight: 700; margin-top: 4px;">정답: <span id="sumAns1">...</span></p>
+            </div>
+
+            <div class="summary-item">
+              <div class="summary-header">
+                <span class="summary-title">02. 조건 비교 (등호 변화 분석)</span>
+                <span class="task-sub">조건 변형</span>
+              </div>
+              <p><strong>문제:</strong> <span id="sumExpr2">...</span> 의 해를 각각 구하고, 달라지는 점을 서술하시오.</p>
+              <p style="color: var(--accent-blue); font-weight: 700; margin-top: 4px;">비교 핵심: <span id="sumAns2">...</span></p>
+            </div>
+
+            <div class="summary-item">
+              <div class="summary-header">
+                <span class="summary-title">03. 이유 설명 (오답 분석 및 수정)</span>
+                <span class="task-sub">논리 설명</span>
+              </div>
+              <p><strong>문제:</strong> <span id="sumExpr3">...</span> 에서 학생이 빠뜨린 조건을 찾아 올바르게 고치고 이유를 설명하시오.</p>
+              <p style="color: var(--accent-purple); font-weight: 700; margin-top: 4px;">교정 가이드: <span id="sumAns3">...</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Fallback Copy Modal -->
+  <div class="modal-overlay" id="copyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">클립보드 내용 수동 복사</h3>
+        <button type="button" class="btn-close" id="btnCloseModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px;">
+          자동 복사가 제한되어 아래 텍스트를 선택 후 복사(Ctrl+C)하세요.
+        </p>
+        <textarea id="copyModalTextarea" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" id="btnModalCopy">텍스트 선택 후 닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">알림 메시지</div>
+
+  <script src="script.js?v=20261031_7"></script>
+</body>
+</html>
