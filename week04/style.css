@@ -24,6 +24,11 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
@@ -31,6 +36,8 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   padding-bottom: 60px;
+  overflow-x: hidden;
+  width: 100%;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -579,9 +586,25 @@ input[type="range"] {
     border-radius: var(--radius-md);
   }
 
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .card-wrapper {
     padding: 16px 10px;
     margin-bottom: 16px;
+  }
+
+  #svgContainer {
+    width: 100%;
+    max-width: 100%;
   }
 
   .color-picker-row {
@@ -596,6 +619,7 @@ input[type="range"] {
   .formula-box {
     flex-wrap: wrap;
     gap: 6px;
+    max-width: 100%;
   }
 
   .panel-header-row {
@@ -607,7 +631,7 @@ input[type="range"] {
 
   .panel-header-row h2 {
     font-size: 1.05rem;
-    white-space: nowrap;
+    white-space: normal;
     word-break: keep-all;
   }
 
@@ -615,5 +639,17 @@ input[type="range"] {
     font-size: 0.78rem;
     padding: 3px 10px;
     white-space: nowrap;
+  }
+
+  input[type="text"],
+  textarea {
+    font-size: 16px;
+  }
+
+  .toast {
+    max-width: 90vw;
+    white-space: normal;
+    text-align: center;
+    word-break: keep-all;
   }
 }

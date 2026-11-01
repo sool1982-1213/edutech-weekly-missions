@@ -15,12 +15,19 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-page);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -538,11 +545,29 @@ body {
 
   .toolbar {
     width: 100%;
+    padding: 16px 14px;
   }
 
-  .btn-print {
+  .toolbar-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .toolbar-actions .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .edit-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
   }
 
   .report-paper {
@@ -570,7 +595,12 @@ body {
   .teacher-profile-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
+    padding: 16px 14px;
+  }
+
+  .subject-tag {
+    align-self: flex-start;
   }
 
   .progress-header {
@@ -581,7 +611,7 @@ body {
 
   .report-footer {
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 12px;
     text-align: left;
   }
@@ -594,6 +624,13 @@ body {
 
   .signature {
     font-size: 0.92rem;
-    white-space: nowrap;
+    white-space: normal;
+  }
+
+  .toast {
+    max-width: 90vw;
+    white-space: normal;
+    text-align: center;
+    word-break: keep-all;
   }
 }

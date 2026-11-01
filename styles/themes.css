@@ -127,6 +127,8 @@
 @media (max-width: 520px) {
   .theme-selector-wrapper {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     padding: 2px;
@@ -134,11 +136,19 @@
 
   .theme-pill-btn {
     flex: 1;
+    min-width: 0;
     justify-content: center;
-    padding: 5px 4px;
-    font-size: 0.76rem;
-    gap: 3px;
+    padding: 5px 3px;
+    font-size: 0.74rem;
+    gap: 2px;
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .theme-pill-btn {
+    padding: 4px 1px;
+    font-size: 0.7rem;
   }
 }
 
@@ -146,6 +156,12 @@
    임베드(Iframe) 환경 최적화
    통합 허브 뷰어 내부에서는 불필요한 내부 네비게이션 헤더를 숨기고 여백을 최적화
    ========================================================================== */
+.is-embedded html,
+.is-embedded body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
 .is-embedded .top-nav {
   display: none !important;
 }
@@ -156,7 +172,12 @@
 }
 
 .is-embedded .container {
-  margin: 16px auto !important;
-  padding: 0 16px !important;
+  margin: 12px auto !important;
+  padding: 0 10px !important;
+  max-width: 100% !important;
+}
+
+.is-embedded .panel {
+  padding: 16px 12px !important;
 }
 

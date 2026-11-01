@@ -20,12 +20,19 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-page);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -373,6 +380,10 @@ body {
   opacity: 0;
   pointer-events: none;
   z-index: 100;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  text-align: center;
+  word-break: keep-all;
 }
 
 [data-theme="dark"] .toast {
@@ -446,8 +457,13 @@ body {
   }
 
   .profile-chip {
-    font-size: 0.78rem;
-    padding: 4px 12px;
+    font-size: 0.74rem;
+    padding: 5px 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.4;
+    max-width: 100%;
   }
 
   .portal-main {
@@ -491,6 +507,10 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     margin-bottom: 18px;
+  }
+
+  .week-tab-item:last-child {
+    grid-column: 1 / -1; /* 최신 7주차 미션 전폭 강조 및 홀수 탭 여백 방지 */
   }
 
   .week-tab-item {
@@ -553,6 +573,8 @@ body {
   }
 
   .app-iframe {
+    width: 100%;
+    max-width: 100%;
     height: 720px;
     -webkit-overflow-scrolling: touch;
   }

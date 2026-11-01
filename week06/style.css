@@ -8,12 +8,19 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-page);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -1411,27 +1418,117 @@ body {
 }
 
 @media (max-width: 640px) {
+  .top-nav {
+    padding: 10px 0;
+  }
+
+  .nav-container {
+    padding: 0 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
   .container {
     padding: 16px 12px 60px;
   }
 
   .page-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    word-break: keep-all;
+  }
+
+  .continuity-bar {
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    gap: 6px;
   }
 
   .math-formula {
     font-size: 1.4rem;
   }
 
+  .question-quote {
+    padding: 10px 12px;
+    font-size: 0.92rem;
+  }
+
+  #quoteText {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .graph-legend {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .minmax-summary-box {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px;
+    font-size: 0.88rem;
+  }
+
+  .chips-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .val-chip {
+    padding: 6px 10px;
+    font-size: 0.84rem;
+  }
+
+  .signals-meta-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .timeline-step-card {
+    gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .step-content {
+    min-width: 0;
+    word-break: keep-all;
+  }
+
   .export-btn-pair {
     grid-template-columns: 1fr;
   }
 
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
   .toast {
-    left: 20px;
-    right: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(100px);
     bottom: 20px;
     text-align: center;
+    max-width: 90vw;
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .param-grid {
+    grid-template-columns: 1fr;
   }
 }
 

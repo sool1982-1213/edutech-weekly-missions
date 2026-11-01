@@ -16,12 +16,19 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-page);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -240,6 +247,8 @@ textarea:focus {
   padding: 12px 18px;
   background: var(--bg-hover);
   border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .box-title {
@@ -472,12 +481,14 @@ textarea:focus {
   .tab-btn {
     width: 100% !important;
     text-align: center !important;
-    padding: 11px 8px !important;
-    font-size: 0.84rem !important;
-    white-space: nowrap !important;
+    padding: 10px 6px !important;
+    font-size: 0.82rem !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
     justify-content: center !important;
     display: flex !important;
     align-items: center !important;
+    min-height: 44px !important;
   }
 }
 
@@ -537,17 +548,35 @@ textarea:focus {
   .tab-btn {
     width: 100%;
     text-align: center;
-    padding: 10px 8px;
-    font-size: 0.82rem;
-    white-space: nowrap;
+    padding: 10px 6px;
+    font-size: 0.8rem;
+    white-space: normal;
+    word-break: keep-all;
     justify-content: center;
     display: flex;
     align-items: center;
+    min-height: 44px;
   }
 
   .form-row {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
+  }
+
+  .mobile-preview-frame {
+    border-width: 8px;
+    border-radius: 24px;
+    max-width: 100%;
+  }
+
+  .mobile-card-content {
+    padding: 20px 14px;
+    min-height: auto;
   }
 
   .card-notice-preview {
@@ -558,5 +587,12 @@ textarea:focus {
     flex-direction: column;
     gap: 6px;
     align-items: flex-start;
+  }
+
+  .toast {
+    max-width: 90vw;
+    white-space: normal;
+    text-align: center;
+    word-break: keep-all;
   }
 }

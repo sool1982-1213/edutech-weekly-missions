@@ -8,12 +8,19 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-page);
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -266,6 +273,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .param-header h3 {
@@ -472,6 +481,8 @@ button {
   margin-bottom: 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .card-meta {
@@ -1360,12 +1371,33 @@ button {
 }
 
 @media (max-width: 640px) {
+  .top-nav {
+    padding: 10px 0;
+  }
+
+  .nav-container {
+    padding: 0 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
   .container {
     padding: 16px 14px 60px;
   }
 
   .page-header h1 {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
+    line-height: 1.35;
+    word-break: keep-all;
+  }
+
+  .continuity-bar {
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    gap: 6px;
   }
 
   .solution-grid {
@@ -1382,16 +1414,59 @@ button {
 
   .matrix-display-row {
     justify-content: center;
+    padding: 12px 8px;
+    gap: 10px;
+  }
+
+  .matrix-table td {
+    min-width: 36px;
+    height: 32px;
+    font-size: 1.1rem;
+    padding: 1px 3px;
+  }
+
+  .matrix-brackets {
+    padding: 2px 14px;
+  }
+
+  .worked-line-item {
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .line-text {
+    min-width: 0;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .hints-action-row,
   .export-actions-bar {
     flex-direction: column;
+    gap: 8px;
   }
 
   .btn-action {
     width: 100%;
     justify-content: center;
+  }
+
+  .modal-card {
+    padding: 18px 14px;
+    border-radius: 14px;
+    max-width: 100%;
+  }
+
+  input[type="text"],
+  textarea {
+    font-size: 16px;
+  }
+
+  .toast {
+    max-width: 90vw;
+    white-space: normal;
+    text-align: center;
+    word-break: keep-all;
   }
 }
 
