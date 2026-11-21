@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 우리 반 전용 수학 방탈출 교실 · 한 식의 네 관점 | 10주차 고수 미션</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230f766e'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='24' fill='white'>W10</text></svg>">
+  <link rel="stylesheet" href="../styles/themes.css?v=20261122_w10">
+  <link rel="stylesheet" href="style.css?v=20261122_w10">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <script src="../styles/theme-switcher.js?v=20261122_w10"></script>
+</head>
+<body>
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="nav-right">
+        <div class="theme-switcher-mount"></div>
+        <div class="badge badge-level">WEEK 10 · LEVEL 04 고수</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header no-print">
+      <div class="curriculum-tag">2022 개정 공통수학1 · 다항식 · 이차방정식 · 이차부등식 · 이차함수 최솟값</div>
+      <h1>문제를 풀었더니, 다음 문이 열렸다 → <span class="highlight-text">우리 반 전용 수학 방탈출 교실</span></h1>
+      <p class="description">
+        같은 식 f(x) = (x − p)(x − q) 하나에 숨은 <strong>상수항 · 방정식의 근 · 부등식의 정수 해 · 이차함수의 최솟값</strong>을 차례대로 열어 단서를 모읍니다.
+        오답 탈락이나 강제 시간 제한 없이 <strong>3단계 힌트</strong>와 <strong>모둠 역할 분담</strong>으로 친구에게 이유를 설명하며 마지막 문을 열어 보세요.
+      </p>
+
+      <div class="continuity-bar">
+        <div class="cont-item"><span>8주차</span> 우리 반 과제 묶음</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item"><span>9주차</span> 움직이는 수학 탐구</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item active"><span>10주차</span> 우리 반 전용 수학 방탈출 (고수)</div>
+      </div>
+
+      <div class="criteria-bar">
+        <div class="crit-chip">
+          <span class="crit-num">기준 1</span>
+          <span class="crit-txt">시작 전·앞 잠금 미해결 우회 불가 및 중복 단서 방지 · 앞자리 0 보존 문자열 암호</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">기준 2</span>
+          <span class="crit-txt">3단계 힌트(감점·탈락 없음), 풀이 이유 필수 옵션(자동 채점 배제), Unicode − 지원</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">기준 3</span>
+          <span class="crit-txt">이야기 편집 · 모둠 역할 안내 · 검토 완료 후 학생용 수사노트/교사용 진행표 분리</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace-grid">
+      <!-- Left Panel: Teacher Setup & Story Editor -->
+      <aside class="panel controls-panel no-print">
+        <div class="panel-header">
+          <h2 class="panel-title">⚙️ 방탈출 교실 설정 &amp; 이야기 편집</h2>
+          <span class="panel-sub">고수 · 45~60분</span>
+        </div>
+
+        <div class="form-group">
+          <label for="authorInput">선생님 별명</label>
+          <input type="text" id="authorInput" value="수현T" maxlength="30" placeholder="선생님 별명을 입력하세요">
+        </div>
+
+        <!-- Math Parameters -->
+        <div class="param-box">
+          <div class="param-title">
+            <span>🔢 식 조건 설정: f(x) = (x − p)(x − q)</span>
+            <small>변경 시 게임 진행 초기화</small>
+          </div>
+
+          <div class="param-group">
+            <label for="selectP">작은 근 p (−4부터 2까지 정수)</label>
+            <select id="selectP">
+              <option value="-4">p = −4</option>
+              <option value="-3">p = −3</option>
+              <option value="-2">p = −2</option>
+              <option value="-1">p = −1</option>
+              <option value="0" selected>p = 0 (고수 예시)</option>
+              <option value="1">p = 1</option>
+              <option value="2">p = 2</option>
+            </select>
+          </div>
+
+          <div class="param-group">
+            <div class="param-label-row">
+              <label>두 근의 차 q − p (짝수 선택)</label>
+            </div>
+            <div class="pill-grid-3">
+              <button type="button" class="btn-diff" data-diff="2">차이 2</button>
+              <button type="button" class="btn-diff active" data-diff="4">차이 4</button>
+              <button type="button" class="btn-diff" data-diff="6">차이 6</button>
+            </div>
+          </div>
+
+          <div class="param-group">
+            <div class="param-label-row">
+              <label>잠금 개수 모드</label>
+            </div>
+            <div class="pill-grid-2">
+              <button type="button" class="btn-lock-count" data-locks="3">잠금 3개 (약 8~10분)</button>
+              <button type="button" class="btn-lock-count active" data-locks="4">잠금 4개 (약 12~15분)</button>
+            </div>
+          </div>
+
+          <label class="option-toggle-row">
+            <input type="checkbox" id="chkRequireReason">
+            <span>정답 확인 전 <strong>풀이 이유 한 문장</strong> 입력 필수</span>
+          </label>
+          <p class="tiny-note">※ 풀이 이유는 프로그램이 옳고 그름을 자동 판정하지 않으며, 선생님·친구와 함께 확인합니다.</p>
+
+          <div class="teacher-preview-card" id="teacherPreviewCard">
+            <!-- Teacher-only quick summary of f(x) & password -->
+          </div>
+        </div>
+
+        <!-- Story Editor (04 고수) -->
+        <div class="param-box">
+          <div class="param-title">
+            <span>📖 우리 반 이야기 편집</span>
+          </div>
+          <div class="form-group">
+            <label for="storyTitleInput">게임 제목</label>
+            <input type="text" id="storyTitleInput" value="칠판 속 단서를 구출하라" maxlength="80">
+          </div>
+          <div class="form-group">
+            <label for="storyIntroInput">시작 이야기</label>
+            <textarea id="storyIntroInput" rows="3" maxlength="400">쉬는 시간 직전, 칠판에 남아 있던 이차식 하나가 교실 문 자물쇠와 연결되어 잠겨 버렸습니다! 같은 식을 네 가지 관점으로 읽어 단서 숫자를 모으고, 모둠 친구들과 이유를 확인하며 교실 문을 열어 봅시다.</textarea>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="storyOutroInput">탈출 후 마무리 질문</label>
+            <textarea id="storyOutroInput" rows="2" maxlength="300">네 개의 단서 중 가장 도움이 되었던 힌트는 무엇이었고, 그 문제의 풀이 이유를 친구에게 어떻게 설명했나요?</textarea>
+          </div>
+        </div>
+
+        <!-- Teacher Review Gate -->
+        <div class="export-gate-box" id="exportGateBox">
+          <div class="gate-header">
+            <span class="gate-badge locked" id="gateBadge">검토 필요</span>
+            <strong>교사 검토 체크 (학생 입력 제외 저장)</strong>
+          </div>
+          <label class="review-item">
+            <input type="checkbox" id="chkTeacherReviewed">
+            <span>정답·힌트·단서(절댓값 일의 자리)·앞자리 0 포함 최종 암호를 모두 확인했습니다.</span>
+          </label>
+          <div class="action-stack">
+            <button type="button" class="btn-primary" id="btnDownloadStudent" disabled>
+              💾 학생용 수사 노트 HTML 저장 (정답·암호 제외)
+            </button>
+            <button type="button" class="btn-secondary" id="btnPrintStudent" disabled>
+              🖨️ 학생용 수사 노트 인쇄 / PDF
+            </button>
+            <button type="button" class="btn-primary btn-teacher-accent" id="btnDownloadTeacher" disabled>
+              💾 교사용 진행표 HTML 저장 (정답·힌트·암호)
+            </button>
+            <button type="button" class="btn-secondary" id="btnPrintTeacher" disabled>
+              🖨️ 교사용 진행표 인쇄 / PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="action-stack" style="margin-top: 12px;">
+          <button type="button" class="btn-secondary" id="btnCopySubmission">
+            📋 10주차 제출 댓글 양식 복사
+          </button>
+        </div>
+      </aside>
+
+      <!-- Right Panel: Interactive Escape Room -->
+      <section class="panel content-panel">
+        <!-- Classroom Role Guide (04 고수) -->
+        <div class="roles-bar">
+          <div class="roles-title">👥 우리 반 모둠 역할 분담 안내 (권장)</div>
+          <div class="roles-grid">
+            <div class="role-chip"><strong>🔎 탐색자</strong><span>식에서 필요한 값과 조건 찾기</span></div>
+            <div class="role-chip"><strong>📝 기록자</strong><span>풀이 과정과 단서 숫자 적기</span></div>
+            <div class="role-chip"><strong>💬 설명자</strong><span>왜 그 답이 나오는지 모둠에 설명</span></div>
+            <div class="role-chip"><strong>✅ 검산자</strong><span>대입과 그래프·수직선으로 확인</span></div>
+          </div>
+        </div>
+
+        <div class="reset-alert" id="resetAlert" role="status" aria-live="polite">
+          <span>🔄</span>
+          <span>문제 조건이나 모드가 변경되어 방탈출 진행 상태·입력·단서가 초기화되었습니다.</span>
+        </div>
+
+        <!-- Progress Map -->
+        <nav class="progress-map" id="progressMap" aria-label="방탈출 진행 지도">
+          <!-- Dynamically rendered step nodes -->
+        </nav>
+
+        <!-- Dynamic Game Stage Mount -->
+        <div id="gameStageMount" class="game-stage">
+          <!-- Phase 0: Intro | Phase 1: Locks or Final Door | Phase 2: Escaped -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- One polite live region for accessible error announcement -->
+  <div id="ariaAnnouncer" class="visually-hidden" aria-live="polite"></div>
+
+  <!-- Native Dialog for Fallback Copy -->
+  <dialog id="copyModal" class="native-modal" closedby="any" aria-labelledby="copyModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="copyModalTitle">클립보드 내용 수동 복사</h3>
+        <form method="dialog">
+          <button type="submit" class="btn-close" value="close" aria-label="닫기">&times;</button>
+        </form>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">자동 복사가 제한되어 아래 텍스트를 선택 후 복사(Ctrl+C)하세요.</p>
+        <textarea id="copyModalTextarea" readonly aria-label="복사할 텍스트"></textarea>
+      </div>
+      <div class="modal-footer">
+        <form method="dialog">
+          <button type="submit" class="btn-secondary" value="cancel">닫기</button>
+        </form>
+        <button type="button" class="btn-primary" id="btnModalCopy">텍스트 선택 후 복사</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">알림 메시지</div>
+
+  <script src="script.js?v=20261122_w10"></script>
+</body>
+</html>

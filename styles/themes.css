@@ -8,6 +8,7 @@
 
 :root,
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg-page: #090d16;
   --bg-panel: #111827;
   --bg-card: #151f38;
@@ -27,6 +28,7 @@
 }
 
 [data-theme="light"] {
+  color-scheme: light;
   --bg-page: #f8fafc;
   --bg-panel: #ffffff;
   --bg-card: #ffffff;
@@ -46,6 +48,7 @@
 }
 
 [data-theme="pastel"] {
+  color-scheme: light;
   --bg-page: #faf6f0;
   --bg-panel: #ffffff;
   --bg-card: #fffbf7;
@@ -65,6 +68,7 @@
 }
 
 [data-theme="sky"] {
+  color-scheme: light;
   --bg-page: #f0f6ff;
   --bg-panel: #ffffff;
   --bg-card: #ffffff;
@@ -180,4 +184,24 @@
 .is-embedded .panel {
   padding: 16px 12px !important;
 }
+
+/* ==========================================================================
+   브랜드 일관 폼 컨트롤 & 접근성 유틸리티
+   ========================================================================== */
+body {
+  accent-color: var(--accent);
+}
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
 

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수현T의 움직이는 수학 · 직각삼각형 내접 직사각형 넓이 탐구 | 9주차 고수 미션</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230f766e'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='26' fill='white'>W9</text></svg>">
+  <link rel="stylesheet" href="../styles/themes.css?v=20261122_w10">
+  <link rel="stylesheet" href="style.css?v=20261122_w10">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <script src="../styles/theme-switcher.js?v=20261122_w10"></script>
+</head>
+<body>
+  <header class="top-nav no-print">
+    <div class="nav-container">
+      <a href="../index.html" class="back-link">← 주간 미션 허브로 돌아가기</a>
+      <div class="nav-right">
+        <div class="theme-switcher-mount"></div>
+        <div class="badge badge-level">WEEK 09 · LEVEL 04 고수</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="page-header no-print">
+      <div class="curriculum-tag">2022 개정 공통수학1 [10공수1-02-06] · 이차함수의 최대·최소와 대칭성</div>
+      <h1>점 하나가 움직이면, 수학이 보인다 → <span class="highlight-text">움직이는 수학 (도형·넓이·그래프)</span></h1>
+      <p class="description">
+        예상 없이 바로 정답부터 보지 않습니다. 먼저 <strong>예상</strong>을 입력해 그래프를 열고,
+        도형 위 점 P(x, y)를 움직이며 <strong>넓이가 같은 쌍둥이 직사각형(x와 W−x)</strong>을 관찰한 뒤,
+        <strong>완전제곱식</strong>과 <strong>목표 넓이 도전</strong>(25%·50%·75%·100%)까지 한 흐름으로 탐구합니다.
+      </p>
+
+      <div class="continuity-bar">
+        <div class="cont-item"><span>7주차</span> 3단계 후속 과제</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item"><span>8주차</span> 우리 반 과제 묶음</div>
+        <div class="cont-arrow">→</div>
+        <div class="cont-item active"><span>9주차</span> 움직이는 수학 도입·탐구 (고수)</div>
+      </div>
+
+      <div class="criteria-bar">
+        <div class="crit-chip">
+          <span class="crit-num">흐름 1</span>
+          <span class="crit-txt">예상 입력(0 포함) 후 포물선 공개 · W·H(2~12) 변경 시 전체 상태 초기화</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">흐름 2</span>
+          <span class="crit-txt">마우스·터치·슬라이더·1회 재생 연동 및 쌍둥이 도형(W−x) · 관찰표(최대 6개)</span>
+        </div>
+        <div class="crit-chip">
+          <span class="crit-num">흐름 3</span>
+          <span class="crit-txt">목표 넓이(100% 해 1개 / 25·50·75% 해 2개) &amp; 학생용/교사용 분리 저장</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace-grid">
+      <!-- Left Panel: Teacher Settings & Review Gate -->
+      <aside class="panel controls-panel no-print">
+        <div class="panel-header">
+          <h2 class="panel-title">⚙️ 수업 장면 설정</h2>
+          <span class="panel-sub">고수 · 40~60분</span>
+        </div>
+
+        <div class="form-group">
+          <label for="authorInput">선생님 별명</label>
+          <input type="text" id="authorInput" value="수현T" maxlength="30" placeholder="선생님 별명을 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="titleInput">수업 제목</label>
+          <input type="text" id="titleInput" value="오늘은 선생님 대신 도형이 설명합니다" maxlength="80" placeholder="수업 제목을 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="openingInput">수업 도입 질문</label>
+          <textarea id="openingInput" rows="2" maxlength="250" placeholder="학생에게 먼저 물어볼 질문을 입력하세요">직각삼각형 안에 들어가는 직사각형의 가로가 길수록 넓이도 계속 넓어질까요? 언제 가장 넓어질까요?</textarea>
+        </div>
+
+        <!-- Presets -->
+        <div class="preset-section">
+          <div class="preset-title">
+            <span>📐 삼각형 크기 프리셋</span>
+            <small>크기 변경 시 탐구 상태 초기화</small>
+          </div>
+          <div class="preset-grid">
+            <button type="button" class="btn-preset active" data-w="12" data-h="8">
+              <strong>고수 기본 (12 × 8)</strong>
+              <span>최대 넓이 24 (x = 6)</span>
+            </button>
+            <button type="button" class="btn-preset" data-w="8" data-h="6">
+              <strong>넓이 수사대 (8 × 6)</strong>
+              <span>최대 넓이 12 (x = 4)</span>
+            </button>
+            <button type="button" class="btn-preset" data-w="10" data-h="8">
+              <strong>쌍둥이 찾기 (10 × 8)</strong>
+              <span>최대 넓이 20 (x = 5)</span>
+            </button>
+            <button type="button" class="btn-preset" data-w="6" data-h="10">
+              <strong>세로형 (6 × 10)</strong>
+              <span>최대 넓이 15 (x = 3)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- W & H Sliders (2~12) -->
+        <div class="param-box">
+          <div class="param-title">
+            <span>밑변 W · 높이 H 조절 (2부터 12까지 정수)</span>
+          </div>
+
+          <div class="param-group">
+            <div class="param-label-row">
+              <label for="sliderW">밑변 OA 길이 W</label>
+              <span class="param-val-badge" id="valW">12</span>
+            </div>
+            <input type="range" id="sliderW" min="2" max="12" step="1" value="12">
+            <div class="slider-scale"><span>2</span><span>5</span><span>8</span><span>10</span><span>12</span></div>
+          </div>
+
+          <div class="param-group" style="margin-bottom: 0;">
+            <div class="param-label-row">
+              <label for="sliderH">높이 OB 길이 H</label>
+              <span class="param-val-badge" id="valH">8</span>
+            </div>
+            <input type="range" id="sliderH" min="2" max="12" step="1" value="8">
+            <div class="slider-scale"><span>2</span><span>5</span><span>8</span><span>10</span><span>12</span></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="info-callout">
+            <strong>📌 교육과정 및 수치 안내</strong>
+            <p>O(0,0), A(W,0), B(0,H) 위 점 P(x, y)에 대해 미분·적분·행렬 없이 완전제곱식으로 설명합니다. 화면의 소수는 근삿값이며 정확한 값은 분수로 확인합니다.</p>
+          </div>
+        </div>
+
+        <!-- Teacher Review Gate -->
+        <div class="export-gate-box" id="exportGateBox">
+          <div class="gate-header">
+            <span class="gate-badge locked" id="gateBadge">검토 필요</span>
+            <strong>교사 검토 체크 (완료 시 저장 가능)</strong>
+          </div>
+          <div class="review-checklist">
+            <label class="review-item">
+              <input type="checkbox" class="teacher-review-chk" id="chkReviewVertex">
+              <span>꼭짓점(W/2, WH/4) 및 양 끝점 대입 검산 확인</span>
+            </label>
+            <label class="review-item">
+              <input type="checkbox" class="teacher-review-chk" id="chkReviewScale">
+              <span>W·H 변경 시 그래프 축척 안내 확인</span>
+            </label>
+            <label class="review-item">
+              <input type="checkbox" class="teacher-review-chk" id="chkReviewTarget">
+              <span>목표 넓이 해 개수(100% 1개, 나머지 2개) 확인</span>
+            </label>
+          </div>
+          <div class="action-stack">
+            <button type="button" class="btn-primary" id="btnDownloadStudent" disabled>
+              💾 학생용 탐구지 HTML 저장 (정답 제외)
+            </button>
+            <button type="button" class="btn-secondary" id="btnPrintStudent" disabled>
+              🖨️ 학생용 탐구지 인쇄 / PDF
+            </button>
+            <button type="button" class="btn-primary btn-teacher-accent" id="btnDownloadTeacher" disabled>
+              💾 교사용 해설 HTML 저장 (완전제곱식·검산)
+            </button>
+            <button type="button" class="btn-secondary" id="btnPrintTeacher" disabled>
+              🖨️ 교사용 해설 인쇄 / PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="action-stack" style="margin-top: 12px;">
+          <button type="button" class="btn-secondary" id="btnCopySubmission">
+            📋 9주차 제출 댓글 양식 복사
+          </button>
+        </div>
+      </aside>
+
+      <!-- Right Panel: 4-Stage Guided Inquiry -->
+      <section class="panel content-panel">
+        <div class="reset-alert" id="resetAlert" role="status" aria-live="polite">
+          <span>🔄</span>
+          <span>삼각형 크기(W 또는 H)가 바뀌어 예상·그래프 공개·관찰 기록·목표 입력·검토 체크가 모두 초기화되었습니다.</span>
+        </div>
+
+        <!-- Stage 01: Predict Before Seeing Graph -->
+        <article class="stage-card">
+          <div class="stage-header">
+            <span class="stage-tag">STEP 01 · 먼저 예상하기</span>
+            <span class="stage-status" id="guessStatusBadge">그래프 공개 대기 중</span>
+          </div>
+          <p class="stage-prompt" id="openingPromptDisplay">
+            직각삼각형 안에 들어가는 직사각형의 가로가 길수록 넓이도 계속 넓어질까요? 언제 가장 넓어질까요?
+          </p>
+
+          <form id="guessForm" novalidate class="guess-form">
+            <div class="guess-input-row">
+              <div class="guess-field-wrap">
+                <label for="guessInput">가장 넓어질 것 같은 가로 길이 x (<span id="guessRangeHint">0부터 12까지</span>)</label>
+                <div class="guess-controls">
+                  <input type="number" id="guessInput" min="0" max="12" step="any" required aria-invalid="false" data-error="guessErrorMsg" placeholder="예: 0, 6, 8">
+                  <button type="submit" class="btn-primary" id="btnSubmitGuess">예상 확정하고 그래프 공개하기 🔓</button>
+                </div>
+                <div id="guessErrorMsg" class="error-msg">0 이상 W 이하의 숫자를 입력해 주세요. (0도 입력 가능합니다)</div>
+              </div>
+            </div>
+            <div class="quick-guess-row">
+              <span>빠른 예상 선택:</span>
+              <button type="button" class="btn-chip-guess" data-frac="0">x = 0</button>
+              <button type="button" class="btn-chip-guess" data-frac="0.25">x = W/4</button>
+              <button type="button" class="btn-chip-guess" data-frac="0.5">x = W/2</button>
+              <button type="button" class="btn-chip-guess" data-frac="0.75">x = 3W/4</button>
+              <button type="button" class="btn-chip-guess" data-frac="1">x = W</button>
+            </div>
+          </form>
+
+          <div class="guess-feedback-bar" id="guessFeedbackBar" hidden>
+            <!-- Filled after guess submission -->
+          </div>
+        </article>
+
+        <!-- Stage 02: Dual Interactive Stage (Geometry SVG + Graph SVG) -->
+        <article class="stage-card">
+          <div class="stage-header">
+            <span class="stage-tag">STEP 02 · 같이 움직이기 &amp; 쌍둥이 도형 관찰</span>
+            <label class="twin-toggle-label">
+              <input type="checkbox" id="chkShowTwin" checked>
+              <span>같은 넓이 쌍둥이 도형(W − x) 겹쳐 보기</span>
+            </label>
+          </div>
+
+          <div class="dual-canvas-grid">
+            <!-- Geometry SVG -->
+            <div class="canvas-card">
+              <div class="canvas-card-title">
+                <span>📐 도형 화면 (점 P를 마우스·손가락으로 드래그)</span>
+                <span class="canvas-badge" id="twinMatchBadge" hidden>두 도형이 하나로 만났어요!</span>
+              </div>
+              <div class="svg-stage" id="geoSvgMount"></div>
+              <p class="canvas-note">빗변 AB 위 점 P(x, y)를 직접 움직이면 두 직사각형의 모양과 넓이가 함께 바뀝니다.</p>
+            </div>
+
+            <!-- Parabola Graph SVG -->
+            <div class="canvas-card">
+              <div class="canvas-card-title">
+                <span>📈 넓이 그래프 S(x)</span>
+                <span class="canvas-badge" id="graphStateBadge">예상 후 공개</span>
+              </div>
+              <div class="graph-stage-wrap">
+                <div class="svg-stage" id="graphSvgMount"></div>
+                <div class="graph-lock-overlay" id="graphLockOverlay">
+                  <div class="lock-box">
+                    <strong>🔒 그래프가 아직 가려져 있습니다</strong>
+                    <p>STEP 01에서 예상한 가로 길이 x를 먼저 확정하면 이차함수 그래프가 공개됩니다.</p>
+                  </div>
+                </div>
+              </div>
+              <p class="scale-warning">
+                ⚠️ <strong>축척 안내:</strong> W·H를 바꾸면 그래프 세로 축척이 자동으로 조정됩니다. 화면상 곡선 높이만으로 서로 다른 삼각형의 최대 넓이를 비교하지 마세요.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slider & Playback Controls -->
+          <div class="playback-bar">
+            <div class="slider-main-col">
+              <div class="param-label-row">
+                <label for="sliderX">가로 길이 x 조절 (0부터 <span id="maxXLabel">12</span>까지)</label>
+                <span class="param-val-badge" id="valXBadge">x = 3.00</span>
+              </div>
+              <input type="range" id="sliderX" min="0" max="12" step="0.05" value="3" aria-label="직사각형 가로 길이 x">
+            </div>
+            <div class="playback-btns">
+              <button type="button" class="btn-primary" id="btnPlayPause">▶ 1회 자동 재생</button>
+              <button type="button" class="btn-secondary" id="btnRecordObs">📌 관찰 기록 추가 (<span id="obsCountLabel">0</span>/6)</button>
+            </div>
+          </div>
+
+          <!-- Key Point Inspection Buttons -->
+          <div class="keypoint-row">
+            <span>핵심 지점 바로 보기:</span>
+            <button type="button" class="btn-keypoint" data-k="0">x = 0</button>
+            <button type="button" class="btn-keypoint" data-k="0.25">x = W/4</button>
+            <button type="button" class="btn-keypoint" data-k="0.5">x = W/2</button>
+            <button type="button" class="btn-keypoint" data-k="0.75">x = 3W/4</button>
+            <button type="button" class="btn-keypoint" data-k="1">x = W</button>
+          </div>
+
+          <!-- Live Neon Metrics -->
+          <div class="metrics-grid">
+            <div class="metric-card neon-primary">
+              <span class="m-lbl">가로 x (근삿값)</span>
+              <strong class="m-val" id="metricX">3.00</strong>
+            </div>
+            <div class="metric-card neon-primary">
+              <span class="m-lbl">세로 y = H(1−x/W)</span>
+              <strong class="m-val" id="metricY">6.00</strong>
+            </div>
+            <div class="metric-card neon-primary">
+              <span class="m-lbl">넓이 S(x)</span>
+              <strong class="m-val" id="metricArea">18.00</strong>
+            </div>
+            <div class="metric-card neon-twin">
+              <span class="m-lbl">쌍둥이 가로 W−x</span>
+              <strong class="m-val" id="metricTwinX">9.00</strong>
+            </div>
+            <div class="metric-card neon-twin">
+              <span class="m-lbl">쌍둥이 넓이 S(W−x)</span>
+              <strong class="m-val" id="metricTwinArea">18.00</strong>
+            </div>
+          </div>
+
+          <div class="degenerate-notice" id="degenerateNotice" hidden>
+            ℹ️ 현재 <strong>양 끝점(x = 0 또는 x = W)</strong>에 있어 가로 또는 세로가 0이 되므로, 넓이가 0인 퇴화한 직사각형입니다.
+          </div>
+
+          <!-- Observation Table (Max 6) -->
+          <div class="obs-section">
+            <div class="obs-head">
+              <h3>📋 관찰 기록표 (최대 6개 비교)</h3>
+              <button type="button" class="btn-mini" id="btnClearObs">기록 비우기</button>
+            </div>
+            <div class="table-wrap">
+              <table class="obs-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>가로 x</th>
+                    <th>세로 y</th>
+                    <th>넓이 S(x)</th>
+                    <th>쌍둥이 가로 (W−x)</th>
+                    <th>관찰 특징</th>
+                    <th>삭제</th>
+                  </tr>
+                </thead>
+                <tbody id="obsTableBody">
+                  <tr><td colspan="7" class="obs-empty">점 P를 움직이며 '관찰 기록 추가'를 눌러 6개까지 비교해 보세요.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+
+        <!-- Stage 03: Explain with Completing the Square -->
+        <article class="stage-card">
+          <div class="stage-header">
+            <span class="stage-tag">STEP 03 · 식으로 설명하기</span>
+            <button type="button" class="btn-secondary" id="btnToggleFormula">식으로 설명 펼치기 ▾</button>
+          </div>
+          <p class="stage-sub-note">
+            화면의 소수는 <strong>관찰 결과(근삿값)</strong>이며, 정확한 최댓값과 대칭 원리는 아래 <strong>분수식과 완전제곱식</strong>으로 증명합니다.
+          </p>
+          <div class="formula-reveal-box" id="formulaRevealBox" hidden>
+            <!-- Populated dynamically with exact reduced fractions -->
+          </div>
+        </article>
+
+        <!-- Stage 04: Target Area Challenge (Level 04 고수) -->
+        <article class="stage-card">
+          <div class="stage-header">
+            <span class="stage-tag">STEP 04 · 목표 넓이 도전 (고수)</span>
+            <span class="stage-status" id="targetGoalLabel">목표: 최대 넓이의 75%</span>
+          </div>
+          <p class="stage-prompt">
+            원하는 목표 넓이 비율을 고르고, 그 넓이가 만들어지는 <strong>가로 길이 x를 모두</strong> 찾아보세요.
+          </p>
+
+          <div class="target-ratio-grid" role="group" aria-label="목표 넓이 비율 선택">
+            <button type="button" class="btn-ratio" data-ratio="25">최대 넓이의 25%</button>
+            <button type="button" class="btn-ratio" data-ratio="50">최대 넓이의 50%</button>
+            <button type="button" class="btn-ratio active" data-ratio="75">최대 넓이의 75%</button>
+            <button type="button" class="btn-ratio" data-ratio="100">최대 넓이의 100% (최대)</button>
+          </div>
+
+          <div class="target-info-banner" id="targetInfoBanner">
+            <!-- Shows exact target area value in fraction & decimal -->
+          </div>
+
+          <form id="targetExploreForm" novalidate class="target-explore-grid">
+            <div class="target-input-col">
+              <label for="targetX1Input">찾은 가로 x₁ (0부터 W까지)</label>
+              <div class="input-with-fill">
+                <input type="number" id="targetX1Input" min="0" max="12" step="any" aria-invalid="false" data-error="targetX1Error" placeholder="예: 3">
+                <button type="button" class="btn-mini" id="btnFillX1">현재 x 넣기</button>
+              </div>
+              <div id="targetX1Error" class="error-msg">0 이상 W 이하의 숫자를 입력해 주세요.</div>
+            </div>
+
+            <div class="target-input-col" id="targetX2Col">
+              <label for="targetX2Input">찾은 가로 x₂ (두 번째 해가 있다면 입력)</label>
+              <div class="input-with-fill">
+                <input type="number" id="targetX2Input" min="0" max="12" step="any" aria-invalid="false" data-error="targetX2Error" placeholder="예: 9">
+                <button type="button" class="btn-mini" id="btnFillX2">현재 x 넣기</button>
+              </div>
+              <div id="targetX2Error" class="error-msg">0 이상 W 이하의 숫자를 입력해 주세요.</div>
+            </div>
+
+            <div class="target-actions-row">
+              <button type="submit" class="btn-secondary" id="btnCheckMyTarget">내 탐색 점검하기 🔍</button>
+              <button type="button" class="btn-primary" id="btnRevealTargetAnswer">🎯 목표 넓이 정답 및 해의 개수 확인</button>
+            </div>
+          </form>
+
+          <div class="target-feedback-box" id="targetExploreFeedback" hidden></div>
+          <div class="target-answer-box" id="targetAnswerBox" hidden></div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- One polite live region for accessible form error announcement -->
+  <div id="ariaAnnouncer" class="visually-hidden" aria-live="polite"></div>
+
+  <!-- Native Dialog for Fallback Copy -->
+  <dialog id="copyModal" class="native-modal" closedby="any" aria-labelledby="copyModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="copyModalTitle">클립보드 내용 수동 복사</h3>
+        <form method="dialog">
+          <button type="submit" class="btn-close" value="close" aria-label="닫기">&times;</button>
+        </form>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">자동 복사가 제한되어 아래 텍스트를 선택 후 복사(Ctrl+C)하세요.</p>
+        <textarea id="copyModalTextarea" readonly aria-label="복사할 텍스트"></textarea>
+      </div>
+      <div class="modal-footer">
+        <form method="dialog">
+          <button type="submit" class="btn-secondary" value="cancel">닫기</button>
+        </form>
+        <button type="button" class="btn-primary" id="btnModalCopy">텍스트 선택 후 복사</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">알림 메시지</div>
+
+  <script src="script.js?v=20261122_w10"></script>
+</body>
+</html>

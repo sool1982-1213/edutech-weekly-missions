@@ -142,6 +142,7 @@ body {
   font-weight: 800;
   margin-bottom: 8px;
   color: var(--text-main);
+  word-break: keep-all;
 }
 
 .hero-content p {
@@ -206,7 +207,7 @@ body {
 /* Week Tabs Bar */
 .week-tabs-bar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   margin-bottom: 26px;
 }
@@ -395,9 +396,9 @@ body {
   opacity: 1;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1100px) {
   .week-tabs-bar {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -502,15 +503,11 @@ body {
     font-size: 0.88rem;
   }
 
-  /* 모바일 주차 탭: 2x2 그리드 컴팩트 버튼으로 터치 편의성 극대화 */
+  /* 모바일 주차 탭: 2열 그리드 컴팩트 버튼으로 터치 편의성 극대화 (10개 짝수 배치) */
   .week-tabs-bar {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     margin-bottom: 18px;
-  }
-
-  .week-tab-item:last-child {
-    grid-column: 1 / -1; /* 최신 7주차 미션 전폭 강조 및 홀수 탭 여백 방지 */
   }
 
   .week-tab-item {
@@ -519,13 +516,20 @@ body {
     gap: 4px;
   }
 
+  .tab-top-row {
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
   .tab-week-num {
-    font-size: 0.74rem;
+    font-size: 0.72rem;
+    white-space: nowrap;
   }
 
   .tab-status-badge {
-    font-size: 0.68rem;
-    padding: 1px 6px;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    white-space: nowrap;
   }
 
   .tab-title {
